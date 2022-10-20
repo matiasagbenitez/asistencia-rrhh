@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             AreaSeeder::class,
             DepartamentoSeeder::class,
             PuestoSeeder::class,
+            CategoriasDeHorariosSeeder::class,
         ]);
 
     }

@@ -29,32 +29,56 @@
             class="flex-grow px-4 pb-4 md:block md:pb-0 md:overflow-y-auto">
 
             {{-- SUBTÍTULO PARAMETRIZACIÓN --}}
-            <span class="font-bold">Parametrización
+            <span class="font-bold">Parámetros empresa
                 <hr>
             </span>
 
-            <a href="#"
+            <a href="{{ route('empresas.index') }}"
                 class="block px-4 py-1 mt-2 text-sm font-semibold text-gray-900 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
                 <i class="fas fa-poll mr-2"></i>
                 Empresa
             </a>
 
-            <a href="#"
+            <a href="{{ route('areas.index') }}"
                 class="block px-4 py-1 mt-2 text-sm font-semibold text-gray-900 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
                 <i class="fas fa-poll mr-2"></i>
                 Áreas
             </a>
 
-            <a href="#"
+            <a href="{{ route('departamentos.index') }}"
                 class="block px-4 py-1 mt-2 text-sm font-semibold text-gray-900 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
                 <i class="fas fa-poll mr-2"></i>
                 Departamentos
             </a>
 
-            <a href="#"
+            <a href="{{ route('puestos.index') }}"
                 class="block px-4 py-1 mt-2 text-sm font-semibold text-gray-900 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
                 <i class="fas fa-poll mr-2"></i>
                 Puestos
+            </a>
+
+            {{-- SUBTÍTULO PARAMETRIZACIÓN --}}
+            <br>
+            <span class="font-bold">Horarios
+                <hr>
+            </span>
+
+            <a href="{{ route('categorias-de-horario.index') }}"
+                class="block px-4 py-1 mt-2 text-sm font-semibold text-gray-900 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+                <i class="fas fa-clock mr-2"></i>
+                Categorías de horarios
+            </a>
+
+            {{-- SUBTÍTULO PARAMETRIZACIÓN --}}
+            <br>
+            <span class="font-bold">Empleados
+                <hr>
+            </span>
+
+            <a href="#"
+                class="block px-4 py-1 mt-2 text-sm font-semibold text-gray-900 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+                <i class="fas fa-database mr-2"></i>
+                Empleados
             </a>
 
         </nav>
