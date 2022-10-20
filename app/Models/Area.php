@@ -24,4 +24,9 @@ class Area extends Model
     {
         return $this->belongsTo(Empresa::class);
     }
+
+    public function departamentos()
+    {
+        return $this->hasMany(Departamento::class);
+    }
 }
