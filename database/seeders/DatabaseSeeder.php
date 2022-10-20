@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             EmpresaSeeder::class,
             AreaSeeder::class,
             DepartamentoSeeder::class,
+            PuestoSeeder::class,
         ]);
 
     }
