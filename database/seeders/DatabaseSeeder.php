@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             DepartamentoSeeder::class,
             PuestoSeeder::class,
             CategoriasDeHorariosSeeder::class,
+            EmpleadoSeeder::class,
         ]);
 
     }
