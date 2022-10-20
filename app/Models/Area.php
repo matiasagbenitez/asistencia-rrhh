@@ -5,19 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Empresa extends Model
+class Area extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'nombre',
-        'cuit',
-        'razon_social',
-        'direccion',
+        'slug',
+        'empresa_id',
     ];
 
-    public function areas()
+    public function getRouteKeyName()
     {
-        return $this->hasMany(Area::class);
+        return 'slug';
+    }
+
+    public function empresa()
+    {
+        return $this->belongsTo(Empresa::class);
     }
 }
