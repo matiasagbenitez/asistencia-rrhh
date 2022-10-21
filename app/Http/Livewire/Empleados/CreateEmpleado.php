@@ -15,13 +15,21 @@ class CreateEmpleado extends Component
     public $createForm = [
         'nombre' => '',
         'apellido' => '',
+        'cuil' => '',
+        'direccion' => '',
+        'fecha_ingreso' => '',
+        // 'fecha_egreso' => '',
         'categoria_horario_id' => '',
         'puesto_id' => '',
     ];
 
     protected $rules = [
         'createForm.nombre' => 'required|string',
-        'createForm.apellido' => 'required|max:50',
+        'createForm.apellido' => 'required|string',
+        'createForm.cuil' => 'required',
+        'createForm.direccion' => 'required',
+        'createForm.fecha_ingreso' => 'required|date',
+        // 'createForm.fecha_egreso' => 'nullable',
         'createForm.categoria_horario_id' => 'integer|exists:categorias_de_horarios,id',
         'createForm.puesto_id' => 'integer|exists:puestos,id',
     ];
@@ -29,6 +37,10 @@ class CreateEmpleado extends Component
     protected $validationAttributes = [
         'createForm.nombre' => 'nombre',
         'createForm.apellido' => 'apellido',
+        'createForm.cuil' => 'cuil',
+        'createForm.direccion' => 'dirección',
+        'createForm.fecha_ingreso' => 'fecha de ingreso',
+        // 'createForm.fecha_egreso' => 'fecha de egreso',
         'createForm.categoria_horario_id' => 'categoría de horario',
         'createForm.puesto_id' => 'puesto',
     ];

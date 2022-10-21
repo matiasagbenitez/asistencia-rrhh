@@ -11,19 +11,47 @@
 
         <x-slot name="content">
             {{-- Nombre --}}
-            <div class="mb-4">
-                <x-jet-label class="mb-2">Nombre</x-jet-label>
-                <x-jet-input wire:model.defer="createForm.nombre" type="text" class="w-full"
-                    placeholder="Ingrese el nombre del empleado"></x-jet-input>
-                <x-jet-input-error class="mt-2 text-xs font-semibold" for="createForm.nombre" />
+            <div class="mb-4 grid grid-cols-6 gap-3">
+                <div class="col-span-3">
+                    <x-jet-label class="mb-2">Nombre</x-jet-label>
+                    <x-jet-input wire:model.defer="createForm.nombre" type="text" class="w-full"
+                        placeholder="Ingrese el nombre del empleado"></x-jet-input>
+                    <x-jet-input-error class="mt-2 text-xs font-semibold" for="createForm.nombre" />
+                </div>
+                <div class="col-span-3">
+                    <x-jet-label class="mb-2">Apellido</x-jet-label>
+                    <x-jet-input wire:model.defer="createForm.apellido" type="text" class="w-full"
+                        placeholder="Ingrese el apellido del empleado"></x-jet-input>
+                    <x-jet-input-error class="mt-2 text-xs font-semibold" for="createForm.apellido" />
+                </div>
             </div>
 
-            {{-- Apellido --}}
-            <div class="mb-4">
-                <x-jet-label class="mb-2">Apellido</x-jet-label>
-                <x-jet-input wire:model.defer="createForm.apellido" type="text" class="w-full"
-                    placeholder="Ingrese el apellido del empleado"></x-jet-input>
-                <x-jet-input-error class="mt-2 text-xs font-semibold" for="createForm.apellido" />
+            <div class="mb-4 grid grid-cols-6 gap-3">
+                <div class="col-span-3">
+                    <x-jet-label class="mb-2">CUIL</x-jet-label>
+                    <x-jet-input wire:model.defer="createForm.cuil" type="text" class="w-full"
+                        placeholder="Ingrese el CUIL del empleado"></x-jet-input>
+                    <x-jet-input-error class="mt-2 text-xs font-semibold" for="createForm.cuil" />
+                </div>
+                <div class="col-span-3">
+                    <x-jet-label class="mb-2">Dirección</x-jet-label>
+                    <x-jet-input wire:model.defer="createForm.direccion" type="text" class="w-full"
+                        placeholder="Ingrese la dirección del empleado"></x-jet-input>
+                    <x-jet-input-error class="mt-2 text-xs font-semibold" for="createForm.direccion" />
+                </div>
+            </div>
+
+            <div class="mb-4 grid grid-cols-6 gap-3">
+                <div class="col-span-3">
+                    <x-jet-label class="mb-2">Fecha ingreso</x-jet-label>
+                    <x-jet-input wire:model.defer="createForm.fecha_ingreso" type="date" class="w-full"></x-jet-input>
+                    <x-jet-input-error class="mt-2 text-xs font-semibold" for="createForm.fecha_ingreso" />
+                </div>
+                {{-- <div class="col-span-3">
+                    <x-jet-label class="mb-2">Fecha egreso</x-jet-label>
+                    <x-jet-input wire:model.defer="createForm.fecha_egreso" type="date" class="w-full"></x-jet-input>
+                    <x-jet-input-error class="mt-2 text-xs font-semibold" for="createForm.fecha_egreso" />
+                </div> --}}
             </div>
 
             {{-- Categoria de horario --}}

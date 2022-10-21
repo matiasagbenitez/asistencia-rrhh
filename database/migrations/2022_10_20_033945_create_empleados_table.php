@@ -14,6 +14,12 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('apellido');
 
+            $table->string('cuil');
+            $table->string('direccion');
+
+            $table->date('fecha_ingreso');
+            $table->date('fecha_egreso')->nullable();
+
             $table->unsignedBigInteger('puesto_id');
             $table->foreign('puesto_id')->references('id')->on('puestos');
 
