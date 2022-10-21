@@ -44,7 +44,8 @@
             <div class="mb-4 grid grid-cols-6 gap-3">
                 <div class="col-span-3">
                     <x-jet-label class="mb-2">Fecha ingreso</x-jet-label>
-                    <x-jet-input wire:model.defer="createForm.fecha_ingreso" type="date" class="w-full"></x-jet-input>
+                    <x-jet-input wire:model.defer="createForm.fecha_ingreso" type="date" class="w-full">
+                    </x-jet-input>
                     <x-jet-input-error class="mt-2 text-xs font-semibold" for="createForm.fecha_ingreso" />
                 </div>
                 {{-- <div class="col-span-3">
@@ -67,18 +68,44 @@
             </div>
 
 
-            <div class="mb-4">
-                <x-jet-label class="mb-2">Puesto</x-jet-label>
+            <div class="mb-4 grid grid-cols-6 gap-3">
 
-                <select wire:model.defer="createForm.puesto_id" class="w-full input-control">
-                    <option value="" disabled>Seleccione un puesto</option>
-                    @foreach ($puestos as $puesto)
-                        <option value="{{ $puesto->id }}">
-                            {{ $puesto->nombre }} - {{ $puesto->departamento->nombre }} ({{ $puesto->departamento->area->nombre }})
-                        </option>
-                    @endforeach
-                </select>
-                <x-jet-input-error class="mt-2 text-xs font-semibold" for="createForm.puesto_id" />
+                <div class="col-span-2">
+                    <x-jet-label class="mb-2">Área</x-jet-label>
+                    <select wire:model="area" class="w-full input-control">
+                        <option value="">Seleccione</option>
+                        @foreach ($areas as $area)
+                            <option value="{{ $area->id }}">
+                                {{ $area->nombre }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="col-span-2">
+                    <x-jet-label class="mb-2">Departamento</x-jet-label>
+                    <select wire:model="departamento" class="w-full input-control">
+                        <option value="">Seleccione </option>
+                        @foreach ($departamentos as $departamento)
+                            <option value="{{ $departamento->id }}">
+                                {{ $departamento->nombre }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="col-span-2">
+                    <x-jet-label class="mb-2">Puesto</x-jet-label>
+                    <select wire:model="createForm.puesto_id" class="w-full input-control">
+                        <option value="">Seleccione</option>
+                        @foreach ($puestos as $puesto)
+                            <option value="{{ $puesto->id }}">
+                                {{ $puesto->nombre }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <x-jet-input-error class="mt-2 text-xs font-semibold" for="createForm.puesto_id" />
+                </div>
             </div>
 
         </x-slot>

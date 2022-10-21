@@ -104,10 +104,11 @@
                             </td>
                             <td class="px-3 py-3 whitespace-nowrap text-sm font-medium">
                                 <div class="flex items-center justify-center gap-2">
+                                    @livewire('empleados.show-empleado', ['empleado' => $empleado], key($empleado->id))
                                     @livewire('empleados.edit-empleado', ['empleado' => $empleado], key($empleado->id))
-                                    <x-jet-danger-button wire:click="$emit('deleteEmpleado', '{{ $empleado->id }}')">
+                                    {{-- <x-jet-danger-button wire:click="$emit('deleteEmpleado', '{{ $empleado->id }}')">
                                         <i class="fas fa-trash"></i>
-                                    </x-jet-danger-button>
+                                    </x-jet-danger-button> --}}
                                 </div>
                             </td>
                         </tr>
@@ -128,7 +129,7 @@
 
     </x-responsive-table>
 
-    @push('script')
+    {{-- @push('script')
         <script>
             Livewire.on('deleteEmpleado', empleadoId => {
                 Swal.fire({
@@ -173,6 +174,6 @@
                 })
             });
         </script>
-    @endpush
+    @endpush --}}
 
 </div>

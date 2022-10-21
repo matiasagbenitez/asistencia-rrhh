@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Empleados;
 
+use App\Models\Area;
 use App\Models\Puesto;
 use Livewire\Component;
 use App\Models\CategoriasDeHorarios;
@@ -10,7 +11,8 @@ use App\Models\Empleado;
 class CreateEmpleado extends Component
 {
     public $isOpen = 0;
-    public $puestos = [], $categorias_de_horarios = [];
+    public $areas = [], $departamentos = [], $puestos = [], $categorias_de_horarios = [];
+    public $area, $departamento;
 
     public $createForm = [
         'nombre' => '',
@@ -30,8 +32,8 @@ class CreateEmpleado extends Component
         'createForm.direccion' => 'required',
         'createForm.fecha_ingreso' => 'required|date',
         // 'createForm.fecha_egreso' => 'nullable',
-        'createForm.categoria_horario_id' => 'integer|exists:categorias_de_horarios,id',
-        'createForm.puesto_id' => 'integer|exists:puestos,id',
+        'createForm.categoria_horario_id' => 'required|integer|exists:categorias_de_horarios,id',
+        'createForm.puesto_id' => 'required|integer|exists:puestos,id',
     ];
 
     protected $validationAttributes = [
@@ -45,11 +47,21 @@ class CreateEmpleado extends Component
         'createForm.puesto_id' => 'puesto',
     ];
 
+    public function updatedArea($value)
+    {
+        $this->departamentos = Area::find($value)->departamentos;
+    }
+
+    public function updatedDepartamento($value)
+    {
+        $this->puestos = Puesto::where('departamento_id', $value)->get();
+    }
+
     public function createEmpleado()
     {
         $this->resetInputFields();
         $this->toggleModal();
-        $this->puestos = Puesto::all();
+        $this->areas = Area::all();
         $this->categorias_de_horarios = CategoriasDeHorarios::all();
     }
 

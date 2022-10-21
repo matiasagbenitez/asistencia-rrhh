@@ -31,16 +31,16 @@ class IndexEmpleados extends Component
         $this->resetPage();
     }
 
-    public function delete(Empleado $empleado)
-    {
-        try {
-            $empleado->delete();
-            $this->emit('render');
-            $this->emit('success', '¡El empleado fue eliminado correctamente!');
-        } catch (\Exception $ex) {
-            $this->emit('error', 'Hubo un error al querer eliminar el empleado. Vuelve a intentarlo más tarde');
-        }
-    }
+    // public function delete(Empleado $empleado)
+    // {
+    //     try {
+    //         $empleado->delete();
+    //         $this->emit('render');
+    //         $this->emit('success', '¡El empleado fue eliminado correctamente!');
+    //     } catch (\Exception $ex) {
+    //         $this->emit('error', 'Hubo un error al querer eliminar el empleado. Vuelve a intentarlo más tarde');
+    //     }
+    // }
 
     public function render()
     {
