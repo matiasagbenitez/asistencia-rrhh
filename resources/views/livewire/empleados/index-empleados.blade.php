@@ -104,7 +104,7 @@
                             </td>
                             <td class="px-3 py-3 whitespace-nowrap text-sm font-medium">
                                 <div class="flex items-center justify-center gap-2">
-                                    {{-- @livewire('empleados.edit-empleado', ['empleado' => $empleado], key($empleado->id)) --}}
+                                    @livewire('empleados.edit-empleado', ['empleado' => $empleado], key($empleado->id))
                                     <x-jet-danger-button wire:click="$emit('deleteEmpleado', '{{ $empleado->id }}')">
                                         <i class="fas fa-trash"></i>
                                     </x-jet-danger-button>
