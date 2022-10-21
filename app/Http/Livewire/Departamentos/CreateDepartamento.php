@@ -41,7 +41,7 @@ class CreateDepartamento extends Component
     {
         $this->validate([
             'createForm.area_id' => 'required|exists:areas,id',
-            'createForm.nombre' => 'required|unique:departamentos,nombre',
+            'createForm.nombre' => 'required|unique:departamentos,nombre,NULL,id,area_id,' . $this->createForm['area_id'],
         ]);
         Departamento::create($this->createForm);
         $this->emit('render');

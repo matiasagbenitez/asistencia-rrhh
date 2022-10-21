@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Departamentos;
 
+use App\Models\Area;
 use Livewire\Component;
 use App\Models\Departamento;
 use Livewire\WithPagination;
@@ -10,10 +11,13 @@ class IndexDepartamentos extends Component
 {
     use WithPagination;
 
-    public $search;
-
+    public $search, $areas, $area;
     protected $listeners = ['render', 'delete'];
 
+    public function mount()
+    {
+        $this->areas = Area::orderBy('nombre', 'ASC')->get();
+    }
     public function updatingSearch()
     {
         $this->resetPage();
@@ -26,13 +30,16 @@ class IndexDepartamentos extends Component
             $this->emit('render');
             $this->emit('success', '¡Departamento eliminado correctamente!');
         } catch (\Throwable $th) {
-            $this->emit('error', 'Sucedió un error al eliminar el departamento.');
+            $this->emit('error', 'El departamento seleccionado no se puede eliminar porque tiene puestos asociados.');
         }
     }
 
     public function render()
     {
         $departamentos = Departamento::where('nombre', 'LIKE', "%{$this->search}%")
+            ->whereHas('area', function ($query) {
+                $query->where('nombre', 'LIKE', "%{$this->area}%");
+            })
             ->orderBy('nombre')
             ->paginate(5);
 

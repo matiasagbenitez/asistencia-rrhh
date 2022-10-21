@@ -9,8 +9,26 @@
 
     <x-responsive-table>
 
-        <div class="px-6 py-4 flex gap-2">
-            <x-jet-input type="text" wire:model="search" class="w-full" placeholder="Filtre su búsqueda aquí..." />
+        <div class="px-6 py-4 grid grid-cols-8 gap-2">
+            <div class="col-span-4">
+                <x-jet-input type="text" wire:model="search" class="w-full" placeholder="Filtre su búsqueda aquí..." />
+            </div>
+            <div class="col-span-2">
+                <select wire:model="departamento" class="input-control w-full">
+                    <option value="">Seleccione departamento</option>
+                    @foreach ($departamentos as $departamento)
+                        <option value="{{ $departamento->nombre }}">{{ $departamento->nombre }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-span-2">
+                <select wire:model="area" class="input-control w-full">
+                    <option value="">Seleccione área</option>
+                    @foreach ($areas as $area)
+                        <option value="{{ $area->nombre }}">{{ $area->nombre }}</option>
+                    @endforeach
+                </select>
+            </div>
         </div>
 
         @if ($puestos->count())
@@ -94,7 +112,7 @@
                     showCancelButton: true,
                     confirmButtonColor: '#1f2937',
                     cancelButtonColor: '#dc2626',
-                    confirmButtonText: 'Sí, eliminar área',
+                    confirmButtonText: 'Sí, eliminar puesto',
                     cancelButtonText: 'Cancelar'
                 }).then((result) => {
                     if (result.isConfirmed) {

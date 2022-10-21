@@ -18,7 +18,7 @@ class IndexAreas extends Component
             $this->emit('render');
             $this->emit('success', '¡El área se eliminó correctamente!');
         } catch (\Throwable $th) {
-            $this->emit('error', '¡El área no se pudo eliminar!');
+            $this->emit('error', 'El área seleccionada no se puede eliminar porque tiene departamentos asociados.');
         }
     }
 
