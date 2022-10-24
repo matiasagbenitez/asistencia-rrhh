@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Empleados;
 
+use App\Http\Services\EmpleadoService;
 use App\Models\Area;
 use App\Models\Departamento;
 use Livewire\Component;
@@ -13,17 +14,24 @@ class IndexEmpleados extends Component
 {
     use WithPagination;
 
-    public $search;
-    public $areas, $departamentos, $puestos;
-    public $area, $departamento, $puesto;
+    public $collections = [
+        'areas' => [],
+        'departamentos' => [],
+        'puestos' => [],
+    ];
+
+    public $filters = [
+        'search' => '',
+        'area' => '',
+        'departamento' => '',
+        'puesto' => '',
+    ];
 
     protected $listeners = ['render', 'delete'];
 
     public function mount()
     {
-        $this->areas = Area::orderBy('nombre')->get();
-        $this->departamentos = Departamento::orderBy('nombre')->get();
-        $this->puestos = Puesto::orderBy('nombre')->get();
+
     }
 
     public function updatingSearch()
@@ -44,23 +52,40 @@ class IndexEmpleados extends Component
 
     public function render()
     {
-        $empleados = Empleado::whereHas('puesto', function ($query) {
-                $query->where('nombre', 'LIKE', '%' . $this->puesto . '%');
-            })
-            ->whereHas('puesto.departamento', function ($query) {
-                $query->where('nombre', 'LIKE', '%' . $this->departamento . '%');
-            })
-            ->whereHas('puesto.departamento.area', function ($query) {
-                $query->where('nombre', 'LIKE', '%' . $this->area . '%');
-            })
-            // Where nombre or apellido like $this->search
-            ->where(function ($query) {
-                $query->where('nombre', 'LIKE', '%' . $this->search . '%')
-                    ->orWhere('apellido', 'LIKE', '%' . $this->search . '%')
-                    ->orWhere('cuil', 'LIKE', '%' . $this->search . '%');
-            })
-            ->paginate(10);
+        // Insertar botón en lista para limpiar filtros (por ahora se limpia reseteando el select de área)
+        $this->filters['area'] == '' ? $this->resetFilters() : null;
+
+        $this->collections['areas'] = Area::orderBy('nombre')->get();
+        $this->collections['departamentos'] = Departamento::orderBy('nombre')->where('area_id', $this->filters['area'])->get();
+        $this->collections['puestos'] = Puesto::orderBy('nombre')->where('departamento_id', $this->filters['departamento'])->get();
+
+        $empleados = $this->getEmpleados();
 
         return view('livewire.empleados.index-empleados', compact('empleados'));
+    }
+
+    public function filters($queryBuilder){
+
+        ($this->filters['area'] != '') ? $queryBuilder->where('areas.id', $this->filters['area']) : null;
+        ($this->filters['puesto'] != '') ? $queryBuilder->where('puestos.id', $this->filters['puesto']) : null;
+        ($this->filters['departamento'] != '') ? $queryBuilder->where('departamentos.id', $this->filters['departamento']) : null;
+        ($this->filters['search'] != '') ? $queryBuilder->where(function ($query) {
+            $query->where('empleados.nombre', 'LIKE', '%' . $this->filters['search'] . '%')
+                ->orWhere('empleados.apellido', 'LIKE', '%' . $this->filters['search'] . '%')
+                ->orWhere('empleados.cuil', 'LIKE', '%' . $this->filters['search'] . '%');
+        }) : null;
+
+        return $queryBuilder;
+    }
+
+    public function getEmpleados(){
+        $queryBuilder = EmpleadoService::QBEmpleadoCompleto();
+        return $this->filters($queryBuilder)->paginate(10);
+    }
+
+    public function resetFilters(){
+        $this->filters['departamento'] = '';
+        $this->filters['puesto'] = '';
+        $this->filters['area'] = '';
     }
 }

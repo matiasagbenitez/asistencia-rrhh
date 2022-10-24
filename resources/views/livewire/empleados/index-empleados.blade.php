@@ -11,32 +11,32 @@
 
         <div class="px-6 py-4 grid grid-cols-6 gap-2">
             <div class="col-span-6">
-                <x-jet-input type="text" wire:model="search" class="w-full" placeholder="Filtre su búsqueda aquí..." />
+                <x-jet-input type="text" wire:model="filters.search" class="w-full" placeholder="Filtre su búsqueda aquí..." />
             </div>
 
             <div class="col-span-2">
-                    <select wire:model="area" class="input-control w-full">
+                    <select wire:model="filters.area" class="input-control w-full">
                         <option value="">Seleccione un área</option>
-                        @foreach ($areas as $area)
-                            <option value="{{ $area->nombre }}">{{ $area->nombre }}</option>
+                        @foreach ($collections['areas'] as $area)
+                            <option value="{{ $area['id'] }}">{{ $area['nombre'] }}</option>
                         @endforeach
                     </select>
                 </div>
 
                 <div class="col-span-2">
-                    <select wire:model="departamento" class="input-control w-full">
+                    <select wire:model="filters.departamento" class="input-control w-full">
                         <option value="">Seleccione un departamento</option>
-                        @foreach ($departamentos as $departamento)
-                            <option value="{{ $departamento->nombre }}">{{ $departamento->nombre }}</option>
+                        @foreach ($collections['departamentos'] as $departamento)
+                            <option value="{{ $departamento->id }}">{{ $departamento->nombre }}</option>
                         @endforeach
                     </select>
                 </div>
 
                 <div class="col-span-2">
-                    <select wire:model="puesto" class="input-control w-full">
+                    <select wire:model="filters.puesto" class="input-control w-full">
                         <option value="">Seleccione un puesto</option>
-                        @foreach ($puestos as $puesto)
-                            <option value="{{ $puesto->nombre }}">{{ $puesto->nombre }}</option>
+                        @foreach ($collections['puestos'] as $puesto)
+                            <option value="{{ $puesto->id }}">{{ $puesto->nombre }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -89,23 +89,23 @@
                             </td>
                             <td class="px-3 py-3 text-center">
                                 <p class="text-sm uppercase">
-                                    {{ $empleado->puesto->departamento->area->nombre }}
+                                    {{ $empleado->area }}
                                 </p>
                             </td>
                             <td class="px-3 py-3 text-center">
                                 <p class="text-sm uppercase">
-                                    {{ $empleado->puesto->departamento->nombre }}
+                                    {{ $empleado->departamento }}
                                 </p>
                             </td>
                             <td class="px-3 py-3 text-center">
                                 <p class="text-sm uppercase">
-                                    {{ $empleado->puesto->nombre }}
+                                    {{ $empleado->puesto }}
                                 </p>
                             </td>
                             <td class="px-3 py-3 whitespace-nowrap text-sm font-medium">
                                 <div class="flex items-center justify-center gap-2">
-                                    @livewire('empleados.show-empleado', ['empleado' => $empleado], key($empleado->id))
-                                    @livewire('empleados.edit-empleado', ['empleado' => $empleado], key($empleado->id))
+                                    @livewire('empleados.show-empleado', ['empleadoShow' => $empleado], key($empleado->id.'show'))
+                                    @livewire('empleados.edit-empleado', ['empleadoEdit' => $empleado], key($empleado->id.'edit'))
                                     {{-- <x-jet-danger-button wire:click="$emit('deleteEmpleado', '{{ $empleado->id }}')">
                                         <i class="fas fa-trash"></i>
                                     </x-jet-danger-button> --}}

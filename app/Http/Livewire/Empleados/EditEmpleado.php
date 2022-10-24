@@ -11,7 +11,7 @@ class EditEmpleado extends Component
 {
     public $isOpen = 0;
     public $puestos = [], $categorias_de_horarios = [];
-    public $empleado, $empleado_id;
+    public $empleadoEdit;
 
     public $editForm = [
         'nombre' => '',
@@ -35,9 +35,9 @@ class EditEmpleado extends Component
         'editForm.puesto_id' => 'puesto',
     ];
 
-    public function mount(Empleado $empleado)
+    public function mount(Empleado $empleadoEdit)
     {
-        $this->empleado = $empleado;
+        $this->empleadoEdit = $empleadoEdit;
         $this->puestos = Puesto::all();
         $this->categorias_de_horarios = CategoriasDeHorarios::all();
     }
@@ -46,14 +46,14 @@ class EditEmpleado extends Component
     {
         $this->toggleModal();
         $this->editForm = [
-            'nombre' => $this->empleado->nombre,
-            'apellido' => $this->empleado->apellido,
-            'cuil' => $this->empleado->cuil,
-            'direccion' => $this->empleado->direccion,
-            'fecha_ingreso' => $this->empleado->fecha_ingreso,
-            'fecha_egreso' => $this->empleado->fecha_egreso,
-            'categoria_horario_id' => $this->empleado->categoria_horario_id,
-            'puesto_id' => $this->empleado->puesto_id,
+            'nombre' => $this->empleadoEdit->nombre,
+            'apellido' => $this->empleadoEdit->apellido,
+            'cuil' => $this->empleadoEdit->cuil,
+            'direccion' => $this->empleadoEdit->direccion,
+            'fecha_ingreso' => $this->empleadoEdit->fecha_ingreso,
+            'fecha_egreso' => $this->empleadoEdit->fecha_egreso,
+            'categoria_horario_id' => $this->empleadoEdit->categoria_horario_id,
+            'puesto_id' => $this->empleadoEdit->puesto_id,
         ];
         $this->puestos = Puesto::all();
         $this->categorias_de_horarios = CategoriasDeHorarios::all();
@@ -77,7 +77,7 @@ class EditEmpleado extends Component
             'editForm.categoria_horario_id' => 'integer|exists:categorias_de_horarios,id',
             'editForm.puesto_id' => 'integer|exists:puestos,id',
         ]);
-        $this->empleado->update($this->editForm);
+        $this->empleadoEdit->update($this->editForm);
         $this->toggleModal();
         $this->emitTo('empleados.index-empleados', 'render');
         $this->emit('success', '¡El empleado se actualizó correctamente!');

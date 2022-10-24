@@ -16,22 +16,22 @@
 
             <div class="flex items-baseline space-x-2">
                 <h3 class="mt-3 text-md font-bold">Nombre:</h3>
-                <p class="text-md font-mono">{{ $empleado->nombre }}</p>
+                <p class="text-md font-mono">{{ $empleadoShow->nombre }}</p>
             </div>
 
             <div class="flex items-baseline space-x-2">
                 <h3 class="mt-3 text-md font-bold">Apellido:</h3>
-                <p class="text-md font-mono">{{ $empleado->apellido }}</p>
+                <p class="text-md font-mono">{{ $empleadoShow->apellido }}</p>
             </div>
 
             <div class="flex items-baseline space-x-2">
                 <h3 class="mt-3 text-md font-bold">CUIL:</h3>
-                <p class="text-md font-mono">{{ $empleado->cuil }}</p>
+                <p class="text-md font-mono">{{ $empleadoShow->cuil }}</p>
             </div>
 
             <div class="flex items-baseline space-x-2">
                 <h3 class="mt-3 text-md font-bold">Dirección:</h3>
-                <p class="text-md font-mono">{{ $empleado->direccion }}</p>
+                <p class="text-md font-mono">{{ $empleadoShow->direccion }}</p>
             </div>
 
             <h2 class="font-bold text-lg uppercase mt-3">Datos laborales</h2>
@@ -39,28 +39,28 @@
 
             <div class="flex items-baseline space-x-2">
                 <h3 class="mt-3 text-md font-bold">Área:</h3>
-                <p class="text-md font-mono">{{ $area }}</p>
+                <p class="text-md font-mono">{{ $empleadoShow->area }}</p>
             </div>
 
             <div class="flex items-baseline space-x-2">
                 <h3 class="mt-3 text-md font-bold">Departamento:</h3>
-                <p class="text-md font-mono">{{ $departamento }}</p>
+                <p class="text-md font-mono">{{ $empleadoShow->departamento }}</p>
             </div>
 
             <div class="flex items-baseline space-x-2">
                 <h3 class="mt-3 text-md font-bold">Puesto:</h3>
-                <p class="text-md font-mono">{{ $puesto }}</p>
+                <p class="text-md font-mono">{{ $empleadoShow->puesto }}</p>
             </div>
 
             <div class="flex items-baseline space-x-2">
                 <h3 class="mt-3 text-md font-bold">Fecha ingreso:</h3>
-                <p class="text-md font-mono">{{ $empleado->fecha_ingreso }}</p>
+                <p class="text-md font-mono">{{ $empleadoShow->fecha_ingreso }}</p>
             </div>
 
-            @if ($empleado->fecha_egreso)
+            @if ($empleadoShow->fecha_egreso)
                 <div class="flex items-baseline space-x-2">
                     <h3 class="mt-3 text-md font-bold">Fecha egreso:</h3>
-                    <p class="text-md font-mono">{{ $empleado->fecha_ingreso }}</p>
+                    <p class="text-md font-mono">{{ $empleadoShow->fecha_ingreso }}</p>
                 </div>
             @endif
 
