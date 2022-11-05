@@ -11,25 +11,54 @@ class PuestoSeeder extends Seeder
     {
         $puestos = [
             [
-                'nombre' => 'Jefe de departamento',
+                'nombre' => 'Contador',
+                'departamento_id' => 1,
             ],
             [
-                'nombre' => 'Técnico',
+                'nombre' => 'Auxiliar Contable',
+                'departamento_id' => 1,
             ],
             [
-                'nombre' => 'Auxiliar',
+                'nombre' => 'Jefe de Compras',
+                'departamento_id' => 2,
             ],
             [
-                'nombre' => 'Operario',
-            ]
+                'nombre' => 'Asistente de Compras',
+                'departamento_id' => 2,
+            ],
+            [
+                'nombre' => 'Jefe de Ventas',
+                'departamento_id' => 3,
+            ],
+            [
+                'nombre' => 'Asistente de Ventas',
+                'departamento_id' => 3,
+            ],
+            [
+                'nombre' => 'Cajero',
+                'departamento_id' => 3,
+            ],
+            [
+                'nombre' => 'Jefe de Recursos Humanos',
+                'departamento_id' => 4,
+            ],
+            [
+                'nombre' => 'Asistente de Recursos Humanos',
+                'departamento_id' => 4,
+            ],
+            [
+                'nombre' => 'Jefe de Formación y Capacitación',
+                'departamento_id' => 5,
+            ],
+            [
+                'nombre' => 'Asistente de Formación y Capacitación',
+                'departamento_id' => 5,
+            ],
         ];
 
         // Crear puestos para cada departamento
-        foreach (\App\Models\Departamento::all() as $departamento) {
-            foreach ($puestos as $puesto) {
-                $puesto['departamento_id'] = $departamento->id;
-                \App\Models\Puesto::create($puesto);
-            }
+        foreach ($puestos as $puesto) {
+            \App\Models\Puesto::create($puesto);
         }
     }
 }

@@ -12,23 +12,15 @@ class AreaSeeder extends Seeder
     {
         $areas = [
             [
-                'nombre' => 'Dirección',
+                'nombre' => 'Administración y Finanzas',
                 'empresa_id' => 1,
             ],
             [
-                'nombre' => 'Administración',
+                'nombre' => 'Comercialización',
                 'empresa_id' => 1,
             ],
             [
-                'nombre' => 'Ventas',
-                'empresa_id' => 1,
-            ],
-            [
-                'nombre' => 'Producción',
-                'empresa_id' => 1,
-            ],
-            [
-                'nombre' => 'Contabilidad',
+                'nombre' => 'Recursos Humanos',
                 'empresa_id' => 1,
             ]
         ];

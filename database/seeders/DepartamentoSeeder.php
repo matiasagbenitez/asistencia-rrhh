@@ -11,44 +11,24 @@ class DepartamentoSeeder extends Seeder
     {
         $departamentos = [
             [
-                'nombre' => 'Departamento 1',
+                'nombre' => 'Contabilidad',
                 'area_id' => 1,
             ],
             [
-                'nombre' => 'Departamento 2',
-                'area_id' => 1,
-            ],
-            [
-                'nombre' => 'Departamento 3',
+                'nombre' => 'Compras',
                 'area_id' => 2,
             ],
             [
-                'nombre' => 'Departamento 4',
+                'nombre' => 'Ventas',
                 'area_id' => 2,
             ],
             [
-                'nombre' => 'Departamento 5',
+                'nombre' => 'Administración de Recursos Humanos',
                 'area_id' => 3,
             ],
             [
-                'nombre' => 'Departamento 6',
+                'nombre' => 'Formación y Capacitación',
                 'area_id' => 3,
-            ],
-            [
-                'nombre' => 'Departamento 7',
-                'area_id' => 4,
-            ],
-            [
-                'nombre' => 'Departamento 8',
-                'area_id' => 4,
-            ],
-            [
-                'nombre' => 'Departamento 9',
-                'area_id' => 5,
-            ],
-            [
-                'nombre' => 'Departamento 10',
-                'area_id' => 5,
             ],
         ];
 

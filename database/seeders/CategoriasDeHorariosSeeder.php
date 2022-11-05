@@ -18,16 +18,7 @@ class CategoriasDeHorariosSeeder extends Seeder
             ],
             [
                 'nombre' => 'Tiempo parcial',
-            ],
-            [
-                'nombre' => 'Tiempo completo con flexibilidad',
-            ],
-            [
-                'nombre' => 'Medio tiempo con flexibilidad',
-            ],
-            [
-                'nombre' => 'Tiempo parcial con flexibilidad',
-            ],
+            ]
         ];
 
         foreach ($categorias_de_horarios as $categoria_de_horario) {
