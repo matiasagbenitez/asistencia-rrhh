@@ -2,59 +2,45 @@
 
     <x-slot name="header">
         <div class="flex items-center justify-between">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Categorías de horarios de la empresa</h2>
-            @livewire('categorias-horarios.create-categoria-horario')
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Jornadas</h2>
+            @livewire('categorias-horarios.jornadas.create-jornada', ['categoria' => $categoria], key($categoria->id.'create'))
         </div>
     </x-slot>
 
     <x-responsive-table>
 
-        <div class="px-6 py-4 flex gap-2">
-            <x-jet-input type="text" wire:model="search" class="w-full" placeholder="Filtre su búsqueda aquí..." />
+        <div class="px-6 py-4 grid grid-cols-6 gap-2">
+            Filtros
         </div>
 
-        @if ($categorias_de_horarios->count())
+        @if ($items->count())
             <table class="text-gray-600 min-w-full divide-y divide-gray-200">
                 <thead class="border-b border-gray-300 bg-gray-200">
                     <tr class="text-center text-sm font-bold text-gray-500 uppercase tracking-wider">
-                        <th scope="col"
-                            class="px-4 py-2 ">
-                            ID
-                        </th>
-                        <th scope="col"
-                            class="w-full px-4 py-2">
-                            Nombre
-                        </th>
-                        <th scope="col"
-                            class="px-4 py-2">
-                            Acción
-                        </th>
+                        <th class="px-6 py-3">Nombre</th>
+                        <th class="px-6 py-3">Tipo</th>
+                        <th class="px-6 py-3">Hora de entrada</th>
+                        <th class="px-6 py-3">Hora de salida</th>
+                        <th class="px-6 py-3">Tolerancia</th>
+                        <th class="px-6 py-3">Acciones</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
-                    @foreach ($categorias_de_horarios as $categoria_de_horario)
+                    @foreach ($items as $item)
                         <tr class="bg-gray-50">
-                            <td class="px-6 py-3">
-                                <p class="text-sm uppercase">
-                                    {{ $categoria_de_horario->id }}
-                                </p>
-                            </td>
-                            <td class="px-6 py-3 text-center">
-                                <p class="text-sm uppercase">
-                                    {{ $categoria_de_horario->nombre }}
-                                </p>
-                            </td>
-                            <td class="px-6 py-3 whitespace-nowrap text-sm font-medium">
+                            <td class="px-6 py-4 text-sm text-center">{{ $item->nombre }}</td>
+                            <td class="px-6 py-4 text-sm text-center">{{ $item->tipo }}</td>
+                            <td class="px-6 py-4 text-sm text-center">{{ $item->hora_entrada }}</td>
+                            <td class="px-6 py-4 text-sm text-center">{{ $item->hora_salida }}</td>
+                            <td class="px-6 py-4 text-sm text-center">{{ $item->tolerancia }}</td>
+
+                            <td class="px-3 py-3 whitespace-nowrap text-sm font-medium">
                                 <div class="flex items-center justify-center gap-2">
-                                    @livewire('categorias-horarios.edit-categoria-horario', ['categoria_de_horario' => $categoria_de_horario], key($categoria_de_horario->id))
-                                    <x-jet-button >
-                                        <a href="{{ route('categorias-de-horario.jornada.index', $categoria_de_horario->id) }}">
-                                            <i class="fas fa-clock"></i>
-                                        </a>
-                                    </x-jet-button>
-                                    <x-jet-danger-button wire:click="$emit('deleteCategoriaHorario', '{{ $categoria_de_horario->id }}')">
+                                    @livewire('categorias-horarios.jornadas.edit-jornada', ['jornada' => $item], key($item->id.'edit'))
+                                    {{-- @livewire('items.show-item', ['itemShow' => $item], key($item->id.'show'))
+                                    <x-jet-danger-button wire:click="$emit('deleteitem', '{{ $item->id }}')">
                                         <i class="fas fa-trash"></i>
-                                    </x-jet-danger-button>
+                                    </x-jet-danger-button> --}}
                                 </div>
                             </td>
                         </tr>
@@ -67,11 +53,17 @@
             </div>
         @endif
 
+        @if ($items->hasPages())
+            <div class="px-6 py-3">
+                {{ $items->links() }}
+            </div>
+        @endif
+
     </x-responsive-table>
 
     @push('script')
         <script>
-            Livewire.on('deleteCategoriaHorario', categoriaHorarioId => {
+            Livewire.on('deleteitem', itemId => {
                 Swal.fire({
                     title: '¿Estás seguro?',
                     text: "¡No podrás revertir esta acción!",
@@ -79,12 +71,12 @@
                     showCancelButton: true,
                     confirmButtonColor: '#1f2937',
                     cancelButtonColor: '#dc2626',
-                    confirmButtonText: 'Sí, eliminar categoría',
+                    confirmButtonText: 'Sí, eliminar item',
                     cancelButtonText: 'Cancelar'
                 }).then((result) => {
                     if (result.isConfirmed) {
 
-                        Livewire.emitTo('categorias-horarios.index-categorias-horarios', 'delete', categoriaHorarioId);
+                        Livewire.emitTo('items.index-items', 'delete', itemId);
 
                         Livewire.on('success', message => {
                             const Toast = Swal.mixin({
@@ -115,5 +107,4 @@
             });
         </script>
     @endpush
-
 </div>

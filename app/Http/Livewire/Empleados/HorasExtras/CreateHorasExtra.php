@@ -11,10 +11,10 @@ class CreateHorasExtra extends Component
     public $collections;
 
     public $form = [
-        'form.fecha_hora_inicio' => '',
-        'form.fecha_hora_fin' => '',
-        'form.remuneracion' => '',
-        'form.empleado_id' => '',
+        'fecha_hora_inicio' => '',
+        'fecha_hora_fin' => '',
+        'remuneracion' => '',
+        'empleado_id' => '',
     ];
 
     public function mount($empleado)
