@@ -109,6 +109,9 @@
                                     <x-jet-button >
                                         <a href="{{ route('empleados.incidencias.index', $empleado->id) }}">In</a>
                                     </x-jet-button>
+                                    <x-jet-button >
+                                        <a href="{{ route('empleados.horas-extras.index', $empleado->id) }}">HE</a>
+                                    </x-jet-button>
 
                                     {{-- <x-jet-danger-button wire:click="$emit('deleteEmpleado', '{{ $empleado->id }}')">
                                         <i class="fas fa-trash"></i>

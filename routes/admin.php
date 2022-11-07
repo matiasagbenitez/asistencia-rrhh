@@ -7,6 +7,7 @@ use App\Http\Livewire\Empresas\IndexEmpresas;
 use App\Http\Livewire\Empleados\IndexEmpleados;
 use App\Http\Livewire\Departamentos\IndexDepartamentos;
 use App\Http\Livewire\CategoriasHorarios\IndexCategoriasHorarios;
+use App\Http\Livewire\Empleados\HorasExtras\IndexHorasExtra;
 use App\Http\Livewire\Empleados\Incidencias\IndexIncidencia;
 
 // PARÁMETROS DE EMPRESA
@@ -21,3 +22,4 @@ Route::get('/categorias-de-horario', IndexCategoriasHorarios::class)->name('cate
 // EMPLEADOS
 Route::get('/empleados', IndexEmpleados::class)->name('empleados.index');
 Route::get('/empleados/{empleado}/incidencias', IndexIncidencia::class)->name('empleados.incidencias.index');
+Route::get('/empleados/{empleado}/horas-extras', IndexHorasExtra::class)->name('empleados.horas-extras.index');
