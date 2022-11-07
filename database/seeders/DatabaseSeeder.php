@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
             PuestoSeeder::class,
             CategoriasDeHorariosSeeder::class,
             EmpleadoSeeder::class,
+                TipoDeIncidenciaSeeder::class,
         ]);
-
     }
 }

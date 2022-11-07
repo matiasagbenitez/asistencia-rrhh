@@ -24,5 +24,4 @@ class Empleado extends Model
     {
         return $this->belongsTo(Puesto::class);
     }
-
 }
