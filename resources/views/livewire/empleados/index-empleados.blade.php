@@ -106,6 +106,10 @@
                                 <div class="flex items-center justify-center gap-2">
                                     @livewire('empleados.show-empleado', ['empleadoShow' => $empleado], key($empleado->id.'show'))
                                     @livewire('empleados.edit-empleado', ['empleadoEdit' => $empleado], key($empleado->id.'edit'))
+                                    <x-jet-button >
+                                        <a href="{{ route('empleados.incidencias.index', $empleado->id) }}">In</a>
+                                    </x-jet-button>
+
                                     {{-- <x-jet-danger-button wire:click="$emit('deleteEmpleado', '{{ $empleado->id }}')">
                                         <i class="fas fa-trash"></i>
                                     </x-jet-danger-button> --}}
