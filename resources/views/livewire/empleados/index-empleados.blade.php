@@ -11,35 +11,36 @@
 
         <div class="px-6 py-4 grid grid-cols-6 gap-2">
             <div class="col-span-6">
-                <x-jet-input type="text" wire:model="filters.search" class="w-full" placeholder="Filtre su búsqueda aquí..." />
+                <x-jet-input type="text" wire:model="filters.search" class="w-full"
+                    placeholder="Filtre su búsqueda aquí..." />
             </div>
 
             <div class="col-span-2">
-                    <select wire:model="filters.area" class="input-control w-full">
-                        <option value="">Seleccione un área</option>
-                        @foreach ($collections['areas'] as $area)
-                            <option value="{{ $area['id'] }}">{{ $area['nombre'] }}</option>
-                        @endforeach
-                    </select>
-                </div>
+                <select wire:model="filters.area" class="input-control w-full">
+                    <option value="">Seleccione un área</option>
+                    @foreach ($collections['areas'] as $area)
+                        <option value="{{ $area['id'] }}">{{ $area['nombre'] }}</option>
+                    @endforeach
+                </select>
+            </div>
 
-                <div class="col-span-2">
-                    <select wire:model="filters.departamento" class="input-control w-full">
-                        <option value="">Seleccione un departamento</option>
-                        @foreach ($collections['departamentos'] as $departamento)
-                            <option value="{{ $departamento->id }}">{{ $departamento->nombre }}</option>
-                        @endforeach
-                    </select>
-                </div>
+            <div class="col-span-2">
+                <select wire:model="filters.departamento" class="input-control w-full">
+                    <option value="">Seleccione un departamento</option>
+                    @foreach ($collections['departamentos'] as $departamento)
+                        <option value="{{ $departamento->id }}">{{ $departamento->nombre }}</option>
+                    @endforeach
+                </select>
+            </div>
 
-                <div class="col-span-2">
-                    <select wire:model="filters.puesto" class="input-control w-full">
-                        <option value="">Seleccione un puesto</option>
-                        @foreach ($collections['puestos'] as $puesto)
-                            <option value="{{ $puesto->id }}">{{ $puesto->nombre }}</option>
-                        @endforeach
-                    </select>
-                </div>
+            <div class="col-span-2">
+                <select wire:model="filters.puesto" class="input-control w-full">
+                    <option value="">Seleccione un puesto</option>
+                    @foreach ($collections['puestos'] as $puesto)
+                        <option value="{{ $puesto->id }}">{{ $puesto->nombre }}</option>
+                    @endforeach
+                </select>
+            </div>
         </div>
 
         @if ($empleados->count())
@@ -104,14 +105,19 @@
                             </td>
                             <td class="px-3 py-3 whitespace-nowrap text-sm font-medium">
                                 <div class="flex items-center justify-center gap-2">
-                                    @livewire('empleados.show-empleado', ['empleadoShow' => $empleado], key($empleado->id.'show'))
-                                    @livewire('empleados.edit-empleado', ['empleadoEdit' => $empleado], key($empleado->id.'edit'))
-                                    <x-jet-button >
-                                        <a href="{{ route('empleados.incidencias.index', $empleado->id) }}">In</a>
-                                    </x-jet-button>
-                                    <x-jet-button >
-                                        <a href="{{ route('empleados.horas-extras.index', $empleado->id) }}">HE</a>
-                                    </x-jet-button>
+                                    @livewire('empleados.show-empleado', ['empleadoShow' => $empleado], key($empleado->id . 'show'))
+                                    @livewire('empleados.edit-empleado', ['empleadoEdit' => $empleado], key($empleado->id . 'edit'))
+
+                                    <a href="{{ route('empleados.incidencias.index', $empleado->id) }}">
+                                        <x-jet-button title="Incidencias" class="bg-cyan-900">
+                                            <i class="fas fa-calendar-alt"></i>
+                                        </x-jet-button>
+                                    </a>
+                                    <a href="{{ route('empleados.horas-extras.index', $empleado->id) }}">
+                                        <x-jet-button title="Horas extras" class="bg-zinc-700">
+                                            <i class="fas fa-clock"></i>
+                                        </x-jet-button>
+                                    </a>
 
                                     {{-- <x-jet-danger-button wire:click="$emit('deleteEmpleado', '{{ $empleado->id }}')">
                                         <i class="fas fa-trash"></i>

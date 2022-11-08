@@ -13,7 +13,9 @@ class HoraExtra extends Model
     protected $fillable = [
         'fecha_hora_inicio',
         'fecha_hora_fin',
-        'remuneracion',
+        'cantidad_horas',
+        'remuneracion_hora',
+        'remuneracion_total',
         'empleado_id',
     ];
 

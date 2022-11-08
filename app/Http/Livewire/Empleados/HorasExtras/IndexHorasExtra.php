@@ -37,16 +37,16 @@ class IndexHorasExtra extends Component
         $this->resetPage();
     }
 
-    // public function delete(Empleado $empleado)
-    // {
-    //     try {
-    //         $empleado->delete();
-    //         $this->emit('render');
-    //         $this->emit('success', '¡El empleado fue eliminado correctamente!');
-    //     } catch (\Exception $ex) {
-    //         $this->emit('error', 'Hubo un error al querer eliminar el empleado. Vuelve a intentarlo más tarde');
-    //     }
-    // }
+    public function delete(HoraExtra $horaExtra)
+    {
+        try {
+            $horaExtra->delete();
+            $this->emit('success', '¡La hora extra fue eliminada correctamente!');
+            $this->emit('render');
+        } catch (\Exception $ex) {
+            $this->emit('error', 'Hubo un error al querer eliminar la hora extra. Vuelve a intentarlo más tarde');
+        }
+    }
 
     public function filters($queryBuilder)
     {

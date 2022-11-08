@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Jornada;
 use Illuminate\Database\Seeder;
+use App\Models\CategoriasDeHorarios;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class CategoriasDeHorariosSeeder extends Seeder
 {
@@ -22,7 +24,22 @@ class CategoriasDeHorariosSeeder extends Seeder
         ];
 
         foreach ($categorias_de_horarios as $categoria_de_horario) {
-            \App\Models\CategoriasDeHorarios::create($categoria_de_horario);
+
+            CategoriasDeHorarios::create($categoria_de_horario);
+
+            // Por cada categoría de horario se asocia una jornada
+            $jornada = [
+                'nombre' => 'Jornada de ' . $categoria_de_horario['nombre'],
+                'dia' => 'Lunes',
+                'tipo' => 'Entrada',
+                'hora_entrada' => '08:00:00',
+                'hora_salida' => '16:00:00',
+                'tolerancia' => 0,
+                'categoria_de_horario_id' => CategoriasDeHorarios::where('nombre', $categoria_de_horario['nombre'])->first()->id,
+            ];
+
+            Jornada::create($jornada);
+
         }
 
     }

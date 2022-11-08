@@ -9,6 +9,10 @@ class TipoDeIncidencia extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'nombre',
+    ];
+
     protected $table = 'tipos_de_incidencia';
 
     public function incidencias()

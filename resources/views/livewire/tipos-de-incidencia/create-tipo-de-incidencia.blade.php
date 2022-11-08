@@ -1,16 +1,16 @@
 <div>
-    <x-jet-secondary-button wire:click="createIncidencia">
+    <x-jet-secondary-button wire:click="createTipoDeIncidencia">
         <i class="fas fa-plus mr-2"></i>
-        Registrar nueva incidencia
+        Crear nuevo tipo de incidencia
     </x-jet-secondary-button>
 
     <x-jet-dialog-modal wire:model="isOpen">
-        <x-slot name="title" class="font-semibold">
-            Registrar nueva incidencia
+        <x-slot name="title">
+            Crear nuevo tipo de incidencia
         </x-slot>
 
         <x-slot name="content">
-            @include('livewire.empleados.incidencias.form-incidencia')
+            @include('livewire.tipos-de-incidencia.form-tipo-de-incidencia')
         </x-slot>
 
         <x-slot name="footer">
@@ -20,7 +20,7 @@
                 </x-jet-danger-button>
 
                 <x-jet-button wire:click="save">
-                    Crear incidencia
+                    Crear tipo de incidencia
                 </x-jet-button>
             </div>
         </x-slot>

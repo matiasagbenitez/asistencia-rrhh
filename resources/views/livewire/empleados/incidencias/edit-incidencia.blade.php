@@ -5,7 +5,7 @@
 
     <x-jet-dialog-modal wire:model="isOpen">
         <x-slot name="title">
-            Editar Incidencia
+            Editar incidencia
         </x-slot>
 
         <x-slot name="content">

@@ -8,8 +8,6 @@
     </x-slot>
 
     <x-responsive-table>
-
-        <div class="px-6 py-4 grid grid-cols-6 gap-2">
             <div class="col-span-4">
                 <x-jet-input type="text" wire:model="search" class="w-full" placeholder="Filtre su búsqueda aquí..." />
             </div>

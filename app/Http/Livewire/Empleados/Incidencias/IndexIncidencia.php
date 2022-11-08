@@ -37,16 +37,16 @@ class IndexIncidencia extends Component
         $this->resetPage();
     }
 
-    // public function delete(Empleado $empleado)
-    // {
-    //     try {
-    //         $empleado->delete();
-    //         $this->emit('render');
-    //         $this->emit('success', '¡El empleado fue eliminado correctamente!');
-    //     } catch (\Exception $ex) {
-    //         $this->emit('error', 'Hubo un error al querer eliminar el empleado. Vuelve a intentarlo más tarde');
-    //     }
-    // }
+    public function delete(Incidencia $incidencia)
+    {
+        try {
+            $incidencia->delete();
+            $this->emit('success', '¡La incidencia fue eliminada correctamente!');
+            $this->emit('render');
+        } catch (\Exception $ex) {
+            $this->emit('error', 'Hubo un error al querer eliminar la incidencia. Vuelve a intentarlo más tarde');
+        }
+    }
 
     public function filters($queryBuilder)
     {
@@ -59,7 +59,7 @@ class IndexIncidencia extends Component
         $queryBuilder = Incidencia::where('empleado_id', $this->empleado->id)
             ->leftJoin('tipos_de_incidencia', 'incidencias.tipo_de_incidencia_id', '=', 'tipos_de_incidencia.id')
             ->select('incidencias.*', 'tipos_de_incidencia.nombre as tipo');
-        return $this->filters($queryBuilder)->paginate(10);
+        return $this->filters($queryBuilder)->orderBy('fecha_hora', 'desc')->paginate(10);
     }
 
     public function resetFilters()

@@ -23,14 +23,18 @@ class EditHorasExtra extends Component
     public $form = [
         'form.fecha_hora_inicio' => '',
         'form.fecha_hora_fin' => '',
-        'form.remuneracion' => '',
+        'form.cantidad_horas' => '',
+        'form.remuneracion_hora' => '',
+        'form.remuneracion_total' => '',
         'form.empleado_id' => '',
     ];
 
     protected $validationAttributes = [
         'form.fecha_hora_inicio' => 'Fecha y hora de inicio',
         'form.fecha_hora_fin' => 'Fecha y hora de fin',
-        'form.remuneracion' => 'Remuneración',
+        'form.cantidad_horas' => 'Cantidad de horas',
+        'form.remuneracion_hora' => 'Remuneración por hora',
+        'form.remuneracion_total' => 'Remuneración total',
     ];
 
     public function editHorasExtra()
@@ -39,7 +43,9 @@ class EditHorasExtra extends Component
         $this->form = [
             'fecha_hora_inicio' => $this->horasExtra->fecha_hora_inicio,
             'fecha_hora_fin' => $this->horasExtra->fecha_hora_fin,
-            'remuneracion' => $this->horasExtra->remuneracion,
+            'cantidad_horas' => $this->horasExtra->cantidad_horas,
+            'remuneracion_hora' => $this->horasExtra->remuneracion_hora,
+            'remuneracion_total' => $this->horasExtra->remuneracion_total,
             'empleado_id' => $this->horasExtra->empleado_id,
         ];
     }
@@ -50,12 +56,40 @@ class EditHorasExtra extends Component
         $this->resetErrorBag();
     }
 
+    public function updatedFormFechaHoraFin()
+    {
+        if ($this->form['fecha_hora_inicio'] && $this->form['fecha_hora_fin']) {
+            // Validar que la fecha de inicio sea menor a la fecha de fin
+            $this->validate([
+                'form.fecha_hora_inicio' => 'before:form.fecha_hora_fin',
+                'form.fecha_hora_fin' => 'after:form.fecha_hora_inicio',
+            ]);
+
+            $hora_inicio = strtotime($this->form['fecha_hora_inicio']);
+            $hora_fin = strtotime($this->form['fecha_hora_fin']);
+            $this->form['cantidad_horas'] = round(abs($hora_fin - $hora_inicio) / 3600, 2);
+        } else {
+            $this->form['cantidad_horas'] = '-';
+        }
+    }
+
+    public function updatedFormRemuneracionHora()
+    {
+        if ($this->form['cantidad_horas'] && $this->form['remuneracion_hora']) {
+            $this->form['remuneracion_total'] = $this->form['cantidad_horas'] * $this->form['remuneracion_hora'];
+        } else {
+            $this->form['remuneracion_total'] = '';
+        }
+    }
+
     public function update()
     {
         $this->validate([
-            'form.fecha_hora_inicio' => 'required',
-            'form.fecha_hora_fin' => 'required',
-            'form.remuneracion' => 'required',
+            'form.fecha_hora_inicio' => 'required|before:form.fecha_hora_fin',
+            'form.fecha_hora_fin' => 'required|after:form.fecha_hora_inicio',
+            'form.cantidad_horas' => 'required',
+            'form.remuneracion_hora' => 'required',
+            'form.remuneracion_total' => 'required',
             'form.empleado_id' => 'required',
         ]);
         $this->horasExtra->update($this->form);

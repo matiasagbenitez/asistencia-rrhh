@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Database\Seeders\HoraExtraSeeder;
+use Database\Seeders\IncidenciaSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,7 +24,9 @@ class DatabaseSeeder extends Seeder
             PuestoSeeder::class,
             CategoriasDeHorariosSeeder::class,
             EmpleadoSeeder::class,
-                TipoDeIncidenciaSeeder::class,
+            TipoDeIncidenciaSeeder::class,
+            IncidenciaSeeder::class,
+            HoraExtraSeeder::class,
         ]);
     }
 }

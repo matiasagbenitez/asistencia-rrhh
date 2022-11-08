@@ -2,41 +2,50 @@
 
     <x-slot name="header">
         <div class="flex items-center justify-between">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Horas extras de
-                <span class="font-bold uppercase">{{ $empleado->nombre }} {{ $empleado->apellido }}</span>
-            </h2>
-            @livewire('empleados.horas-extras.create-horas-extra', ['empleado' => $empleado], key($empleado->id))
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Tipos de incidencias</h2>
+            @livewire('tipos-de-incidencia.create-tipo-de-incidencia')
         </div>
     </x-slot>
 
     <x-responsive-table>
 
-        @if ($items->count())
+        <div class="px-6 py-4 flex gap-2">
+            <x-jet-input type="text" wire:model="search" class="w-full" placeholder="Filtre su búsqueda aquí..." />
+        </div>
+
+        @if ($tipos_de_incidencia->count())
             <table class="text-gray-600 min-w-full divide-y divide-gray-200">
                 <thead class="border-b border-gray-300 bg-gray-200">
                     <tr class="text-center text-sm font-bold text-gray-500 uppercase tracking-wider">
-                        <th class="w-1/5 px-6 py-3">Inicio</th>
-                        <th class="w-1/5 px-6 py-3">Fin</th>
-                        <th class="w-1/5 px-6 py-3">Cantidad horas</th>
-                        <th class="w-1/5 px-6 py-3">Rem. hora</th>
-                        <th class="w-1/5 px-6 py-4">Rem. total</th>
-                        <th class="px-6 py-3">Acciones</th>
+                        <th scope="col" class="px-4 py-2 ">
+                            ID
+                        </th>
+                        <th scope="col" class="w-full px-4 py-2">
+                            Nombre tipo de incidencia
+                        </th>
+                        <th scope="col" class="px-4 py-2">
+                            Acción
+                        </th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
-                    @foreach ($items as $item)
+                    @foreach ($tipos_de_incidencia as $tipo)
                         <tr class="bg-gray-50">
-                            <td class="px-6 py-4 text-sm text-center">{{ Date::parse($item->fecha_hora_inicio)->format('d-m-Y H:i') }} HS</td>
-                            <td class="px-6 py-4 text-sm text-center">{{ Date::parse($item->fecha_hora_fin)->format('d-m-Y H:i') }} HS</td>
-                            <td class="px-6 py-4 text-sm text-center">{{ $item->cantidad_horas }}</td>
-                            <td class="px-6 py-4 text-sm text-center">${{ number_format($item->remuneracion_hora, 2, ',', '.') }}</td>
-                            <td class="px-6 py-4 text-sm text-center">${{ number_format($item->remuneracion_total, 2, ',', '.') }}</td>
-                            <td class="px-3 py-3 whitespace-nowrap text-sm font-medium">
+                            <td class="px-6 py-3">
+                                <p class="text-sm uppercase">
+                                    {{ $tipo->id }}
+                                </p>
+                            </td>
+                            <td class="px-6 py-3 text-center">
+                                <p class="text-sm uppercase">
+                                    {{ $tipo->nombre }}
+                                </p>
+                            </td>
+                            <td class="px-6 py-3 whitespace-nowrap text-sm font-medium">
                                 <div class="flex items-center justify-center gap-2">
-                                    @livewire('empleados.horas-extras.edit-horas-extra', ['horasExtra' => $item], key($item->id.'edit'))
-                                    {{-- @livewire('empleados.horas-extras.index-horas-extra', ['itemShow' => $item], key($item->id.'show')) --}}
-                                    <x-jet-danger-button wire:click="$emit('deleteHoraExtra', '{{ $item->id }}')">
+                                    @livewire('tipos-de-incidencia.edit-tipo-de-incidencia', ['tipo' => $tipo], key($tipo->id))
+                                    <x-jet-danger-button
+                                        wire:click="$emit('deleteTipoDeIncidencia', '{{ $tipo->id }}')">
                                         <i class="fas fa-trash"></i>
                                     </x-jet-danger-button>
                                 </div>
@@ -47,18 +56,13 @@
             </table>
         @else
             <div class="px-6 py-4">
-                <p class="text-center font-semibold">
-                    No se encontraron horas extras para
-                    <span class="font-bold">
-                        {{ $empleado->nombre }} {{ $empleado->apellido }}.
-                    </span>
-                </p>
+                <p class="text-center font-semibold">No se encontraron registros coincidentes.</p>
             </div>
         @endif
 
-        @if ($items->hasPages())
+        @if ($tipos_de_incidencia->hasPages())
             <div class="px-6 py-3">
-                {{ $items->links() }}
+                {{ $tipos_de_incidencia->links() }}
             </div>
         @endif
 
@@ -66,7 +70,7 @@
 
     @push('script')
         <script>
-            Livewire.on('deleteHoraExtra', itemId => {
+            Livewire.on('deleteTipoDeIncidencia', TipoDeIncidenciaId => {
                 Swal.fire({
                     title: '¿Estás seguro?',
                     text: "¡No podrás revertir esta acción!",
@@ -74,12 +78,12 @@
                     showCancelButton: true,
                     confirmButtonColor: '#1f2937',
                     cancelButtonColor: '#dc2626',
-                    confirmButtonText: 'Sí, eliminar hora extra',
+                    confirmButtonText: 'Sí, eliminar tipo de incidencia',
                     cancelButtonText: 'Cancelar'
                 }).then((result) => {
                     if (result.isConfirmed) {
 
-                        Livewire.emitTo('empleados.horas-extras.index-horas-extra', 'delete', itemId);
+                        Livewire.emitTo('tipos-de-incidencia.index-tipos-de-incidencia', 'delete', TipoDeIncidenciaId);
 
                         Livewire.on('success', message => {
                             const Toast = Swal.mixin({
@@ -110,4 +114,5 @@
             });
         </script>
     @endpush
+
 </div>

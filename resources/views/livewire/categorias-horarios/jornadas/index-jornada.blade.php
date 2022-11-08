@@ -2,16 +2,18 @@
 
     <x-slot name="header">
         <div class="flex items-center justify-between">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Jornadas</h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Jornadas de la categoría
+                <span class="font-bold">{{ $categoria->nombre }}</span>
+            </h2>
             @livewire('categorias-horarios.jornadas.create-jornada', ['categoria' => $categoria], key($categoria->id.'create'))
         </div>
     </x-slot>
 
     <x-responsive-table>
 
-        <div class="px-6 py-4 grid grid-cols-6 gap-2">
+        {{-- <div class="px-6 py-4 grid grid-cols-6 gap-2">
             Filtros
-        </div>
+        </div> --}}
 
         @if ($items->count())
             <table class="text-gray-600 min-w-full divide-y divide-gray-200">

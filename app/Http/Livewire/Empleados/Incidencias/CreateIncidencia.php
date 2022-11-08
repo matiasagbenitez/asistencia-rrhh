@@ -64,7 +64,7 @@ class CreateIncidencia extends Component
     public function resetInputFields()
     {
         $this->reset('form');
-        //$this->resetErrorBag();
+        $this->resetErrorBag();
     }
 
     public function save()

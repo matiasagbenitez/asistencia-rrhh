@@ -47,11 +47,11 @@
                             <td class="px-6 py-3 whitespace-nowrap text-sm font-medium">
                                 <div class="flex items-center justify-center gap-2">
                                     @livewire('categorias-horarios.edit-categoria-horario', ['categoria_de_horario' => $categoria_de_horario], key($categoria_de_horario->id))
-                                    <x-jet-button >
-                                        <a href="{{ route('categorias-de-horario.jornada.index', $categoria_de_horario->id) }}">
+                                    <a href="{{ route('categorias-de-horario.jornada.index', $categoria_de_horario->id) }}">
+                                        <x-jet-button class="bg-zinc-700">
                                             <i class="fas fa-clock"></i>
+                                        </x-jet-button>
                                         </a>
-                                    </x-jet-button>
                                     <x-jet-danger-button wire:click="$emit('deleteCategoriaHorario', '{{ $categoria_de_horario->id }}')">
                                         <i class="fas fa-trash"></i>
                                     </x-jet-danger-button>
