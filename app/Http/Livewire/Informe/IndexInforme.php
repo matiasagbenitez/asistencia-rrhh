@@ -18,7 +18,14 @@ class IndexInforme extends Component
     {
         $horasExtras = InformeService::horasExtras($this->empleado, '2021-01-01', '2023-01-31');
         $horasTrabajadas = InformeService::horasTrabajadas($this->empleado, '2021-01-01', '2023-01-31');
+        $faltasJustificadas = InformeService::faltasJustificadas($this->empleado, '2021-01-01', '2023-01-31');
+        $faltasInjustificadas = InformeService::faltasInjustificadas($this->empleado, '2021-01-01', '2023-01-31');
 
-        return view('livewire.informe.index-informe', compact('horasExtras', 'horasTrabajadas'));
+        return view('livewire.informe.index-informe', compact(
+            'horasExtras',
+            'horasTrabajadas',
+            'faltasJustificadas',
+            'faltasInjustificadas'
+        ));
     }
 }

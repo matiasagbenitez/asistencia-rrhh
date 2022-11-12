@@ -11,6 +11,8 @@ class TipoDeIncidencia extends Model
 
     public const SALIDA = 3;
     public const ENTRADA = 2;
+    public const FALTA_INJUSTIFICADA = 4;
+    public const FALTA_JUSTIFICADA = 5;
 
     protected $fillable = [
         'nombre',

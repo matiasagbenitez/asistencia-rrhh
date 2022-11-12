@@ -71,4 +71,42 @@ class InformeService
 
         return $total;
     }
+
+    /**
+     * Calcula las faltas injustificadas de un empleado en un rango de fechas.
+     *
+     * @param Empleado $empleado
+     * @param string $fechaInicio
+     * @param string $fechaFin
+     *
+     * @return integer
+     */
+    public static function faltasInjustificadas(Empleado $empleado, $fechaInicio, $fechaFin)
+    {
+        $faltas = Incidencia::where('tipo_de_incidencia_id', TipoDeIncidencia::FALTA_INJUSTIFICADA)
+            ->whereBetween('fecha_hora', [$fechaInicio, $fechaFin])
+            ->where('empleado_id', $empleado->id)
+            ->count();
+
+        return $faltas;
+    }
+
+    /**
+     * Calcula las faltas justificadas de un empleado en un rango de fechas.
+     *
+     * @param Empleado $empleado
+     * @param string $fechaInicio
+     * @param string $fechaFin
+     *
+     * @return integer
+     */
+    public static function faltasJustificadas(Empleado $empleado, $fechaInicio, $fechaFin)
+    {
+        $faltas = Incidencia::where('tipo_de_incidencia_id', TipoDeIncidencia::FALTA_JUSTIFICADA)
+            ->whereBetween('fecha_hora', [$fechaInicio, $fechaFin])
+            ->where('empleado_id', $empleado->id)
+            ->count();
+
+        return $faltas;
+    }
 }
