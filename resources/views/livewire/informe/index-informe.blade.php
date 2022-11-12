@@ -24,5 +24,9 @@
         <h3 class="mt-3 text-md font-bold">Faltas justificadas:</h3>
         <p class="text-md font-mono">{{ $faltasJustificadas }}</p>
     </div>
+    <div class="flex items-baseline space-x-2">
+        <h3 class="mt-3 text-md font-bold">Asistencias:</h3>
+        <p class="text-md font-mono">{{ $asistencias }}</p>
+    </div>
 
 </div>

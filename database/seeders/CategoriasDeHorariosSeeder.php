@@ -30,7 +30,7 @@ class CategoriasDeHorariosSeeder extends Seeder
             // Por cada categoría de horario se asocia una jornada
             $jornada = [
                 'nombre' => 'Jornada de ' . $categoria_de_horario['nombre'],
-                'dia' => 'Lunes',
+                'dia' => Jornada::LUNES,
                 'tipo' => 'Entrada',
                 'hora_entrada' => '08:00:00',
                 'hora_salida' => '16:00:00',

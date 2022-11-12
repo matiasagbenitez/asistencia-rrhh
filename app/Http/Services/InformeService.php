@@ -5,6 +5,7 @@ namespace App\Http\Services;
 use App\Models\Empleado;
 use App\Models\HoraExtra;
 use App\Models\Incidencia;
+use App\Models\Jornada;
 use App\Models\TipoDeIncidencia;
 use Carbon\Carbon;
 
@@ -109,4 +110,46 @@ class InformeService
 
         return $faltas;
     }
+
+    /**
+     * Calcula las asistencias de un empleado en un rango de fechas.
+     *
+     * @param Empleado $empleado
+     * @param string $fechaInicio
+     * @param string $fechaFin
+     *
+     * @return integer
+     */
+    public static function asistencias(Empleado $empleado, $fechaInicio, $fechaFin)
+    {
+        $asistencias = Incidencia::where('tipo_de_incidencia_id', TipoDeIncidencia::ENTRADA)
+            ->whereBetween('fecha_hora', [$fechaInicio, $fechaFin])
+            ->where('empleado_id', $empleado->id)
+            ->count();
+
+        return $asistencias;
+    }
+
+    /**
+     * Devuelve un array con los horarios de jornadas de cada dia de un empleado según su categoría de horario.
+     *
+     * @param Empleado $empleado
+     *
+     * @return array
+     */
+    // public static function horario(Empleado $empleado)
+    // {
+    //     $horario['lunes'] = Jornada::where('empleado_id', $empleado->id)
+    //         ->where('dia', Jornada::LUNES)
+    //         ->orderBy('hora_inicio', 'asc')
+    //         ->get();
+    //     $horario['martes'] = [];
+    //     $horario['miercoles'] = [];
+    //     $horario['jueves'] = [];
+    //     $horario['viernes'] = [];
+    //     $horario['sabado'] = [];
+    //     $horario['domingo'] = [];
+
+    //     return $horario;
+    // }
 }
