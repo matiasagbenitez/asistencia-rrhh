@@ -8,7 +8,9 @@ use Livewire\Component;
 class CreateJornada extends Component
 {
     public $isOpen = 0;
-    public $collections;
+    public $collections = [
+        'dias' => [],
+    ];
 
     public $form = [
         'nombre' => '',
@@ -23,6 +25,15 @@ class CreateJornada extends Component
     public function mount($categoria)
     {
         $this->categoria = $categoria;
+        $this->collections['dias'] = [
+            Jornada::LUNES => 'Lunes',
+            Jornada::MARTES => 'Martes',
+            Jornada::MIERCOLES => 'Miércoles',
+            Jornada::JUEVES => 'Jueves',
+            Jornada::VIERNES => 'Viernes',
+            Jornada::SABADO => 'Sábado',
+            Jornada::DOMINGO => 'Domingo',
+        ];
     }
 
     public function render()

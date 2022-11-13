@@ -13,8 +13,12 @@
     </div>
     <div class="col-span-3">
         <x-jet-label class="mb-2">Dia</x-jet-label>
-        <x-jet-input wire:model.defer="form.dia" type="text" class="w-full"
-            placeholder="Ingrese el dia de la jornada"></x-jet-input>
+            <select wire:model.defer="form.dia" class="w-full input-control">
+                <option value="" disabled>Seleccione un dia</option>
+                @foreach ($collections['dias'] as $key => $dia)
+                    <option value="{{ $key }}">{{ $dia }}</option>
+                @endforeach
+            </select>
         <x-jet-input-error class="mt-2 text-xs font-semibold" for="form.dia" />
     </div>
 

@@ -2,12 +2,16 @@
 
 namespace App\Http\Livewire\CategoriasHorarios\Jornadas;
 
+use App\Models\Jornada;
 use Livewire\Component;
 
 class EditJornada extends Component
 {
     public $isOpen = 0;
     public $horasExtra;
+    public $collections = [
+        'dias' => [],
+    ];
 
     public $form = [
         'nombre' => '',
@@ -22,6 +26,15 @@ class EditJornada extends Component
     public function mount($jornada)
     {
         $this->jornada = $jornada;
+        $this->collections['dias'] = [
+            Jornada::LUNES => 'Lunes',
+            Jornada::MARTES => 'Martes',
+            Jornada::MIERCOLES => 'Miércoles',
+            Jornada::JUEVES => 'Jueves',
+            Jornada::VIERNES => 'Viernes',
+            Jornada::SABADO => 'Sábado',
+            Jornada::DOMINGO => 'Domingo',
+        ];
     }
 
     public function render()

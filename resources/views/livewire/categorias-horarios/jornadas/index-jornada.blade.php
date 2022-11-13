@@ -21,6 +21,7 @@
                     <tr class="text-center text-sm font-bold text-gray-500 uppercase tracking-wider">
                         <th class="px-6 py-3">Nombre</th>
                         <th class="px-6 py-3">Tipo</th>
+                        <th class="px-6 py-3">Dia</th>
                         <th class="px-6 py-3">Hora de entrada</th>
                         <th class="px-6 py-3">Hora de salida</th>
                         <th class="px-6 py-3">Tolerancia</th>
@@ -32,6 +33,7 @@
                         <tr class="bg-gray-50">
                             <td class="px-6 py-4 text-sm text-center">{{ $item->nombre }}</td>
                             <td class="px-6 py-4 text-sm text-center">{{ $item->tipo }}</td>
+                            <td class="px-6 py-4 text-sm text-center">{{ $item->dia }}</td>
                             <td class="px-6 py-4 text-sm text-center">{{ $item->hora_entrada }}</td>
                             <td class="px-6 py-4 text-sm text-center">{{ $item->hora_salida }}</td>
                             <td class="px-6 py-4 text-sm text-center">{{ $item->tolerancia }}</td>

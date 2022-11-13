@@ -57,7 +57,35 @@ class IndexJornada extends Component
     public function getJornadas()
     {
         $queryBuilder = Jornada::where('categoria_de_horario_id', $this->categoria->id);
-        return $this->filters($queryBuilder)->paginate(10);
+        $jornadas = $this->filters($queryBuilder)->paginate(10);
+        $jornadas->each(function ($jornada) {
+            switch ($jornada->dia) {
+                case 1:
+                    $jornada->dia = 'Lunes';
+                    break;
+                case 2:
+                    $jornada->dia = 'Martes';
+                    break;
+                case 3:
+                    $jornada->dia = 'Miércoles';
+                    break;
+                case 4:
+                    $jornada->dia = 'Jueves';
+                    break;
+                case 5:
+                    $jornada->dia = 'Viernes';
+                    break;
+                case 6:
+                    $jornada->dia = 'Sábado';
+                    break;
+                case 7:
+                    $jornada->dia = 'Domingo';
+                    break;
+                default:
+                    $jornada->dia = 'Se cargó mal este día';
+            }
+        });
+        return $jornadas;
     }
 
     public function resetFilters()
