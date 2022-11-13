@@ -2,6 +2,7 @@
 
 namespace App\Http\Services;
 
+use App\Models\Asistencia;
 use App\Models\Empleado;
 use App\Models\HoraExtra;
 use App\Models\Incidencia;
@@ -13,7 +14,6 @@ class InformeService
 {
     /**
      * Calcula las horas trabajadas de un empleado en un rango de fechas.
-     * Sólo se tendrán en cuenta aquellas entradas y salidas con una diferencia menor o igual a 12 horas.
      *
      * @param Empleado $empleado
      * @param string $fechaInicio
@@ -23,26 +23,15 @@ class InformeService
      */
     public static function horasTrabajadas(Empleado $empleado, $fechaInicio, $fechaFin)
     {
-        $entradas = Incidencia::where('tipo_de_incidencia_id', TipoDeIncidencia::ENTRADA)
-            ->whereBetween('fecha_hora', [$fechaInicio, $fechaFin])
-            ->where('empleado_id', $empleado->id)
+        $total = 0;
+        $asistencias = Asistencia::where('empleado_id', $empleado->id)
+            ->whereBetween('fecha_hora_entrada', [$fechaInicio, $fechaFin])
             ->get();
 
-        $total = 0;
-        foreach ($entradas as $entrada) {
-            $salida = Incidencia::where('tipo_de_incidencia_id', TipoDeIncidencia::SALIDA)
-                ->where('fecha_hora', '>', $entrada->fecha_hora)
-                ->where('empleado_id', $empleado->id)
-                ->orderBy('fecha_hora', 'asc')
-                ->first();
-
-            if ($salida) {
-                $inicio = Carbon::parse($entrada->fecha_hora);
-                $fin = Carbon::parse($salida->fecha_hora);
-                if ($inicio->diffInHours($fin) <= 12) {
-                    $total += $inicio->diffInHours($fin);
-                }
-            }
+        foreach ($asistencias as $asistencia) {
+            $inicio = Carbon::parse($asistencia->fecha_hora_entrada);
+            $fin = Carbon::parse($asistencia->fecha_hora_salida);
+            $total += $inicio->diffInHours($fin);
         }
 
         return $total;
@@ -122,9 +111,8 @@ class InformeService
      */
     public static function asistencias(Empleado $empleado, $fechaInicio, $fechaFin)
     {
-        $asistencias = Incidencia::where('tipo_de_incidencia_id', TipoDeIncidencia::ENTRADA)
-            ->whereBetween('fecha_hora', [$fechaInicio, $fechaFin])
-            ->where('empleado_id', $empleado->id)
+        $asistencias = Asistencia::where('empleado_id', $empleado->id)
+            ->whereBetween('fecha_hora_entrada', [$fechaInicio, $fechaFin])
             ->count();
 
         return $asistencias;

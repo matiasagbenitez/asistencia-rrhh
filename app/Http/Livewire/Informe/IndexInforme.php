@@ -9,25 +9,69 @@ use Livewire\Component;
 
 class IndexInforme extends Component
 {
+    public $empleado;
+
+    public $collections = [
+        'empleados' => [],
+    ];
+
+    public $filtros = [
+        'fecha_inicio' => '',
+        'fecha_fin' => '',
+        'empleado_id' => '',
+    ];
+
     public function mount()
     {
-        $this->empleado = Empleado::find(1);
+        $this->collections['empleados'] = Empleado::all();
+        $this->filtros['fecha_inicio'] = Carbon::now()->subMonth()->format('Y-m-d');
+        $this->filtros['fecha_fin'] = Carbon::now()->format('Y-m-d');
     }
 
     public function render()
     {
-        $horasExtras = InformeService::horasExtras($this->empleado, '2021-01-01', '2023-01-31');
-        $asistencias = InformeService::asistencias($this->empleado, '2021-01-01', '2023-01-31');
-        $horasTrabajadas = InformeService::horasTrabajadas($this->empleado, '2021-01-01', '2023-01-31');
-        $faltasJustificadas = InformeService::faltasJustificadas($this->empleado, '2021-01-01', '2023-01-31');
-        $faltasInjustificadas = InformeService::faltasInjustificadas($this->empleado, '2021-01-01', '2023-01-31');
+        $this->empleado = Empleado::find($this->filtros['empleado_id']);
+        $stats = $this->getStats($this->empleado);
 
-        return view('livewire.informe.index-informe', compact(
-            'horasExtras',
-            'asistencias',
-            'horasTrabajadas',
-            'faltasJustificadas',
-            'faltasInjustificadas',
-        ));
+        return view('livewire.informe.index-informe', compact('stats'));
+    }
+
+    public function getStats($empleado)
+    {
+        if (!is_null($empleado)) {
+            $horasExtras = InformeService::horasExtras(
+                $empleado,
+                $this->filtros['fecha_inicio'],
+                $this->filtros['fecha_fin']
+            );
+            $asistencias = InformeService::asistencias(
+                $empleado,
+                $this->filtros['fecha_inicio'],
+                $this->filtros['fecha_fin']
+            );
+            $horasTrabajadas = InformeService::horasTrabajadas(
+                $empleado,
+                $this->filtros['fecha_inicio'],
+                $this->filtros['fecha_fin']
+            );
+            $faltasJustificadas = InformeService::faltasJustificadas(
+                $empleado,
+                $this->filtros['fecha_inicio'],
+                $this->filtros['fecha_fin']
+            );
+            $faltasInjustificadas = InformeService::faltasInjustificadas(
+                $empleado,
+                $this->filtros['fecha_inicio'],
+                $this->filtros['fecha_fin']
+            );
+            return [
+                'horasExtras' => $horasExtras,
+                'asistencias' => $asistencias,
+                'horasTrabajadas' => $horasTrabajadas,
+                'faltasJustificadas' => $faltasJustificadas,
+                'faltasInjustificadas' => $faltasInjustificadas,
+            ];
+        }
+        return null;
     }
 }
