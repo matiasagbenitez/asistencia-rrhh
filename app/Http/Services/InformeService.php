@@ -137,19 +137,25 @@ class InformeService
      *
      * @return array
      */
-    // public static function horario(Empleado $empleado)
-    // {
-    //     $horario['lunes'] = Jornada::where('empleado_id', $empleado->id)
-    //         ->where('dia', Jornada::LUNES)
-    //         ->orderBy('hora_inicio', 'asc')
-    //         ->get();
-    //     $horario['martes'] = [];
-    //     $horario['miercoles'] = [];
-    //     $horario['jueves'] = [];
-    //     $horario['viernes'] = [];
-    //     $horario['sabado'] = [];
-    //     $horario['domingo'] = [];
+    public static function horario(Empleado $empleado)
+    {
+        $horario = [
+            Jornada::LUNES => [],
+            Jornada::MARTES => [],
+            Jornada::MIERCOLES => [],
+            Jornada::JUEVES => [],
+            Jornada::VIERNES => [],
+            Jornada::SABADO => [],
+            Jornada::DOMINGO => [],
+        ];
 
-    //     return $horario;
-    // }
+        foreach ($horario as $key => $value) {
+            $horario[$key] = Jornada::where('categoria_de_horario_id', $empleado->categoria_horario_id)
+                ->where('dia', $key)
+                ->orderBy('hora_inicio', 'asc')
+                ->get();
+        }
+
+        return $horario;
+    }
 }
