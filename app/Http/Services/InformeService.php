@@ -152,7 +152,7 @@ class InformeService
         foreach ($horario as $key => $value) {
             $horario[$key] = Jornada::where('categoria_de_horario_id', $empleado->categoria_horario_id)
                 ->where('dia', $key)
-                ->orderBy('hora_inicio', 'asc')
+                ->orderBy('hora_entrada', 'asc')
                 ->get();
         }
 
