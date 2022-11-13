@@ -81,6 +81,8 @@ class CreateJornada extends Component
     public function save()
     {
         $this->form['categoria_de_horario_id'] = $this->categoria->id;
+        $this->form['nombre'] = 'Jornada normal';
+        $this->form['tipo'] = 'Trabajo';
         $this->form['hora_entrada'] = date('H:i:s', strtotime($this->form['hora_entrada']));
         $this->form['hora_salida'] = date('H:i:s', strtotime($this->form['hora_salida']));
         Jornada::create($this->form);

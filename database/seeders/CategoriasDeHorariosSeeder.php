@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\Jornada;
 use Illuminate\Database\Seeder;
 use App\Models\CategoriasDeHorarios;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class CategoriasDeHorariosSeeder extends Seeder
 {
@@ -29,9 +28,9 @@ class CategoriasDeHorariosSeeder extends Seeder
 
             // Por cada categoría de horario se asocia una jornada
             $jornada = [
-                'nombre' => 'Jornada de ' . $categoria_de_horario['nombre'],
+                'nombre' => 'Jornada normal',
                 'dia' => Jornada::LUNES,
-                'tipo' => 'Entrada',
+                'tipo' => 'Trabajo',
                 'hora_entrada' => '08:00:00',
                 'hora_salida' => '16:00:00',
                 'tolerancia' => 0,
