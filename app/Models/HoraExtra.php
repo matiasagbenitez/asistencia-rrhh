@@ -11,12 +11,10 @@ class HoraExtra extends Model
 
     protected $table = 'horas_extras';
     protected $fillable = [
+        'empleado_id',
         'fecha_hora_inicio',
         'fecha_hora_fin',
         'cantidad_horas',
-        'remuneracion_hora',
-        'remuneracion_total',
-        'empleado_id',
     ];
 
     public function empleado()

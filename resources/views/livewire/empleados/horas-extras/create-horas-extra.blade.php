@@ -20,7 +20,7 @@
                 </x-jet-danger-button>
 
                 <x-jet-button wire:click="save">
-                    Crear Item
+                    Registrar horas extras
                 </x-jet-button>
             </div>
         </x-slot>

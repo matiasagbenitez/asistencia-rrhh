@@ -57,7 +57,7 @@ class IndexHorasExtra extends Component
     public function getHorasExtras()
     {
         $queryBuilder = HoraExtra::where('empleado_id', $this->empleado->id);
-        return $this->filters($queryBuilder)->paginate(10);
+        return $this->filters($queryBuilder)->orderBy('fecha_hora_inicio', 'desc')->paginate(10);
     }
 
     public function resetFilters()

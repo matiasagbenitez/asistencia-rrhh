@@ -24,17 +24,13 @@ class EditHorasExtra extends Component
         'form.fecha_hora_inicio' => '',
         'form.fecha_hora_fin' => '',
         'form.cantidad_horas' => '',
-        'form.remuneracion_hora' => '',
-        'form.remuneracion_total' => '',
         'form.empleado_id' => '',
     ];
 
     protected $validationAttributes = [
-        'form.fecha_hora_inicio' => 'Fecha y hora de inicio',
-        'form.fecha_hora_fin' => 'Fecha y hora de fin',
-        'form.cantidad_horas' => 'Cantidad de horas',
-        'form.remuneracion_hora' => 'Remuneración por hora',
-        'form.remuneracion_total' => 'Remuneración total',
+        'form.fecha_hora_inicio' => 'fecha y hora de inicio',
+        'form.fecha_hora_fin' => 'fecha y hora de fin',
+        'form.cantidad_horas' => 'cantidad de horas',
     ];
 
     public function editHorasExtra()
@@ -44,8 +40,6 @@ class EditHorasExtra extends Component
             'fecha_hora_inicio' => $this->horasExtra->fecha_hora_inicio,
             'fecha_hora_fin' => $this->horasExtra->fecha_hora_fin,
             'cantidad_horas' => $this->horasExtra->cantidad_horas,
-            'remuneracion_hora' => $this->horasExtra->remuneracion_hora,
-            'remuneracion_total' => $this->horasExtra->remuneracion_total,
             'empleado_id' => $this->horasExtra->empleado_id,
         ];
     }
@@ -88,8 +82,6 @@ class EditHorasExtra extends Component
             'form.fecha_hora_inicio' => 'required|before:form.fecha_hora_fin',
             'form.fecha_hora_fin' => 'required|after:form.fecha_hora_inicio',
             'form.cantidad_horas' => 'required',
-            'form.remuneracion_hora' => 'required',
-            'form.remuneracion_total' => 'required',
             'form.empleado_id' => 'required',
         ]);
         $this->horasExtra->update($this->form);

@@ -6,25 +6,16 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('tipos_de_incidencia', function (Blueprint $table) {
             $table->id();
-            $table->string("nombre");
+            $table->string('nombre');
+            $table->boolean('descuenta_sueldo')->default(false);
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('tipos_de_incidencia');

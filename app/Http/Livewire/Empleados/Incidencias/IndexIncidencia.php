@@ -59,7 +59,8 @@ class IndexIncidencia extends Component
         $queryBuilder = Incidencia::where('empleado_id', $this->empleado->id)
             ->leftJoin('tipos_de_incidencia', 'incidencias.tipo_de_incidencia_id', '=', 'tipos_de_incidencia.id')
             ->select('incidencias.*', 'tipos_de_incidencia.nombre as tipo');
-        return $this->filters($queryBuilder)->orderBy('fecha_hora', 'desc')->paginate(10);
+
+        return $this->filters($queryBuilder)->orderBy('fecha_hora_inicio', 'desc')->paginate(10);
     }
 
     public function resetFilters()

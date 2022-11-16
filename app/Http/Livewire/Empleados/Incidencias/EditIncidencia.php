@@ -24,33 +24,30 @@ class EditIncidencia extends Component
     }
 
     public $form = [
-        'nombre' => '',
-        'descripcion' => '',
-        'fecha_hora' => '',
-        'descontar' => '',
         'empleado_id' => '',
         'tipo_de_incidencia_id' => '',
+        'fecha_hora_inicio' => '',
+        'fecha_hora_fin' => '',
+        'descripcion' => '',
     ];
 
     protected $validationAttributes = [
-        'form.nombre' => 'Nombre',
-        'form.descripcion' => 'Descripción',
-        'form.fecha_hora' => 'Fecha y hora',
-        'form.descontar' => 'Descontar',
-        'form.empleado_id' => 'Empleado',
-        'form.tipo_de_incidencia_id' => 'Tipo de incidencia',
+        'form.empleado_id' => 'empleado',
+        'form.tipo_de_incidencia_id' => 'tipo de incidencia',
+        'form.fecha_hora_inicio' => 'fecha y hora de inicio',
+        'form.fecha_hora_fin' => 'fecha y hora de inicio',
+        'form.descripcion' => 'descripción',
     ];
 
     public function editIncidencia()
     {
         $this->toggleModal();
         $this->form = [
-            'nombre' => $this->incidencia->nombre,
-            'descripcion' => $this->incidencia->descripcion,
-            'fecha_hora' => $this->incidencia->fecha_hora,
-            'descontar' => $this->incidencia->descontar,
-            'empleado_id' => $this->incidencia->empleado_id,
             'tipo_de_incidencia_id' => $this->incidencia->tipo_de_incidencia_id,
+            'fecha_hora_inicio' => $this->incidencia->fecha_hora_inicio,
+            'fecha_hora_fin' => $this->incidencia->fecha_hora_fin,
+            'empleado_id' => $this->incidencia->empleado_id,
+            'descripcion' => $this->incidencia->descripcion,
         ];
     }
 
@@ -63,12 +60,11 @@ class EditIncidencia extends Component
     public function update()
     {
         $this->validate([
-            'form.nombre' => 'required',
-            'form.descripcion' => 'required',
-            'form.fecha_hora' => 'required',
-            'form.descontar' => 'required',
             'form.empleado_id' => 'required',
             'form.tipo_de_incidencia_id' => 'required',
+            'form.fecha_hora_inicio' => 'required',
+            'form.fecha_hora_fin' => 'nullable|after:form.fecha_hora_inicio',
+            'form.descripcion' => 'nullable',
         ]);
         $this->incidencia->update($this->form);
         $this->toggleModal();

@@ -109,17 +109,18 @@
                                     @livewire('empleados.edit-empleado', ['empleadoEdit' => $empleado], key($empleado->id . 'edit'))
 
                                     <a href="{{ route('empleados.asistencias.index', $empleado->id) }}">
-                                        <x-jet-button title="Incidencias" class="bg-cyan-900">
-                                            Asistencias
+                                        <x-jet-button title="Asistencias" class="bg-cyan-900">
+                                            {{-- Icon for assistence --}}
+                                            <i class="fas fa-clipboard"></i>
                                         </x-jet-button>
                                     </a>
                                     <a href="{{ route('empleados.incidencias.index', $empleado->id) }}">
-                                        <x-jet-button title="Incidencias" class="bg-cyan-900">
+                                        <x-jet-button title="Incidencias" class="bg-cyan-800">
                                             <i class="fas fa-calendar-alt"></i>
                                         </x-jet-button>
                                     </a>
                                     <a href="{{ route('empleados.horas-extras.index', $empleado->id) }}">
-                                        <x-jet-button title="Horas extras" class="bg-zinc-700">
+                                        <x-jet-button title="Horas extras" class="bg-cyan-700">
                                             <i class="fas fa-clock"></i>
                                         </x-jet-button>
                                     </a>

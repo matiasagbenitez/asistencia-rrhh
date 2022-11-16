@@ -16,6 +16,7 @@ class TipoDeIncidencia extends Model
 
     protected $fillable = [
         'nombre',
+        'descuenta_sueldo',
     ];
 
     protected $table = 'tipos_de_incidencia';

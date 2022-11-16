@@ -10,14 +10,13 @@ return new class extends Migration
     {
         Schema::create('horas_extras', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('fecha_hora_inicio');
-            $table->dateTime('fecha_hora_fin');
-            $table->float('cantidad_horas', 8, 2)->nullable();
-            $table->float('remuneracion_hora', 8, 2)->nullable();
-            $table->float('remuneracion_total', 8, 2)->nullable();
 
             $table->unsignedBigInteger('empleado_id');
             $table->foreign('empleado_id')->references('id')->on('empleados');
+
+            $table->dateTime('fecha_hora_inicio');
+            $table->dateTime('fecha_hora_fin');
+            $table->float('cantidad_horas', 8, 2)->nullable();
 
             $table->timestamps();
         });

@@ -12,12 +12,11 @@ class Incidencia extends Model
     protected $table = 'incidencias';
 
     protected $fillable = [
-        'nombre',
-        'descripcion',
-        'fecha_hora',
-        'descontar',
         'empleado_id',
         'tipo_de_incidencia_id',
+        'fecha_hora_inicio',
+        'fecha_hora_fin',
+        'descripcion',
     ];
 
     public function empleado()

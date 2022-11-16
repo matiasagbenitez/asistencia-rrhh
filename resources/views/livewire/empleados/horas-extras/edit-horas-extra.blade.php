@@ -5,7 +5,7 @@
 
     <x-jet-dialog-modal wire:model="isOpen">
         <x-slot name="title">
-            Editar Horas Extra
+            Editar horas extra
         </x-slot>
 
         <x-slot name="content">

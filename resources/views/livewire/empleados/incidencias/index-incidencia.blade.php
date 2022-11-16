@@ -21,10 +21,10 @@
                 <thead class="border-b border-gray-300 bg-gray-200">
                     <tr class="text-center text-sm font-bold text-gray-500 uppercase tracking-wider">
                         {{-- <th class="px-6 py-3">ID</th> --}}
-                        <th class="w-1/4 px-6 py-3">Fecha y hora</th>
-                        <th class="w-1/4 px-6 py-3">Incidencia</th>
-                        <th class="w-1/4 px-6 py-3">Tipo</th>
-                        <th class="w-1/4 px-6 py-3">Descuenta sueldo</th>
+                        <th class="w-1/5 px-6 py-3">Inicio incidencia</th>
+                        <th class="w-1/3 px-6 py-3">Incidencia</th>
+                        <th class="w-1/5 px-6 py-3">Fin incidencia</th>
+                        <th class="w-1/5 px-6 py-3">Descuenta sueldo</th>
                         <th class="px-6 py-3">Acciones</th>
                     </tr>
                 </thead>
@@ -32,11 +32,17 @@
                     @foreach ($items as $item)
                         <tr class="bg-gray-50 uppercase text-sm">
                             {{-- <td class="px-6 py-4 text-center">{{ $item->id }}</td> --}}
-                            <td class="px-6 py-4 text-center">{{ Date::parse($item->fecha_hora )->format('d-m-Y H:i') }} hs</td>
-                            <td class="px-6 py-4 text-center">{{ $item->nombre }}</td>
+                            <td class="px-6 py-4 text-center">{{ Date::parse($item->fecha_hora_inicio )->format('d-m-Y H:i') }} hs</td>
                             <td class="px-6 py-4 text-center">{{ $item->tipo }}</td>
                             <td class="px-6 py-4 text-center">
-                                @if (!$item->descontar)
+                                @if ($item->fecha_hora_fin)
+                                    {{ Date::parse($item->fecha_hora_fin )->format('d-m-Y H:i') }} hs
+                                @else
+                                    N/A
+                                @endif
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                @if (!$item->tipoDeIncidencia->descuenta_sueldo)
                                 <span
                                     class="px-6 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                                     NO DESCUENTA

@@ -12,12 +12,11 @@ class CreateIncidencia extends Component
     public $collections;
 
     public $form = [
-        'nombre' => '',
-        'descripcion' => '',
-        'fecha_hora' => '',
-        'descontar' => '',
         'empleado_id' => '',
         'tipo_de_incidencia_id' => '',
+        'fecha_hora_inicio' => '',
+        'fecha_hora_fin' => '',
+        'descripcion' => '',
     ];
 
     public function mount($empleado)
@@ -33,21 +32,19 @@ class CreateIncidencia extends Component
     }
 
     protected $rules = [
-        'form.nombre' => 'required',
-        'form.descripcion' => 'required',
-        'form.fecha_hora' => 'required',
-        'form.descontar' => 'required',
         'form.empleado_id' => 'required',
         'form.tipo_de_incidencia_id' => 'required',
+        'form.fecha_hora_inicio' => 'required',
+        'form.fecha_hora_fin' => 'nullable|after:form.fecha_hora_inicio',
+        'form.descripcion' => 'nullable',
     ];
 
     protected $validationAttributes = [
-        'form.nombre' => 'Nombre',
-        'form.descripcion' => 'Descripción',
-        'form.fecha_hora' => 'Fecha y hora',
-        'form.descontar' => 'Descontar',
-        'form.empleado_id' => 'Empleado',
-        'form.tipo_de_incidencia_id' => 'Tipo de incidencia',
+        'form.empleado_id' => 'empleado',
+        'form.tipo_de_incidencia_id' => 'tipo de incidencia',
+        'form.fecha_hora_inicio' => 'fecha y hora de inicio',
+        'form.fecha_hora_fin' => 'fecha y hora de inicio',
+        'form.descripcion' => 'descripción',
     ];
 
     public function createIncidencia()

@@ -16,11 +16,9 @@
             <table class="text-gray-600 min-w-full divide-y divide-gray-200">
                 <thead class="border-b border-gray-300 bg-gray-200">
                     <tr class="text-center text-sm font-bold text-gray-500 uppercase tracking-wider">
-                        <th class="w-1/5 px-6 py-3">Inicio</th>
-                        <th class="w-1/5 px-6 py-3">Fin</th>
-                        <th class="w-1/5 px-6 py-3">Cantidad horas</th>
-                        <th class="w-1/5 px-6 py-3">Rem. hora</th>
-                        <th class="w-1/5 px-6 py-4">Rem. total</th>
+                        <th class="w-1/3 px-6 py-3">Inicio</th>
+                        <th class="w-1/3 px-6 py-3">Fin</th>
+                        <th class="w-1/3 px-6 py-3">Cantidad horas</th>
                         <th class="px-6 py-3">Acciones</th>
                     </tr>
                 </thead>
@@ -30,8 +28,6 @@
                             <td class="px-6 py-4 text-sm text-center">{{ Date::parse($item->fecha_hora_inicio)->format('d-m-Y H:i') }} HS</td>
                             <td class="px-6 py-4 text-sm text-center">{{ Date::parse($item->fecha_hora_fin)->format('d-m-Y H:i') }} HS</td>
                             <td class="px-6 py-4 text-sm text-center">{{ $item->cantidad_horas }}</td>
-                            <td class="px-6 py-4 text-sm text-center">${{ number_format($item->remuneracion_hora, 2, ',', '.') }}</td>
-                            <td class="px-6 py-4 text-sm text-center">${{ number_format($item->remuneracion_total, 2, ',', '.') }}</td>
                             <td class="px-3 py-3 whitespace-nowrap text-sm font-medium">
                                 <div class="flex items-center justify-center gap-2">
                                     @livewire('empleados.horas-extras.edit-horas-extra', ['horasExtra' => $item], key($item->id.'edit'))

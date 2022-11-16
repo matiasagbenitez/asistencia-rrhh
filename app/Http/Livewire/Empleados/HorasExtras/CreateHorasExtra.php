@@ -14,8 +14,6 @@ class CreateHorasExtra extends Component
         'fecha_hora_inicio' => '',
         'fecha_hora_fin' => '',
         'cantidad_horas' => '-',
-        'remuneracion_hora' => 0,
-        'remuneracion_total' => '',
         'empleado_id' => '',
     ];
 
@@ -33,17 +31,13 @@ class CreateHorasExtra extends Component
         'form.fecha_hora_inicio' => 'required|before:form.fecha_hora_fin',
         'form.fecha_hora_fin' => 'required|after:form.fecha_hora_inicio',
         'form.cantidad_horas' => 'required',
-        'form.remuneracion_hora' => 'required',
-        'form.remuneracion_total' => 'required',
         'form.empleado_id' => 'required',
     ];
 
     protected $validationAttributes = [
-        'form.fecha_hora_inicio' => 'Fecha y hora de inicio',
-        'form.fecha_hora_fin' => 'Fecha y hora de fin',
-        'form.cantidad_horas' => 'Cantidad de horas',
-        'form.remuneracion_hora' => 'Remuneración por hora',
-        'form.remuneracion_total' => 'Remuneración total',
+        'form.fecha_hora_inicio' => 'fecha y hora de inicio',
+        'form.fecha_hora_fin' => 'fecha y hora de fin',
+        'form.cantidad_horas' => 'cantidad de horas',
     ];
 
     public function createHoraExtra()
@@ -77,15 +71,6 @@ class CreateHorasExtra extends Component
             $this->form['cantidad_horas'] = round(abs($hora_fin - $hora_inicio) / 3600, 2);
         } else {
             $this->form['cantidad_horas'] = '-';
-        }
-    }
-
-    public function updatedFormRemuneracionHora()
-    {
-        if ($this->form['cantidad_horas'] && $this->form['remuneracion_hora']) {
-            $this->form['remuneracion_total'] = $this->form['cantidad_horas'] * $this->form['remuneracion_hora'];
-        } else {
-            $this->form['remuneracion_total'] = '';
         }
     }
 

@@ -11,11 +11,10 @@ class IncidenciaFactory extends Factory
 {
     public function definition()
     {
-        $nombre = $this->faker->sentence(2);
-        $descripcion = $this->faker->sentence(10);
-
         $empleado_id = Empleado::inRandomOrder()->first()->id;
         $empleado = Empleado::find($empleado_id);
+
+        $descripcion = $this->faker->sentence(10);
 
         // Si el empleado tiene incidencias, obtener la última
         if ($empleado->incidencias) {
@@ -26,17 +25,15 @@ class IncidenciaFactory extends Factory
         }
 
         // Fecha_hora debe ser mayor a la fecha_hora de la última incidencia
-        $fecha_hora = $this->faker->dateTimeBetween($ultima_incidencia, 'now');
-        $descontar = $this->faker->boolean;
+        $fecha_hora_inicio = $this->faker->dateTimeBetween($ultima_incidencia, 'now');
         $tipo_de_incidencia_id = TipoDeIncidencia::inRandomOrder()->first()->id;
 
         return [
-            'nombre' => $nombre,
-            'descripcion' => $descripcion,
-            'fecha_hora' => $fecha_hora,
-            'descontar' => $descontar,
             'empleado_id' => $empleado_id,
             'tipo_de_incidencia_id' => $tipo_de_incidencia_id,
+            'fecha_hora_inicio' => $fecha_hora_inicio,
+            'fecha_hora_fin' => null,
+            'descripcion' => $descripcion,
         ];
     }
 }
