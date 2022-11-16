@@ -74,7 +74,7 @@ class InformeService
     public static function faltasInjustificadas(Empleado $empleado, $fechaInicio, $fechaFin)
     {
         $faltas = Incidencia::where('tipo_de_incidencia_id', TipoDeIncidencia::FALTA_INJUSTIFICADA)
-            ->whereBetween('fecha_hora', [$fechaInicio, $fechaFin])
+            ->whereBetween('fecha_hora_inicio', [$fechaInicio, $fechaFin])
             ->where('empleado_id', $empleado->id)
             ->count();
 
@@ -93,7 +93,7 @@ class InformeService
     public static function faltasJustificadas(Empleado $empleado, $fechaInicio, $fechaFin)
     {
         $faltas = Incidencia::where('tipo_de_incidencia_id', TipoDeIncidencia::FALTA_JUSTIFICADA)
-            ->whereBetween('fecha_hora', [$fechaInicio, $fechaFin])
+            ->whereBetween('fecha_hora_inicio', [$fechaInicio, $fechaFin])
             ->where('empleado_id', $empleado->id)
             ->count();
 
