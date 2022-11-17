@@ -1,6 +1,7 @@
 <div>
-    <x-jet-button wire:click="editEmpleado">
-        <i class="fas fa-edit"></i>
+    <x-jet-button class="w-full" wire:click="editEmpleado">
+        <i class="fas fa-edit mr-2"></i>
+        Editar empleado
     </x-jet-button>
 
     <x-jet-dialog-modal wire:model="isOpen">

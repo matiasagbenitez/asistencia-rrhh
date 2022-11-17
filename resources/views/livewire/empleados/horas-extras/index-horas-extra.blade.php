@@ -2,6 +2,12 @@
 
     <x-slot name="header">
         <div class="flex items-center justify-between">
+            <a href="{{ route('empleados.detalle', $empleado) }}">
+                <x-jet-button>
+                    <i class="fas fa-arrow-left mr-2"></i>
+                    Volver
+                </x-jet-button>
+            </a>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Horas extras de
                 <span class="font-bold uppercase">{{ $empleado->nombre }} {{ $empleado->apellido }}</span>

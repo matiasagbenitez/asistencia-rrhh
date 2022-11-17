@@ -79,7 +79,7 @@ class EditEmpleado extends Component
         ]);
         $this->empleadoEdit->update($this->editForm);
         $this->toggleModal();
-        $this->emitTo('empleados.index-empleados', 'render');
+        $this->emitTo('empleados.detalle-empleado', 'render');
         $this->emit('success', '¡El empleado se actualizó correctamente!');
     }
 

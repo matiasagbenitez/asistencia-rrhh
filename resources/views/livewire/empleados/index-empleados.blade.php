@@ -50,29 +50,23 @@
                         <th scope="col" class="px-4 py-2 ">
                             ID
                         </th>
-                        <th scope="col" class="w-1/5 px-4 py-2">
+                        <th scope="col" class="w-1/4 px-4 py-2">
                             Empleado
                         </th>
-                        <th scope="col" class="w-1/5 px-4 py-2">
-                            CUIL
-                        </th>
-                        <th scope="col" class="w-1/5 px-4 py-2">
+                        <th scope="col" class="w-1/4 px-4 py-2">
                             Area
                         </th>
-                        <th scope="col" class="w-1/5 px-4 py-2">
+                        <th scope="col" class="w-1/4 px-4 py-2">
                             Departamento
                         </th>
-                        <th scope="col" class="w-1/5 px-4 py-2">
+                        <th scope="col" class="w-1/4 px-4 py-2">
                             Puesto
-                        </th>
-                        <th scope="col" class="px-4 py-2">
-                            Acción
                         </th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
                     @foreach ($empleados as $empleado)
-                        <tr class="bg-gray-50">
+                        <tr onclick="window.location='{{ route('empleados.detalle', $empleado)}}';" class="bg-gray-50 hover:bg-gray-200 cursor-pointer hover:font-bold" title="Click para ir a detalle de empleado">
                             <td class="px-3 py-3">
                                 <p class="text-sm uppercase">
                                     {{ $empleado->id }}
@@ -81,11 +75,6 @@
                             <td class="px-3 py-3 text-center">
                                 <p class="text-sm uppercase">
                                     {{ $empleado->nombre }} {{ $empleado->apellido }}
-                                </p>
-                            </td>
-                            <td class="px-3 py-3 text-center">
-                                <p class="text-sm uppercase">
-                                    {{ $empleado->cuil }}
                                 </p>
                             </td>
                             <td class="px-3 py-3 text-center">
@@ -103,33 +92,15 @@
                                     {{ $empleado->puesto }}
                                 </p>
                             </td>
-                            <td class="px-3 py-3 whitespace-nowrap text-sm font-medium">
+                            {{-- <td class="px-3 py-3 whitespace-nowrap text-sm font-medium">
                                 <div class="flex items-center justify-center gap-2">
                                     @livewire('empleados.show-empleado', ['empleadoShow' => $empleado], key($empleado->id . 'show'))
-                                    @livewire('empleados.edit-empleado', ['empleadoEdit' => $empleado], key($empleado->id . 'edit'))
 
-                                    <a href="{{ route('empleados.asistencias.index', $empleado->id) }}">
-                                        <x-jet-button title="Asistencias" class="bg-cyan-900">
-                                            {{-- Icon for assistence --}}
-                                            <i class="fas fa-clipboard"></i>
-                                        </x-jet-button>
-                                    </a>
-                                    <a href="{{ route('empleados.incidencias.index', $empleado->id) }}">
-                                        <x-jet-button title="Incidencias" class="bg-cyan-800">
-                                            <i class="fas fa-calendar-alt"></i>
-                                        </x-jet-button>
-                                    </a>
-                                    <a href="{{ route('empleados.horas-extras.index', $empleado->id) }}">
-                                        <x-jet-button title="Horas extras" class="bg-cyan-700">
-                                            <i class="fas fa-clock"></i>
-                                        </x-jet-button>
-                                    </a>
-
-                                    {{-- <x-jet-danger-button wire:click="$emit('deleteEmpleado', '{{ $empleado->id }}')">
+                                    <x-jet-danger-button wire:click="$emit('deleteEmpleado', '{{ $empleado->id }}')">
                                         <i class="fas fa-trash"></i>
-                                    </x-jet-danger-button> --}}
+                                    </x-jet-danger-button>
                                 </div>
-                            </td>
+                            </td> --}}
                         </tr>
                     @endforeach
                 </tbody>
