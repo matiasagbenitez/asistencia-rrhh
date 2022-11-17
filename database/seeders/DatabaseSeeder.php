@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             TipoDeIncidenciaSeeder::class,
             IncidenciaSeeder::class,
             HoraExtraSeeder::class,
+            AsistenciaSeeder::class,
         ]);
     }
 }

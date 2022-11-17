@@ -2,13 +2,14 @@
 
 namespace App\Http\Services;
 
-use App\Models\Asistencia;
+use Carbon\Carbon;
+use App\Models\Jornada;
 use App\Models\Empleado;
 use App\Models\HoraExtra;
+use App\Models\Asistencia;
 use App\Models\Incidencia;
-use App\Models\Jornada;
 use App\Models\TipoDeIncidencia;
-use Carbon\Carbon;
+use Illuminate\Support\Facades\Date;
 
 class InformeService
 {
@@ -54,9 +55,12 @@ class InformeService
 
         $total = 0;
         foreach ($horasExtras as $hora) {
-            $inicio = Carbon::parse($hora->fecha_hora_inicio);
-            $fin = Carbon::parse($hora->fecha_hora_fin);
-            $total += $inicio->diffInHours($fin);
+            // $inicio = Carbon::parse($hora->fecha_hora_inicio);
+            // $fin = Carbon::parse($hora->fecha_hora_fin);
+            // $total += $inicio->diffInHours($fin);
+
+            // Simplificando la lógica anterior
+            $total += $hora->cantidad_horas;
         }
 
         return $total;

@@ -11,6 +11,6 @@ class IncidenciaSeeder extends Seeder
     public function run()
     {
         // Run the factory with the model
-        Incidencia::factory()->count(75)->create();
+        Incidencia::factory()->count(25)->create();
     }
 }

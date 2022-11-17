@@ -19,14 +19,26 @@ class HoraExtraFactory extends Factory
         if ($empleado->horas_extras) {
             $ultima_hora_extra = HoraExtra::where('empleado_id', $empleado_id)->latest()->first();
             $fecha_hora_inicio = $this->faker->dateTimeBetween($ultima_hora_extra->fecha_hora_fin, 'now');
+            while ($fecha_hora_inicio->format('N') < 7) {
+                $fecha_hora_inicio = $this->faker->dateTimeBetween($ultima_hora_extra->fecha_hora_fin, 'now');
+            }
         } else {
             // Si no tiene horas extras, crear una fecha aleatoria
-            $fecha_hora_inicio = $this->faker->dateTimeBetween('-2 month', 'now');
+            $fecha_hora_inicio = $this->faker->dateTimeBetween('2022-10-03', 'now');
+            while ($fecha_hora_inicio->format('N') < 7) {
+                $fecha_hora_inicio = $this->faker->dateTimeBetween('2022-10-03', 'now');
+            }
         }
 
-        $fecha_hora_fin = Date::parse($fecha_hora_inicio)->addHours(rand(1, 4))->addMinutes(rand(0, 59));
+        $morning = rand(0, 1);
+        if ($morning) {
+            $fecha_hora_inicio->setTime(12, 0, 0);
+            $fecha_hora_fin = Date::parse($fecha_hora_inicio)->addHours(rand(0, 2))->addMinutes(rand(0, 59));
+        } else {
+            $fecha_hora_inicio->setTime(20, 0, 0);
+            $fecha_hora_fin = Date::parse($fecha_hora_inicio)->addHours(rand(0, 2))->addMinutes(rand(0, 59));
+        }
 
-        // $cantidad_horas es la diferencia entre $fecha_hora_inicio y $fecha_hora_fin
         $cantidad_horas = Date::parse($fecha_hora_fin)->diffInMinutes($fecha_hora_inicio) / 60;
 
         return [

@@ -24,7 +24,7 @@ class IndexInforme extends Component
     public function mount()
     {
         $this->collections['empleados'] = Empleado::all();
-        $this->filtros['fecha_inicio'] = Carbon::now()->subMonth()->format('Y-m-d');
+        $this->filtros['fecha_inicio'] = Carbon::create(2022, 10, 3)->format('Y-m-d');
         $this->filtros['fecha_fin'] = Carbon::now()->format('Y-m-d');
     }
 
