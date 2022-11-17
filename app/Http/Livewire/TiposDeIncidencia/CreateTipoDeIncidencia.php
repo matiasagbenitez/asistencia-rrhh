@@ -11,6 +11,7 @@ class CreateTipoDeIncidencia extends Component
 
     public $form = [
         'nombre' => '',
+        'descuenta_sueldo' => 1,
     ];
 
     public function render()
@@ -20,10 +21,12 @@ class CreateTipoDeIncidencia extends Component
 
     protected $rules = [
         'form.nombre' => 'required|unique:tipos_de_incidencia,nombre',
+        'form.descuenta_sueldo' => 'required|boolean',
     ];
 
     protected $validationAttributes = [
         'form.nombre' => 'nombre',
+        'form.descuenta_sueldo' => 'descuenta sueldo',
     ];
 
     public function createTipoDeIncidencia()

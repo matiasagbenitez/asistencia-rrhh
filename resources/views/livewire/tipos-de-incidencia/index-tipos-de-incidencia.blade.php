@@ -20,8 +20,11 @@
                         <th scope="col" class="px-4 py-2 ">
                             ID
                         </th>
-                        <th scope="col" class="w-full px-4 py-2">
+                        <th scope="col" class="w-1/2 px-4 py-2">
                             Nombre tipo de incidencia
+                        </th>
+                        <th scope="col" class="w-1/2 px-4 py-2">
+                            Descuenta sueldo
                         </th>
                         <th scope="col" class="px-4 py-2">
                             Acción
@@ -40,6 +43,29 @@
                                 <p class="text-sm uppercase">
                                     {{ $tipo->nombre }}
                                 </p>
+                            </td>
+                            <td class="px-6 py-3 text-center">
+                                @switch($tipo->descuenta_sueldo)
+                                    @case(0)
+                                        <div class="flex items-center justify-center">
+                                            <span
+                                                class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                                No descuenta
+                                            </span>
+                                        </div>
+                                    @break
+
+                                    @case(1)
+                                        <div class="flex items-center justify-center">
+                                            <span
+                                                class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                                                Descuenta sueldo
+                                            </span>
+                                        </div>
+                                    @break
+
+                                    @default
+                                @endswitch
                             </td>
                             <td class="px-6 py-3 whitespace-nowrap text-sm font-medium">
                                 <div class="flex items-center justify-center gap-2">
@@ -83,7 +109,8 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
 
-                        Livewire.emitTo('tipos-de-incidencia.index-tipos-de-incidencia', 'delete', TipoDeIncidenciaId);
+                        Livewire.emitTo('tipos-de-incidencia.index-tipos-de-incidencia', 'delete',
+                            TipoDeIncidenciaId);
 
                         Livewire.on('success', message => {
                             const Toast = Swal.mixin({

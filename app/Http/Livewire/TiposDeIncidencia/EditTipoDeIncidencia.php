@@ -22,10 +22,12 @@ class EditTipoDeIncidencia extends Component
 
     public $form = [
         'nombre' => '',
+        'descuenta_sueldo' => '',
     ];
 
     protected $validationAttributes = [
         'form.nombre' => 'nombre',
+        'form.descuenta_sueldo' => 'descuenta sueldo',
     ];
 
     public function editTipoDeIncidencia()
@@ -33,6 +35,7 @@ class EditTipoDeIncidencia extends Component
         $this->toggleModal();
         $this->form = [
             'nombre' => $this->tipo_de_incidencia->nombre,
+            'descuenta_sueldo' => $this->tipo_de_incidencia->descuenta_sueldo,
         ];
     }
 
@@ -46,6 +49,7 @@ class EditTipoDeIncidencia extends Component
     {
         $this->validate([
             'form.nombre' => 'required|unique:tipos_de_incidencia,nombre,' . $this->tipo_de_incidencia->id,
+            'form.descuenta_sueldo' => 'required|boolean',
         ]);
         $this->tipo_de_incidencia->update($this->form);
         $this->toggleModal();
