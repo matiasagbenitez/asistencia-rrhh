@@ -22,8 +22,8 @@
             <table class="text-gray-600 min-w-full divide-y divide-gray-200">
                 <thead class="border-b border-gray-300 bg-gray-200">
                     <tr class="text-center text-sm font-bold text-gray-500 uppercase tracking-wider">
-                        <th class="w-1/5 px-6 py-3">Inicio</th>
-                        <th class="w-1/5 px-6 py-3">Fin</th>
+                        <th class="w-1/2 px-6 py-3">Entrada</th>
+                        <th class="w-1/2 px-6 py-3">Salida</th>
                         <th class="px-6 py-3">Acciones</th>
                     </tr>
                 </thead>

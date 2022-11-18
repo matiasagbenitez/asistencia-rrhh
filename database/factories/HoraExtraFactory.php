@@ -24,9 +24,9 @@ class HoraExtraFactory extends Factory
             }
         } else {
             // Si no tiene horas extras, crear una fecha aleatoria
-            $fecha_hora_inicio = $this->faker->dateTimeBetween('2022-10-03', 'now');
+            $fecha_hora_inicio = $this->faker->dateTimeBetween('2022-11-01', 'now');
             while ($fecha_hora_inicio->format('N') < 7) {
-                $fecha_hora_inicio = $this->faker->dateTimeBetween('2022-10-03', 'now');
+                $fecha_hora_inicio = $this->faker->dateTimeBetween('2022-11-01', 'now');
             }
         }
 

@@ -37,4 +37,4 @@ Route::get('/empleados/{empleado}/horas-extras', IndexHorasExtra::class)->name('
 Route::get('/tipos-de-incidencia', IndexTiposDeIncidencia::class)->name('tipos-de-incidencias.index');
 
 // INFOMRES
-Route::get('/informes', IndexInforme::class)->name('informes.index');
+Route::get('/informes/{empleado?}', IndexInforme::class)->name('informes.index');

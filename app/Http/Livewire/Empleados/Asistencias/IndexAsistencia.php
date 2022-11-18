@@ -11,13 +11,9 @@ class IndexAsistencia extends Component
 {
     use WithPagination;
 
-    public $collections = [
+    public $collections = [];
 
-    ];
-
-    public $filters = [
-
-    ];
+    public $filters = [];
 
     protected $listeners = ['render', 'delete'];
 
@@ -57,7 +53,7 @@ class IndexAsistencia extends Component
     public function getAsistencias()
     {
         $queryBuilder = Asistencia::where('empleado_id', $this->empleado->id);
-        return $this->filters($queryBuilder)->paginate(10);
+        return $this->filters($queryBuilder)->orderBy('fecha_hora_entrada', 'desc')->paginate(10);
     }
 
     public function resetFilters()

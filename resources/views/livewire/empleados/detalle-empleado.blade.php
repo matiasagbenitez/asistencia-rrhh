@@ -129,7 +129,7 @@
                         Horas extras
                     </x-jet-button>
                 </a>
-                <a href="#">
+                <a href="{{ route('informes.index', $empleado->id) }}">
                     <x-jet-button title="Horas extras" class="bg-cyan-600 w-full">
                         <i class="fas fa-database mr-3"></i>
                         Generar informe

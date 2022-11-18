@@ -21,10 +21,17 @@ class IndexInforme extends Component
         'empleado_id' => '',
     ];
 
+    // Optional parameter on mount
     public function mount()
     {
         $this->collections['empleados'] = Empleado::all();
-        $this->filtros['fecha_inicio'] = Carbon::create(2022, 10, 3)->format('Y-m-d');
+
+        if (request()->empleado) {
+            $this->empleado = Empleado::where('id', request()->empleado)->first();
+            $this->filtros['empleado_id'] = $this->empleado->id;
+        }
+
+        $this->filtros['fecha_inicio'] = Carbon::create(2022, 11, 1)->format('Y-m-d');
         $this->filtros['fecha_fin'] = Carbon::now()->format('Y-m-d');
     }
 

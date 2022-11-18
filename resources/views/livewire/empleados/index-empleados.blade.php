@@ -62,11 +62,14 @@
                         <th scope="col" class="w-1/4 px-4 py-2">
                             Puesto
                         </th>
+                        <th scope="col" class="px-4 py-2">
+                            Ver
+                        </th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
                     @foreach ($empleados as $empleado)
-                        <tr onclick="window.location='{{ route('empleados.detalle', $empleado)}}';" class="bg-gray-50 hover:bg-gray-200 cursor-pointer hover:font-bold" title="Click para ir a detalle de empleado">
+                        <tr class="bg-gray-50 hover:bg-gray-100 cursor-pointer">
                             <td class="px-3 py-3">
                                 <p class="text-sm uppercase">
                                     {{ $empleado->id }}
@@ -92,15 +95,21 @@
                                     {{ $empleado->puesto }}
                                 </p>
                             </td>
-                            {{-- <td class="px-3 py-3 whitespace-nowrap text-sm font-medium">
+                            <td class="px-3 py-3 whitespace-nowrap text-sm font-medium">
                                 <div class="flex items-center justify-center gap-2">
-                                    @livewire('empleados.show-empleado', ['empleadoShow' => $empleado], key($empleado->id . 'show'))
 
-                                    <x-jet-danger-button wire:click="$emit('deleteEmpleado', '{{ $empleado->id }}')">
+                                    <a href="{{ route('empleados.detalle', $empleado)}}">
+                                        <x-jet-button>
+                                            <i class="fas fa-list"></i>
+                                        </x-jet-button>
+                                    </a>
+
+                                    {{-- <x-jet-danger-button wire:click="$emit('deleteEmpleado', '{{ $empleado->id }}')">
                                         <i class="fas fa-trash"></i>
-                                    </x-jet-danger-button>
+                                    </x-jet-danger-button> --}}
+
                                 </div>
-                            </td> --}}
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

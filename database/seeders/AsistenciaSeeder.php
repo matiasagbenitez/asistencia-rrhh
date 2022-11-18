@@ -13,13 +13,10 @@ class AsistenciaSeeder extends Seeder
     public function run()
     {
         // Create 25 asistencias for each employee
-        // Empleado::all()->each(function ($empleado) {
-        //     Asistencia::factory()->count(25)->create([
-        //         'empleado_id' => $empleado->id,
-        //     ]);
-        // });
-
-        // Execute Asistencia factory 750 times
-        Asistencia::factory()->count(15)->create();
+        Empleado::all()->each(function ($empleado) {
+            for ($i = 0; $i < 30; $i++) {
+                Asistencia::factory()->count(1)->create();
+            }
+        });
     }
 }
