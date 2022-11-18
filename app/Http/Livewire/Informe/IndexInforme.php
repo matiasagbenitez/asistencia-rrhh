@@ -35,6 +35,11 @@ class IndexInforme extends Component
         $this->filtros['fecha_fin'] = Carbon::now()->format('Y-m-d');
     }
 
+    public function updatedFiltrosEmpleadoId()
+    {
+        $this->empleado = Empleado::where('id', $this->filtros['empleado_id'])->first();
+    }
+
     public function render()
     {
         $this->empleado = Empleado::find($this->filtros['empleado_id']);
@@ -46,12 +51,22 @@ class IndexInforme extends Component
     public function getStats($empleado)
     {
         if (!is_null($empleado)) {
+            $asistencias = InformeService::asistencias(
+                $empleado,
+                $this->filtros['fecha_inicio'],
+                $this->filtros['fecha_fin']
+            );
+            $listadoAsistencias = InformeService::listadoAsistencias(
+                $empleado,
+                $this->filtros['fecha_inicio'],
+                $this->filtros['fecha_fin']
+            );
             $horasExtras = InformeService::horasExtras(
                 $empleado,
                 $this->filtros['fecha_inicio'],
                 $this->filtros['fecha_fin']
             );
-            $asistencias = InformeService::asistencias(
+            $listadoHorasExtra = InformeService::listadoHorasExtra(
                 $empleado,
                 $this->filtros['fecha_inicio'],
                 $this->filtros['fecha_fin']
@@ -72,11 +87,14 @@ class IndexInforme extends Component
                 $this->filtros['fecha_fin']
             );
             return [
-                'horasExtras' => $horasExtras,
+                'empleado' => $empleado,
                 'asistencias' => $asistencias,
+                'listado_asistencias' => $listadoAsistencias,
                 'horasTrabajadas' => $horasTrabajadas,
                 'faltasJustificadas' => $faltasJustificadas,
                 'faltasInjustificadas' => $faltasInjustificadas,
+                'horasExtras' => $horasExtras,
+                'listado_horas_extra' => $listadoHorasExtra,
             ];
         }
         return null;

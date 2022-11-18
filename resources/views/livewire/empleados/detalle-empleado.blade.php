@@ -22,9 +22,10 @@
         </div>
     </x-slot>
 
-    <div class="flex justify-between">
+    {{-- <div class="flex justify-between"> --}}
+    <div class="grid grid-cols-4 gap-5">
 
-        <div class="px-8 py-6 mt-6 bg-white rounded-lg shadow">
+        <div class="col-span-3 px-8 py-6 mt-6 bg-white rounded-lg shadow">
             <div class="grid grid-cols-5 gap-4">
                 {{-- INFORMACIÓN DEL EMPLEADO --}}
                 <div class="col-span-5">

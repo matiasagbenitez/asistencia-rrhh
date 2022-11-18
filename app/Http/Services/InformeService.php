@@ -30,12 +30,20 @@ class InformeService
             ->get();
 
         foreach ($asistencias as $asistencia) {
-            $inicio = Carbon::parse($asistencia->fecha_hora_entrada);
-            $fin = Carbon::parse($asistencia->fecha_hora_salida);
-            $total += $inicio->diffInHours($fin);
+            // $inicio = Carbon::parse($asistencia->fecha_hora_entrada);
+            // $fin = Carbon::parse($asistencia->fecha_hora_salida);
+            // $total += $inicio->diffInHours($fin);
+            $total += $asistencia->cantidad_horas;
         }
 
         return $total;
+    }
+
+    public static function listadoAsistencias(Empleado $empleado, $fechaInicio, $fechaFin)
+    {
+        return Asistencia::where('empleado_id', $empleado->id)
+            ->whereBetween('fecha_hora_entrada', [$fechaInicio, $fechaFin])
+            ->get();
     }
 
     /**
@@ -64,6 +72,13 @@ class InformeService
         }
 
         return $total;
+    }
+
+    public static function listadoHorasExtra(Empleado $empleado, $fechaInicio, $fechaFin)
+    {
+        return HoraExtra::where('empleado_id', $empleado->id)
+            ->whereBetween('fecha_hora_inicio', [$fechaInicio, $fechaFin])
+            ->get();
     }
 
     /**

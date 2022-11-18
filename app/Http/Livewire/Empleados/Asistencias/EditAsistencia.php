@@ -2,8 +2,9 @@
 
 namespace App\Http\Livewire\Empleados\Asistencias;
 
-use App\Models\Asistencia;
 use Livewire\Component;
+use App\Models\Asistencia;
+use Illuminate\Support\Facades\Date;
 
 class EditAsistencia extends Component
 {
@@ -13,6 +14,7 @@ class EditAsistencia extends Component
     public $form = [
         'fecha_hora_entrada' => '',
         'fecha_hora_salida' => '',
+        'cantidad_horas' => '',
         'empleado_id' => '',
     ];
 
@@ -37,6 +39,7 @@ class EditAsistencia extends Component
         $this->form = [
             'fecha_hora_entrada' => $this->asistencia->fecha_hora_entrada,
             'fecha_hora_salida' => $this->asistencia->fecha_hora_salida,
+            'cantidad_horas' => $this->asistencia->cantidad_horas,
             'empleado_id' => $this->asistencia->empleado_id,
         ];
     }
@@ -54,6 +57,7 @@ class EditAsistencia extends Component
             'form.fecha_hora_salida' => 'required|after:form.fecha_hora_entrada',
             'form.empleado_id' => 'required',
         ]);
+        $this->form['cantidad_horas'] = Date::parse($this->form['fecha_hora_salida'])->diffInMinutes($this->form['fecha_hora_entrada']) / 60;
         $this->asistencia->update($this->form);
         $this->toggleModal();
         $this->emitTo('empleados.asistencias.index-asistencia', 'render');

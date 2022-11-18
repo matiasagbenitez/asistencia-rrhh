@@ -2,8 +2,9 @@
 
 namespace App\Http\Livewire\Empleados\Asistencias;
 
-use App\Models\Asistencia;
 use Livewire\Component;
+use App\Models\Asistencia;
+use Illuminate\Support\Facades\Date;
 
 class CreateAsistencia extends Component
 {
@@ -13,6 +14,7 @@ class CreateAsistencia extends Component
     public $form = [
         'fecha_hora_entrada' => '',
         'fecha_hora_salida' => '',
+        'cantidad_horas' => '',
         'empleado_id' => '',
     ];
 
@@ -57,6 +59,7 @@ class CreateAsistencia extends Component
     public function save()
     {
         $this->form['empleado_id'] = $this->empleado->id;
+        $this->form['cantidad_horas'] = Date::parse($this->form['fecha_hora_salida'])->diffInMinutes($this->form['fecha_hora_entrada']) / 60;
         $this->validate();
         Asistencia::create($this->form);
         $this->resetInputFields();

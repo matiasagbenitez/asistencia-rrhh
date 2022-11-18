@@ -57,10 +57,13 @@ class AsistenciaFactory extends Factory
             $fecha_hora_salida = Date::create(2022, 11, 1, 12, 0, 0);
         }
 
+        $cantidad_horas = Date::parse($fecha_hora_salida)->diffInMinutes($fecha_hora_entrada) / 60;
+
         return [
             'empleado_id' => $empleado->id,
             'fecha_hora_entrada' => $fecha_hora_entrada,
             'fecha_hora_salida' => $fecha_hora_salida,
+            'cantidad_horas' => $cantidad_horas,
             'created_at' => $fecha_hora_entrada,
             'updated_at' => $fecha_hora_salida,
         ];

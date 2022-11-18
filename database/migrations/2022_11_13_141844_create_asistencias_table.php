@@ -16,9 +16,10 @@ return new class extends Migration
         Schema::create('asistencias', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('empleado_id');
+            $table->foreign('empleado_id')->references('id')->on('empleados');
             $table->datetime('fecha_hora_entrada');
             $table->datetime('fecha_hora_salida')->nullable();
-            $table->foreign('empleado_id')->references('id')->on('empleados');
+            $table->float('cantidad_horas', 8, 2)->nullable();
             $table->timestamps();
         });
     }
