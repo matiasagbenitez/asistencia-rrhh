@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             IncidenciaSeeder::class,
             HoraExtraSeeder::class,
             AsistenciaSeeder::class,
+            JornadaSeeder::class,
         ]);
     }
 }

@@ -21,7 +21,7 @@ class EmpleadoSeeder extends Seeder
                 'fecha_ingreso' => '2022-11-01',
                 'fecha_egreso' => null,
                 'puesto_id' => 1,
-                'categoria_horario_id' => CategoriasDeHorarios::all()->random()->id,
+                'categoria_horario_id' => 1,
             ],
             [
                 'nombre' => 'Jose',
@@ -31,7 +31,7 @@ class EmpleadoSeeder extends Seeder
                 'fecha_ingreso' => '2022-11-01',
                 'fecha_egreso' => null,
                 'puesto_id' => 2,
-                'categoria_horario_id' => CategoriasDeHorarios::all()->random()->id,
+                'categoria_horario_id' => 1,
             ],
             [
                 'nombre' => 'Maria',
@@ -41,7 +41,7 @@ class EmpleadoSeeder extends Seeder
                 'fecha_ingreso' => '2022-11-01',
                 'fecha_egreso' => null,
                 'puesto_id' => 3,
-                'categoria_horario_id' => CategoriasDeHorarios::all()->random()->id,
+                'categoria_horario_id' => 1,
             ],
             [
                 'nombre' => 'Guillermo',
@@ -51,7 +51,7 @@ class EmpleadoSeeder extends Seeder
                 'fecha_ingreso' => '2022-11-01',
                 'fecha_egreso' => null,
                 'puesto_id' => 4,
-                'categoria_horario_id' => CategoriasDeHorarios::all()->random()->id,
+                'categoria_horario_id' => 1,
             ],
             [
                 'nombre' => 'Karen',
@@ -61,7 +61,7 @@ class EmpleadoSeeder extends Seeder
                 'fecha_ingreso' => '2022-11-01',
                 'fecha_egreso' => null,
                 'puesto_id' => 4,
-                'categoria_horario_id' => CategoriasDeHorarios::all()->random()->id,
+                'categoria_horario_id' => 1,
             ],
             [
                 'nombre' => 'Mateo',
@@ -71,7 +71,7 @@ class EmpleadoSeeder extends Seeder
                 'fecha_ingreso' => '2022-11-01',
                 'fecha_egreso' => null,
                 'puesto_id' => 5,
-                'categoria_horario_id' => CategoriasDeHorarios::all()->random()->id,
+                'categoria_horario_id' => 1,
             ],
             [
                 'nombre' => 'Emma',
@@ -81,7 +81,7 @@ class EmpleadoSeeder extends Seeder
                 'fecha_ingreso' => '2022-11-01',
                 'fecha_egreso' => null,
                 'puesto_id' => 6,
-                'categoria_horario_id' => CategoriasDeHorarios::all()->random()->id,
+                'categoria_horario_id' => 1,
             ],
             [
                 'nombre' => 'Lautaro',
@@ -91,7 +91,7 @@ class EmpleadoSeeder extends Seeder
                 'fecha_ingreso' => '2022-11-01',
                 'fecha_egreso' => null,
                 'puesto_id' => 6,
-                'categoria_horario_id' => CategoriasDeHorarios::all()->random()->id,
+                'categoria_horario_id' => 1,
             ],
             [
                 'nombre' => 'Pedro',
@@ -101,7 +101,7 @@ class EmpleadoSeeder extends Seeder
                 'fecha_ingreso' => '2022-11-01',
                 'fecha_egreso' => null,
                 'puesto_id' => 7,
-                'categoria_horario_id' => CategoriasDeHorarios::all()->random()->id,
+                'categoria_horario_id' => 1,
             ],
             [
                 'nombre' => 'Agustina',
@@ -111,7 +111,7 @@ class EmpleadoSeeder extends Seeder
                 'fecha_ingreso' => '2022-11-01',
                 'fecha_egreso' => null,
                 'puesto_id' => 7,
-                'categoria_horario_id' => CategoriasDeHorarios::all()->random()->id,
+                'categoria_horario_id' => 1,
             ],
             [
                 'nombre' => 'German',
@@ -121,7 +121,7 @@ class EmpleadoSeeder extends Seeder
                 'fecha_ingreso' => '2022-11-01',
                 'fecha_egreso' => null,
                 'puesto_id' => 7,
-                'categoria_horario_id' => CategoriasDeHorarios::all()->random()->id,
+                'categoria_horario_id' => 1,
             ],
             [
                 'nombre' => 'Mariana',
@@ -131,7 +131,7 @@ class EmpleadoSeeder extends Seeder
                 'fecha_ingreso' => '2022-11-01',
                 'fecha_egreso' => null,
                 'puesto_id' => 8,
-                'categoria_horario_id' => CategoriasDeHorarios::all()->random()->id,
+                'categoria_horario_id' => 1,
             ],
             [
                 'nombre' => 'Esteban',
@@ -141,7 +141,7 @@ class EmpleadoSeeder extends Seeder
                 'fecha_ingreso' => '2022-11-01',
                 'fecha_egreso' => null,
                 'puesto_id' => 9,
-                'categoria_horario_id' => CategoriasDeHorarios::all()->random()->id,
+                'categoria_horario_id' => 1,
             ],
             [
                 'nombre' => 'Alexis',
@@ -151,7 +151,7 @@ class EmpleadoSeeder extends Seeder
                 'fecha_ingreso' => '2022-11-01',
                 'fecha_egreso' => null,
                 'puesto_id' => 10,
-                'categoria_horario_id' => CategoriasDeHorarios::all()->random()->id,
+                'categoria_horario_id' => 1,
             ],
             [
                 'nombre' => 'Alejandro',
@@ -161,7 +161,7 @@ class EmpleadoSeeder extends Seeder
                 'fecha_ingreso' => '2022-11-01',
                 'fecha_egreso' => null,
                 'puesto_id' => 11,
-                'categoria_horario_id' => CategoriasDeHorarios::all()->random()->id,
+                'categoria_horario_id' => 1,
             ]
         ];
 

@@ -15,15 +15,17 @@ return new class extends Migration
     {
         Schema::create('jornadas', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
+            $table->unsignedBigInteger('categoria_de_horario_id');
+            $table->foreign('categoria_de_horario_id')->references('id')->on('categorias_de_horarios');
+
             $table->string('dia');
             $table->string('tipo');
+            $table->string('nombre');
+
             $table->time('hora_entrada');
             $table->time('hora_salida');
             $table->integer('tolerancia');
-            $table->unsignedBigInteger('categoria_de_horario_id');
 
-            $table->foreign('categoria_de_horario_id')->references('id')->on('categorias_de_horarios');
             $table->timestamps();
         });
     }
