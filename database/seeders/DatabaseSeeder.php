@@ -6,17 +6,12 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Database\Seeders\HoraExtraSeeder;
 use Database\Seeders\IncidenciaSeeder;
+use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
 {
     public function run()
     {
-        \App\Models\User::factory()->create([
-            'name' => 'Admin',
-            'email' => 'admin@admin.com',
-            'password' => bcrypt('password'),
-        ]);
-
         $this->call([
             EmpresaSeeder::class,
             AreaSeeder::class,
@@ -29,6 +24,28 @@ class DatabaseSeeder extends Seeder
             HoraExtraSeeder::class,
             AsistenciaSeeder::class,
             JornadaSeeder::class,
+            PermissionSeeder::class,
+            RoleSeeder::class,
         ]);
+
+        \App\Models\User::factory()->create([
+            'name' => 'Admin',
+            'email' => 'admin@admin.com',
+            'password' => bcrypt('password'),
+        ])->syncRoles(
+            [
+                Role::find(1)->name,
+            ]
+        );
+
+        \App\Models\User::factory()->create([
+            'name' => 'Empleado',
+            'email' => 'empleado@admin.com',
+            'password' => bcrypt('password'),
+        ])->syncRoles(
+            [
+                Role::find(2)->name,
+            ]
+        );
     }
 }
