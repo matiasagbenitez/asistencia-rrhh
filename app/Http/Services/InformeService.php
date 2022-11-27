@@ -262,4 +262,45 @@ class InformeService
             'exceso' => $horasTrabajadas - $cantidadHorasHorario
         ];
     }
+
+    /**
+     * Calcula los datos necesarios para generar los gráficos del informe
+     *
+     * @param Empleado $empleado
+     * @param string $fechaInicio
+     * @param string $fechaFin
+     *
+     * @return integer
+     */
+    public static function calcularGraficos(Empleado $empleado, $fechaInicio, $fechaFin)
+    {
+        for ($i = 1; $i <= 12; $i++) {
+            $primerDia = date('Y-m-d', strtotime(date('Y') . '-' . $i . '-01'));
+            $ultimoDia = date('Y-m-t', strtotime(date('Y') . '-' . $i . '-01'));
+            $horasExtras[$i] = HoraExtra::where('empleado_id', $empleado->id)
+                ->whereBetween('fecha_hora_inicio', [$primerDia, $ultimoDia])
+                ->sum('cantidad_horas');
+        }
+        $horasExtrasPorMes = [
+            'ENE' => $horasExtras[1],
+            'FEB' => $horasExtras[2],
+            'MAR' => $horasExtras[3],
+            'ABR' => $horasExtras[4],
+            'MAY' => $horasExtras[5],
+            'JUN' => $horasExtras[6],
+            'JUL' => $horasExtras[7],
+            'AGO' => $horasExtras[8],
+            'SEP' => $horasExtras[9],
+            'OCT' => $horasExtras[10],
+            'NOV' => $horasExtras[11],
+            'DIC' => $horasExtras[12],
+        ];
+
+        return [
+            'horasExtras' => $horasExtrasPorMes,
+            'asistencias' => self::asistencias($empleado, $fechaInicio, $fechaFin),
+            'faltasJustificadas' => self::faltasJustificadas($empleado, $fechaInicio, $fechaFin),
+            'faltasInjustificadas' => self::faltasInjustificadas($empleado, $fechaInicio, $fechaFin),
+        ];
+    }
 }
