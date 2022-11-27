@@ -73,13 +73,36 @@ class InformeService
      * @param string $fechaInicio
      * @param string $fechaFin
      *
-     * @return integer
+     * @return Collection
      */
     public static function listadoAsistencias(Empleado $empleado, $fechaInicio, $fechaFin)
     {
-        return Asistencia::where('empleado_id', $empleado->id)
+        $asistencias = Asistencia::where('empleado_id', $empleado->id)
             ->whereBetween('fecha_hora_entrada', [$fechaInicio, $fechaFin])
             ->get();
+
+        $incidencias = Incidencia::where('empleado_id', $empleado->id)
+            ->whereBetween('fecha_hora_inicio', [$fechaInicio, $fechaFin])
+            ->get();
+
+        $lista = [];
+        foreach ($asistencias as $asistencia) {
+            $lista[] = [
+                'fecha_hora_entrada' => $asistencia->fecha_hora_entrada,
+                'fecha_hora_fin' => $asistencia->fecha_hora_salida,
+                'tipo' => 'asistencia',
+            ];
+        }
+
+        foreach ($incidencias as $incidencia) {
+            $lista[] = [
+                'fecha_hora_entrada' => $incidencia->fecha_hora_inicio,
+                'fecha_hora_fin' => $incidencia->fecha_hora_fin,
+                'tipo' => $incidencia->tipoDeIncidencia->nombre,
+            ];
+        }
+
+        return $lista;
     }
 
     /**

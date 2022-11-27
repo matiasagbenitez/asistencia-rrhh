@@ -77,16 +77,40 @@
                     <table class="min-w-full divide-y divide-gray-100 border">
                         <thead class="border-b border-gray-100 bg-gray-100">
                             <tr class="text-center text-sm font-bold uppercase tracking-wider">
+                                <th class="px-2 py-2 w-1/4">Tipo</th>
                                 <th class="px-2 py-2 w-1/4">Fecha</th>
-                                <th class="px-2 py-2 w-1/4">Entrada</th>
-                                <th class="px-2 py-2 w-1/4">Salida</th>
-                                <th class="px-2 py-2 w-1/4">Horas</th>
+                                <th class="px-2 py-2 w-1/4">Hora de inicio</th>
+                                <th class="px-2 py-2 w-1/4">Hora de fin</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($stats['listado_asistencias'] as $asistencia)
+                            @foreach ($stats['listado_asistencias'] as $item)
                                 <tr>
                                     <td class="py-2 px-2 text-center">
+                                        <p class="text-sm uppercase">
+                                            {{ $item['tipo']}}
+                                        </p>
+                                    </td>
+                                    <td class="py-2 px-2 text-center">
+                                        <p class="text-sm uppercase">
+                                            {{ Date::parse($item['fecha_hora_entrada'])->format('d-m-Y') }}
+                                        </p>
+                                    </td>
+                                    <td class="py-2 px-2 text-center">
+                                        <p class="text-sm uppercase">
+                                            {{ Date::parse($item['fecha_hora_entrada'])->format('H:i') }}
+                                        </p>
+                                    </td>
+                                    <td class="py-2 px-2 text-center">
+                                        <p class="text-sm uppercase">
+                                            {{
+                                                $item['fecha_hora_fin']
+                                                    ? Date::parse($item['fecha_hora_fin'])->format('H:i')
+                                                    : ' - - '
+                                            }}
+                                        </p>
+                                    </td>
+                                    {{-- <td class="py-2 px-2 text-center">
                                         <p class="text-sm uppercase">
                                             {{ Date::parse($asistencia->fecha_hora_entrada)->format('d-m-Y') }}
                                         </p>
@@ -105,7 +129,7 @@
                                         <p class="text-sm uppercase">
                                             {{ number_format($asistencia->cantidad_horas, 2) }}
                                         </p>
-                                    </td>
+                                    </td> --}}
                                 </tr>
                             @endforeach
                             <tr class="border-gray-100 bg-gray-100 text-center font-bold uppercase text-sm">
