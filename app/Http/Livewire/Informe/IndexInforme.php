@@ -86,6 +86,20 @@ class IndexInforme extends Component
                 $this->filtros['fecha_inicio'],
                 $this->filtros['fecha_fin']
             );
+
+
+            // Este es el array con los datos de exceso de horas
+            // [
+            // 'cantidadDeHoras' => $cantidadHorasHorario,
+            // 'horasTrabajadas' => $horasTrabajadas,
+            // 'exceso' => ($horasTrabajadas - $cantidadHorasHorario)
+            // ];
+            $excesoHoras = InformeService::excesoHoras(
+                $empleado,
+                $this->filtros['fecha_inicio'],
+                $this->filtros['fecha_fin']
+            );
+
             return [
                 'empleado' => $empleado,
                 'asistencias' => $asistencias,
@@ -95,6 +109,7 @@ class IndexInforme extends Component
                 'faltasInjustificadas' => $faltasInjustificadas,
                 'horasExtras' => $horasExtras,
                 'listado_horas_extra' => $listadoHorasExtra,
+                //'excesoHoras' => $excesoHoras,
             ];
         }
         return null;
