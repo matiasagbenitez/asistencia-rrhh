@@ -87,12 +87,11 @@ class IndexInforme extends Component
                 $this->filtros['fecha_fin']
             );
 
-
             // Este es el array con los datos de exceso de horas
             // [
-            // 'cantidadDeHoras' => $cantidadHorasHorario,
-            // 'horasTrabajadas' => $horasTrabajadas,
-            // 'exceso' => ($horasTrabajadas - $cantidadHorasHorario)
+            // 'cantidadDeHoras' => Float,
+            // 'horasTrabajadas' => Float,
+            // 'exceso' => Float
             // ];
             $excesoHoras = InformeService::excesoHoras(
                 $empleado,
@@ -100,16 +99,30 @@ class IndexInforme extends Component
                 $this->filtros['fecha_fin']
             );
 
+            // Este es el array con los datos para los gráficos
+            // [
+            //     'horasExtras' => Array,
+            //     'asistencias' => Integer,
+            //     'faltasJustificadas' => Integer,
+            //     'faltasInjustificadas' => Integer,
+            // ];
+            $graficos = InformeService::calcularGraficos(
+                $empleado,
+                $this->filtros['fecha_inicio'],
+                $this->filtros['fecha_fin']
+            );
+
             return [
                 'empleado' => $empleado,
+                'graficos' => $graficos,
+                'excesoHoras' => $excesoHoras,
                 'asistencias' => $asistencias,
-                'listado_asistencias' => $listadoAsistencias,
-                'horasTrabajadas' => $horasTrabajadas,
-                'faltasJustificadas' => $faltasJustificadas,
-                'faltasInjustificadas' => $faltasInjustificadas,
                 'horasExtras' => $horasExtras,
+                'horasTrabajadas' => $horasTrabajadas,
                 'listado_horas_extra' => $listadoHorasExtra,
-                //'excesoHoras' => $excesoHoras,
+                'faltasJustificadas' => $faltasJustificadas,
+                'listado_asistencias' => $listadoAsistencias,
+                'faltasInjustificadas' => $faltasInjustificadas,
             ];
         }
         return null;
