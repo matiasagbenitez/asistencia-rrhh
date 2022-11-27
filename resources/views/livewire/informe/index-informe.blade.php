@@ -85,10 +85,10 @@
                         </thead>
                         <tbody>
                             @foreach ($stats['listado_asistencias'] as $item)
-                                <tr>
+                                <tr class="{{ $item['tipo'] != 'asistencia' ? 'bg-gray-100 font-bold' : '' }}">
                                     <td class="py-2 px-2 text-center">
                                         <p class="text-sm uppercase">
-                                            {{ $item['tipo']}}
+                                            {{ $item['tipo'] }}
                                         </p>
                                     </td>
                                     <td class="py-2 px-2 text-center">
@@ -103,33 +103,9 @@
                                     </td>
                                     <td class="py-2 px-2 text-center">
                                         <p class="text-sm uppercase">
-                                            {{
-                                                $item['fecha_hora_fin']
-                                                    ? Date::parse($item['fecha_hora_fin'])->format('H:i')
-                                                    : ' - - '
-                                            }}
+                                            {{ $item['fecha_hora_fin'] ? Date::parse($item['fecha_hora_fin'])->format('H:i') : ' - - ' }}
                                         </p>
                                     </td>
-                                    {{-- <td class="py-2 px-2 text-center">
-                                        <p class="text-sm uppercase">
-                                            {{ Date::parse($asistencia->fecha_hora_entrada)->format('d-m-Y') }}
-                                        </p>
-                                    </td>
-                                    <td class="py-2 px-2 text-center">
-                                        <p class="text-sm uppercase">
-                                            {{ Date::parse($asistencia->fecha_hora_entrada)->format('H:i') }}
-                                        </p>
-                                    </td>
-                                    <td class="py-2 px-2 text-center">
-                                        <p class="text-sm uppercase">
-                                            {{ Date::parse($asistencia->fecha_hora_salida)->format('H:i') }}
-                                        </p>
-                                    </td>
-                                    <td class="py-2 px-2 text-center">
-                                        <p class="text-sm uppercase">
-                                            {{ number_format($asistencia->cantidad_horas, 2) }}
-                                        </p>
-                                    </td> --}}
                                 </tr>
                             @endforeach
                             <tr class="border-gray-100 bg-gray-100 text-center font-bold uppercase text-sm">
@@ -217,14 +193,16 @@
                 <div class="border w-1/2 p-4 rounded-lg">
                     <h2 class="font-bold text-center">Asistencias y faltas</h2>
                     <div class="h-52 w-52 flex items-center justify-center">
-                        <img src="https://media.istockphoto.com/id/1381730525/es/vector/gr%C3%A1fico-circular-3d-aislado-sobre-fondo-blanco-vector-de-stock.jpg?s=612x612&w=is&k=20&c=tXAYAUceRNK8lVogCly6geHyr_MUm96-f6Qt7VOv61c=" alt="Imagen">
+                        <img src="https://media.istockphoto.com/id/1381730525/es/vector/gr%C3%A1fico-circular-3d-aislado-sobre-fondo-blanco-vector-de-stock.jpg?s=612x612&w=is&k=20&c=tXAYAUceRNK8lVogCly6geHyr_MUm96-f6Qt7VOv61c="
+                            alt="Imagen">
                     </div>
                 </div>
                 <div class="border w-1/2 p-4 rounded-lg">
                     <h2 class="font-bold text-center">Faltas justificadas e injustificadas</h2>
                     <div class="h-52 w-52 flex items-center justify-center">
                         <div>
-                            <img src="https://media.istockphoto.com/id/1381730525/es/vector/gr%C3%A1fico-circular-3d-aislado-sobre-fondo-blanco-vector-de-stock.jpg?s=612x612&w=is&k=20&c=tXAYAUceRNK8lVogCly6geHyr_MUm96-f6Qt7VOv61c=" alt="Imagen">
+                            <img src="https://media.istockphoto.com/id/1381730525/es/vector/gr%C3%A1fico-circular-3d-aislado-sobre-fondo-blanco-vector-de-stock.jpg?s=612x612&w=is&k=20&c=tXAYAUceRNK8lVogCly6geHyr_MUm96-f6Qt7VOv61c="
+                                alt="Imagen">
                         </div>
                     </div>
                 </div>

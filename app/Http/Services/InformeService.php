@@ -83,7 +83,7 @@ class InformeService
 
         $incidencias = Incidencia::where('empleado_id', $empleado->id)
             ->whereBetween('fecha_hora_inicio', [$fechaInicio, $fechaFin])
-            ->get();
+            ->orderBy('fecha_hora_inicio')->get();
 
         $lista = [];
         foreach ($asistencias as $asistencia) {
@@ -101,6 +101,10 @@ class InformeService
                 'tipo' => $incidencia->tipoDeIncidencia->nombre,
             ];
         }
+
+        usort($lista, function ($a, $b) {
+            return $a['fecha_hora_entrada'] <=> $b['fecha_hora_entrada'];
+        });
 
         return $lista;
     }
