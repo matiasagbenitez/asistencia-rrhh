@@ -226,7 +226,7 @@ class InformeService
      * @param string $fechaInicio
      * @param string $fechaFin
      *
-     * @return integer
+     * @return array
      */
     public static function excesoHoras(Empleado $empleado, $fechaInicio, $fechaFin)
     {
