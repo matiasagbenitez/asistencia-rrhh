@@ -106,17 +106,34 @@
 
             {{-- SUBTÍTULO PARAMETRIZACIÓN --}}
             {{-- @can('calendario.empleados') --}}
-                <br>
-                <span class="font-bold">Calendario
-                    <hr>
-                </span>
+            <br>
+            <span class="font-bold">Calendario
+                <hr>
+            </span>
 
-                <a href="{{ route('calendarios.empleados', auth()->user()) }}"
-                    class="block px-4 py-1 mt-2 text-sm font-semibold text-gray-900 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
-                    <i class="fas fa-database mr-2"></i>
-                    Calendario
-                </a>
+            <a href="{{ route('calendarios.empleados', auth()->user()) }}"
+                class="block px-4 py-1 mt-2 text-sm font-semibold text-gray-900 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+                <i class="fas fa-database mr-2"></i>
+                Calendario
+            </a>
             {{-- @endcan --}}
+
+            {{-- MI PERFIL --}}
+            <br>
+            <span class="font-bold">Cerrar sesión
+                <hr>
+            </span>
+
+            <form method="POST" action="{{ route('logout') }}" x-data>
+                @csrf
+
+                <a href="{{ route('logout') }}" @click.prevent="$root.submit();"
+                    class="block px-4 py-1 mt-2 text-sm font-semibold text-gray-900 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+                    <i class="fas fa-arrow-alt-circle-left mr-2"></i>
+                    Cerrar sesión
+                </a>
+            </form>
+
         </nav>
     </div>
 </div>
