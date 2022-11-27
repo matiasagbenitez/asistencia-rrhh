@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Areas\IndexAreas;
+use App\Http\Livewire\Calendario\Empleado;
 use App\Http\Livewire\Puestos\IndexPuestos;
 use App\Http\Livewire\Empresas\IndexEmpresas;
 use App\Http\Livewire\Empleados\IndexEmpleados;
@@ -38,3 +39,6 @@ Route::get('/tipos-de-incidencia', IndexTiposDeIncidencia::class)->name('tipos-d
 
 // INFOMRES
 Route::get('/informes/{empleado?}', IndexInforme::class)->name('informes.index');
+
+// MARCAR ASISTENCIA
+Route::get('/calendarios/empleados/{empleado?}', Empleado::class)->name('calendarios.empleados');

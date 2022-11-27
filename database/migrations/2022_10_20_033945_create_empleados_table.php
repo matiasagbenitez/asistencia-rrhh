@@ -26,6 +26,9 @@ return new class extends Migration
             $table->unsignedBigInteger('categoria_horario_id');
             $table->foreign('categoria_horario_id')->references('id')->on('categorias_de_horarios');
 
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users');
+
             $table->timestamps();
         });
     }
