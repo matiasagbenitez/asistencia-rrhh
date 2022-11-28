@@ -18,10 +18,10 @@ use App\Http\Livewire\Empleados\DetalleEmpleado;
 use App\Http\Livewire\Informe\IndexInforme;
 
 // PARÁMETROS DE EMPRESA
-Route::get('/empresas', IndexEmpresas::class)->name('empresas.index');
 Route::get('/areas', IndexAreas::class)->name('areas.index');
-Route::get('/departamentos', IndexDepartamentos::class)->name('departamentos.index');
 Route::get('/puestos', IndexPuestos::class)->name('puestos.index');
+Route::get('/empresas', IndexEmpresas::class)->name('empresas.index');
+Route::get('/departamentos', IndexDepartamentos::class)->name('departamentos.index');
 Route::get('/dias-no-laborables', IndexDias::class)->name('dias-no-laborables.index');
 
 // CATEGORIAS DE HORARIO
