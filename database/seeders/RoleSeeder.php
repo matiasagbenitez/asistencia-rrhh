@@ -23,6 +23,7 @@ class RoleSeeder extends Seeder
             ]
         )->syncPermissions(
             [
+                'calendario.admin',
                 'parametros.empresa',
                 'parametros.asistencia',
                 'empleados',
@@ -36,7 +37,8 @@ class RoleSeeder extends Seeder
             ]
         )->syncPermissions(
             [
-
+                'perfil.empleados',
+                'calendario.empleados',
             ]
         );
     }

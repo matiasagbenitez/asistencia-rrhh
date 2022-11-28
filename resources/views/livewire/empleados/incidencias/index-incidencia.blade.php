@@ -63,7 +63,9 @@
                             <td class="px-3 py-3 normal-case">
                                 <div class="flex items-center justify-center gap-2">
                                     {{-- @livewire('items.show-item', ['itemShow' => $item], key($item->id.'show')) --}}
-                                    @livewire('empleados.incidencias.edit-incidencia', ['incidencia' => $item], key($item->id.'edit'))
+                                    @can('empleados')
+                                        @livewire('empleados.incidencias.edit-incidencia', ['incidencia' => $item], key($item->id.'edit'))
+                                    @endcan
                                     <x-jet-danger-button wire:click="$emit('deleteItem', '{{ $item->id }}')">
                                         <i class="fas fa-trash"></i>
                                     </x-jet-danger-button>

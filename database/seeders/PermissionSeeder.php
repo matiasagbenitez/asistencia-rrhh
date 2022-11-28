@@ -15,6 +15,7 @@ class PermissionSeeder extends Seeder
     public function run()
     {
         $permissions = [
+            // Admin
             [
                 'name'          => 'parametros.empresa',
                 'guard_name'    => 'web',
@@ -29,6 +30,20 @@ class PermissionSeeder extends Seeder
             ],
             [
                 'name'          => 'informes',
+                'guard_name'    => 'web',
+            ],
+            [
+                'name'          => 'calendario.admin',
+                'guard_name'    => 'web',
+            ],
+
+            // Empleados
+            [
+                'name'          => 'perfil.empleados',
+                'guard_name'    => 'web',
+            ],
+            [
+                'name'          => 'calendario.empleados',
                 'guard_name'    => 'web',
             ],
         ];

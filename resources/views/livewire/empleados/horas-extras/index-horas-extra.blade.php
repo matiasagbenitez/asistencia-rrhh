@@ -12,7 +12,9 @@
                 Horas extras de
                 <span class="font-bold uppercase">{{ $empleado->nombre }} {{ $empleado->apellido }}</span>
             </h2>
-            @livewire('empleados.horas-extras.create-horas-extra', ['empleado' => $empleado], key($empleado->id))
+            @can('empleados')
+                @livewire('empleados.horas-extras.create-horas-extra', ['empleado' => $empleado], key($empleado->id))
+            @endcan
         </div>
     </x-slot>
 
@@ -36,11 +38,13 @@
                             <td class="px-6 py-4 text-sm text-center">{{ $item->cantidad_horas }}</td>
                             <td class="px-3 py-3 whitespace-nowrap text-sm font-medium">
                                 <div class="flex items-center justify-center gap-2">
-                                    @livewire('empleados.horas-extras.edit-horas-extra', ['horasExtra' => $item], key($item->id.'edit'))
-                                    {{-- @livewire('empleados.horas-extras.index-horas-extra', ['itemShow' => $item], key($item->id.'show')) --}}
-                                    <x-jet-danger-button wire:click="$emit('deleteHoraExtra', '{{ $item->id }}')">
-                                        <i class="fas fa-trash"></i>
-                                    </x-jet-danger-button>
+                                    @can('empleados')
+                                        @livewire('empleados.horas-extras.edit-horas-extra', ['horasExtra' => $item], key($item->id.'edit'))
+                                        {{-- @livewire('empleados.horas-extras.index-horas-extra', ['itemShow' => $item], key($item->id.'show')) --}}
+                                        <x-jet-danger-button wire:click="$emit('deleteHoraExtra', '{{ $item->id }}')">
+                                            <i class="fas fa-trash"></i>
+                                        </x-jet-danger-button>
+                                    @endcan
                                 </div>
                             </td>
                         </tr>

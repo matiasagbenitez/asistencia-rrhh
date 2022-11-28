@@ -12,7 +12,9 @@
                 Asistencias de
                 <span class="font-bold uppercase">{{ $empleado->nombre }} {{ $empleado->apellido }}</span>
             </h2>
-            @livewire('empleados.asistencias.create-asistencia', ['empleado' => $empleado], key($empleado->id))
+            @can('empleados')
+                @livewire('empleados.asistencias.create-asistencia', ['empleado' => $empleado], key($empleado->id))
+            @endcan
         </div>
     </x-slot>
 
@@ -33,12 +35,14 @@
                             <td class="px-6 py-4 text-sm text-center">{{ Date::parse($item->fecha_hora_entrada)->format('d-m-Y H:i') }} HS</td>
                             <td class="px-6 py-4 text-sm text-center">{{ Date::parse($item->fecha_hora_salida)->format('d-m-Y H:i') }} HS</td>
                             <td class="px-3 py-3 whitespace-nowrap text-sm font-medium">
-                                <div class="flex items-center justify-center gap-2">
-                                    @livewire('empleados.asistencias.edit-asistencia', ['asistencia' => $item], key($item->id.'edit'))
-                                    <x-jet-danger-button wire:click="$emit('deleteAsistencia', '{{ $item->id }}')">
-                                        <i class="fas fa-trash"></i>
-                                    </x-jet-danger-button>
-                                </div>
+                                @can('empleados')
+                                    <div class="flex items-center justify-center gap-2">
+                                        @livewire('empleados.asistencias.edit-asistencia', ['asistencia' => $item], key($item->id.'edit'))
+                                        <x-jet-danger-button wire:click="$emit('deleteAsistencia', '{{ $item->id }}')">
+                                            <i class="fas fa-trash"></i>
+                                        </x-jet-danger-button>
+                                    </div>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach

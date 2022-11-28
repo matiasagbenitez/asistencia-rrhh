@@ -3,12 +3,14 @@
     <x-slot name="header">
         <div class="flex items-center justify-between">
             {{-- GO BACK BUTTON --}}
-            <a href="{{ route('empleados.index') }}">
-                <x-jet-button>
-                    <i class="fas fa-arrow-left mr-2"></i>
-                    Volver
-                </x-jet-button>
-            </a>
+            @can('empleados')
+                <a href="{{ route('empleados.index') }}">
+                    <x-jet-button>
+                        <i class="fas fa-arrow-left mr-2"></i>
+                        Volver
+                    </x-jet-button>
+                </a>
+            @endcan
 
             <h1 class="text-xl font-bold">{{ $empleado->nombre }} {{ $empleado->apellido }}</span></h1>
 
@@ -130,12 +132,14 @@
                         Horas extras
                     </x-jet-button>
                 </a>
-                <a href="{{ route('informes.index', $empleado->id) }}">
-                    <x-jet-button title="Horas extras" class="bg-cyan-600 w-full">
-                        <i class="fas fa-database mr-3"></i>
-                        Generar informe
-                    </x-jet-button>
-                </a>
+                @can('informes')
+                    <a href="{{ route('informes.index', $empleado->id) }}">
+                        <x-jet-button title="Horas extras" class="bg-cyan-600 w-full">
+                            <i class="fas fa-database mr-3"></i>
+                            Generar informe
+                        </x-jet-button>
+                    </a>
+                @endcan
             </div>
         </div>
 

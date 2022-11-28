@@ -1,12 +1,12 @@
 <div>
     <x-jet-button class="w-full" wire:click="editEmpleado">
         <i class="fas fa-edit mr-2"></i>
-        Editar empleado
+        Editar datos personales
     </x-jet-button>
 
     <x-jet-dialog-modal wire:model="isOpen">
         <x-slot name="title">
-            Editar empleado
+            Editar datos personales
         </x-slot>
 
         <x-slot name="content">

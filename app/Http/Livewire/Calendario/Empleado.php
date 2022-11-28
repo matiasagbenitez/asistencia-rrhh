@@ -13,7 +13,7 @@ class Empleado extends Component
     public function mount()
     {
         if (request()->empleado) {
-            $this->empleado = ModelsEmpleado::where('user_id', request()->empleado)->first();
+            $this->empleado = ModelsEmpleado::find(request()->empleado);
             $this->asistencia = $this->getAsistencia($this->empleado);
         } else {
             abort(404);
@@ -47,8 +47,10 @@ class Empleado extends Component
 
     public function getAsistencia($empleado)
     {
-        return Asistencia::where('empleado_id', $empleado->id)
-            ->orderBy('created_at', 'desc')
-            ->first();
+        if ($empleado) {
+            return Asistencia::where('empleado_id', $empleado->id)
+                ->orderBy('created_at', 'desc')
+                ->first();
+        }
     }
 }
