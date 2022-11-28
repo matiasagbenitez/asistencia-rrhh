@@ -2,10 +2,15 @@
 
 namespace App\Http\Livewire\Informe;
 
-use App\Http\Services\InformeService;
-use App\Models\Empleado;
 use Carbon\Carbon;
 use Livewire\Component;
+use App\Models\Empleado;
+use App\Charts\FaltasChart;
+use Termwind\Components\Dd;
+use App\Charts\AsistenciasChart;
+use App\Charts\HorasExtrasChart;
+use Illuminate\Support\Facades\Date;
+use App\Http\Services\InformeService;
 
 class IndexInforme extends Component
 {
@@ -25,14 +30,14 @@ class IndexInforme extends Component
     public function mount()
     {
         $this->collections['empleados'] = Empleado::all();
-
         if (request()->empleado) {
             $this->empleado = Empleado::where('id', request()->empleado)->first();
             $this->filtros['empleado_id'] = $this->empleado->id;
         }
 
-        $this->filtros['fecha_inicio'] = Carbon::create(2022, 11, 1)->format('Y-m-d');
+        $this->filtros['fecha_inicio'] = Carbon::create(2022, 11, 01)->format('Y-m-d');
         $this->filtros['fecha_fin'] = Carbon::now()->format('Y-m-d');
+
     }
 
     public function updatedFiltrosEmpleadoId()
@@ -44,6 +49,79 @@ class IndexInforme extends Component
     {
         $this->empleado = Empleado::find($this->filtros['empleado_id']);
         $stats = $this->getStats($this->empleado);
+        $emptyData = [
+            'faltas' => 0,
+            'asistencias' => 0,
+            'horas_extras' => 0,
+        ];
+
+        if (!is_null($this->empleado)) {
+
+            // Gráfico 1. Circular, contiene faltas justificadas e injustificadas
+            $faltasJustificadas = $stats['graficos']['faltasJustificadas'];
+            $faltasInjustificadas = $stats['graficos']['faltasInjustificadas'];
+            $faltasChart = new FaltasChart;
+            if ($faltasJustificadas == 0 && $faltasInjustificadas == 0) {
+                $emptyData['faltas'] = 1;
+            }
+            $faltasChart->labels(['Faltas justificadas', 'Faltas injustificadas'])->options([
+                'legend' => [
+                    'display' => true,
+                    'position' => 'bottom',
+                    'labels' => [
+                        'boxWidth' => 10,
+                        'fontSize' => 13,
+                    ],
+                ],
+                'scales' => ['xAxes' => [['display' => false,],], 'yAxes' => [['display' => false,],],],
+            ]);
+            $faltasChart->dataset('Faltas', 'pie', [$faltasJustificadas, $faltasInjustificadas])->options([
+                'backgroundColor' => ['#fdba74', '#fca5a5',],
+            ]);
+
+
+
+            // Gráfico 2. Circular, contiene asistencias, faltas justificadas e injustificadas
+            $asistencias = $stats['graficos']['asistencias'];
+            $asistenciasChart = new AsistenciasChart;
+            if ($asistencias == 0 && $faltasJustificadas == 0 && $faltasInjustificadas == 0) {
+                $emptyData['asistencias'] = 1;
+            }
+            $asistenciasChart->labels(['Asistencias', 'Faltas justificadas', 'Faltas injustificadas'])->options([
+                'legend' => [
+                    'display' => true,
+                    'position' => 'bottom',
+                    'labels' => [
+                        'boxWidth' => 10,
+                        'fontSize' => 13,
+                    ],
+                ],
+                'scales' => ['xAxes' => [['display' => false,],], 'yAxes' => [['display' => false,],],],
+            ]);
+            $asistenciasChart->dataset('Asistencias', 'pie', [$asistencias, $faltasJustificadas, $faltasInjustificadas])->options([
+                'backgroundColor' => ['#86efac', '#fdba74', '#fca5a5'],
+            ]);
+
+
+
+            // Gráfico 3. Barra, contiene las horas extras trabajadas en el año
+            $horasExtrasChart = new HorasExtrasChart;
+            $horasExtrasChart->labels(array_keys($stats['graficos']['horasExtras']))->options([
+                'legend' => [
+                    'display' => true,
+                    'position' => 'bottom',
+                    'labels' => [
+                        'boxWidth' => 10,
+                        'fontSize' => 13,
+                    ],
+                ],
+            ]);
+            $horasExtrasChart->dataset('Horas extras', 'bar', array_values($stats['graficos']['horasExtras']))->options([
+                'backgroundColor' => '#d4d4d8',
+            ]);
+
+            return view('livewire.informe.index-informe', compact('stats', 'faltasChart', 'asistenciasChart', 'horasExtrasChart', 'emptyData'));
+        }
 
         return view('livewire.informe.index-informe', compact('stats'));
     }

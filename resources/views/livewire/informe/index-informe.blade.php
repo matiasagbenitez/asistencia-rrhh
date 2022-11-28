@@ -85,7 +85,7 @@
                         </thead>
                         <tbody>
                             @foreach ($stats['listado_asistencias'] as $item)
-                                <tr class="{{ $item['tipo'] != 'asistencia' ? 'bg-gray-100 font-bold' : '' }}">
+                                <tr class="{{ $item['tipo'] != 'asistencia' ? 'bg-red-100 font-bold' : '' }}">
                                     <td class="py-2 px-2 text-center">
                                         <p class="text-sm uppercase">
                                             {{ $item['tipo'] }}
@@ -189,22 +189,39 @@
             <br>
 
             {{-- ------------------------------------------ ESTADÍSTICAS ASISTENCIAS Y FALTAS ------------------------------------------------------ --}}
-            <div class="flex gap-4 mt-2 rounded-lg overflow-hidden">
-                <div class="border w-1/2 p-4 rounded-lg">
-                    <h2 class="font-bold text-center">Asistencias y faltas</h2>
-                    <div class="h-52 w-52 flex items-center justify-center">
-                        <img src="https://media.istockphoto.com/id/1381730525/es/vector/gr%C3%A1fico-circular-3d-aislado-sobre-fondo-blanco-vector-de-stock.jpg?s=612x612&w=is&k=20&c=tXAYAUceRNK8lVogCly6geHyr_MUm96-f6Qt7VOv61c="
-                            alt="Imagen">
-                    </div>
-                </div>
-                <div class="border w-1/2 p-4 rounded-lg">
+            <div class="grid grid-cols-2 gap-4 mt-2 rounded-lg overflow-hidden">
+                <div class="border p-4 rounded-lg h-96">
                     <h2 class="font-bold text-center">Faltas justificadas e injustificadas</h2>
-                    <div class="h-52 w-52 flex items-center justify-center">
-                        <div>
-                            <img src="https://media.istockphoto.com/id/1381730525/es/vector/gr%C3%A1fico-circular-3d-aislado-sobre-fondo-blanco-vector-de-stock.jpg?s=612x612&w=is&k=20&c=tXAYAUceRNK8lVogCly6geHyr_MUm96-f6Qt7VOv61c="
-                                alt="Imagen">
+                    @if ($emptyData['faltas'])
+                        <div class="p-4 flex my-auto justify-center">
+                            <p class="text-sm text-gray-500">
+                                <i class="fas fa-info-circle mr-1"></i>
+                                No se encontraron faltas registradas en el sistema.
+                            </p>
                         </div>
-                    </div>
+                    @else
+                        {!! $faltasChart->container() !!}
+                        {!! $faltasChart->script() !!}
+                    @endif
+                </div>
+                <div class="border p-4 rounded-lg h-96">
+                    <h2 class="font-bold text-center">Asistencias y faltas</h2>
+                    @if ($emptyData['asistencias'])
+                        <div class="p-4 flex my-auto justify-center">
+                            <p class="text-sm text-gray-500">
+                                <i class="fas fa-info-circle mr-1"></i>
+                                No se encontraron asistencias ni faltas registradas en el sistema.
+                            </p>
+                        </div>
+                    @else
+                        {!! $asistenciasChart->container() !!}
+                        {!! $asistenciasChart->script() !!}
+                    @endif
+                </div>
+                <div class="col-span-2 border p-4 rounded-lg">
+                    <h2 class="font-bold text-center">Horas extras anualizadas</h2>
+                    {!! $horasExtrasChart->container() !!}
+                    {!! $horasExtrasChart->script() !!}
                 </div>
             </div>
             {{-- ---------------------------------------- FIN ESTADÍSTICAS ASISTENCIAS Y FALTAS ---------------------------------------------------- --}}
