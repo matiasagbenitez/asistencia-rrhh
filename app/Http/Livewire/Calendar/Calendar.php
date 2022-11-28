@@ -3,6 +3,8 @@
 namespace App\Http\Livewire\Calendar;
 
 use App\Models\Asistencia;
+use App\Models\DiaNoLaborable;
+use App\Models\Incidencia;
 use Livewire\Component;
 
 class Calendar extends Component
@@ -43,9 +45,7 @@ class Calendar extends Component
 
     public function getDaysInMonth()
     {
-        $events = Asistencia::where('empleado_id', 5)->whereYear('fecha_hora_entrada', $this->selectedYear)
-            ->whereMonth('fecha_hora_entrada', $this->selectedMonth)
-            ->get();
+        $events = $this->getEventos();
 
         $daysOfMonth = cal_days_in_month(CAL_GREGORIAN, $this->selectedMonth, $this->selectedYear);
         $firstDay = $this->selectedYear . '-' . $this->selectedMonth . '-01';
@@ -66,10 +66,10 @@ class Calendar extends Component
         }
 
         foreach ($events as $event) {
-            $diaEvento = date('j', strtotime($event->fecha_hora_entrada));
+            $diaEvento = date('j', strtotime($event['fecha']));
             foreach ($days as $key => $day) {
                 if ($day['day'] == $diaEvento) {
-                    $days[$key]['events'][] = $event->cantidad_horas;
+                    $days[$key]['events'][] = $event['texto'];
                 }
             }
         }
@@ -86,5 +86,33 @@ class Calendar extends Component
         }
 
         return $days;
+    }
+
+    public function getEventos()
+    {
+        $eventos = [];
+
+        $diasNoLaborables = DiaNoLaborable::whereYear('fecha', $this->selectedYear)
+            ->whereMonth('fecha', $this->selectedMonth)
+            ->get();
+
+        $incidencias = Incidencia::whereYear('fecha_hora_inicio', $this->selectedYear)
+            ->whereMonth('fecha_hora_inicio', $this->selectedMonth);
+            !auth()->user()->can('empleados') ? $incidencias->where('empleado_id', auth()->user()->id) : '';
+
+        $incidencias = $incidencias->get();
+
+        foreach ($diasNoLaborables as $item) {
+            $eventos[] = ['texto' => $item->nombre, 'fecha' => $item->fecha];
+        }
+
+        foreach ($incidencias as $item) {
+            $eventos[] = [
+                'texto' => $item->tipoDeIncidencia->nombre,
+                'fecha' => $item->fecha_hora_inicio,
+            ];
+        }
+        // dd($eventos, $diasNoLaborables, $incidencias);
+        return $eventos;
     }
 }
