@@ -48,7 +48,7 @@
                         @foreach ($day['events'] as $event)
                             <div class=" {{
                                 isset($event['tipo']) ?
-                                    ($event['tipo'] == 'dia_no_laborable' ? 'bg-red-400' : 'bg-blue-400') : ''
+                                    ($event['tipo'] == 'dia_no_laborable' ? 'bg-green-600' : 'bg-gray-400') : ''
                                 }}
                                 bg-gray-600 px-2 py-1 mb-1 rounded-md">
                                 <span class="text-sm font-bold text-white">
