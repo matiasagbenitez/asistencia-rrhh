@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             JornadaSeeder::class,
             PermissionSeeder::class,
             RoleSeeder::class,
+            DiasNoLaborablesSeeder::class,
         ]);
 
         \App\Models\User::factory()->create([

@@ -13,6 +13,7 @@ class Calendar extends Component
     public $year, $month;
     public $daysNames = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
     public $selectedYear, $selectedMonth;
+    public $today;
 
     public function mount()
     {
@@ -34,6 +35,8 @@ class Calendar extends Component
 
         $this->selectedYear = date('Y');
         $this->selectedMonth = date('m');
+        $this->today = date('d');
+        $this->month = date('m');
     }
 
     public function render()
@@ -108,7 +111,7 @@ class Calendar extends Component
 
         foreach ($incidencias as $item) {
             $eventos[] = [
-                'texto' => $item->tipoDeIncidencia->nombre,
+                'texto' => $item->tipoDeIncidencia->nombre . ' - ' . $item->empleado->apellido,
                 'fecha' => $item->fecha_hora_inicio,
             ];
         }
