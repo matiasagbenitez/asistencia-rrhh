@@ -46,9 +46,13 @@
                     <p class="text-right text-lg font-bold mb-2">{{ $day['day'] }}</p>
                     <div class="">
                         @foreach ($day['events'] as $event)
-                            <div class="bg-gray-600 px-2 py-1 mb-1 rounded-md">
+                            <div class=" {{
+                                isset($event['tipo']) ?
+                                    ($event['tipo'] == 'dia_no_laborable' ? 'bg-red-400' : 'bg-blue-400') : ''
+                                }}
+                                bg-gray-600 px-2 py-1 mb-1 rounded-md">
                                 <span class="text-sm font-bold text-white">
-                                    {{ $event }}
+                                    {{ $event['texto'] }}
                                 </span>
                             </div>
                         @endforeach

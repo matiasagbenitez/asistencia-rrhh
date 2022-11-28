@@ -72,7 +72,7 @@ class Calendar extends Component
             $diaEvento = date('j', strtotime($event['fecha']));
             foreach ($days as $key => $day) {
                 if ($day['day'] == $diaEvento) {
-                    $days[$key]['events'][] = $event['texto'];
+                    $days[$key]['events'][] = ["tipo" => $event['tipo'], "texto" => $event['texto']];
                 }
             }
         }
@@ -106,13 +106,18 @@ class Calendar extends Component
         $incidencias = $incidencias->get();
 
         foreach ($diasNoLaborables as $item) {
-            $eventos[] = ['texto' => $item->nombre, 'fecha' => $item->fecha];
+            $eventos[] = [
+                'texto' => $item->nombre,
+                'fecha' => $item->fecha,
+                'tipo'  => 'dia_no_laborable',
+            ];
         }
 
         foreach ($incidencias as $item) {
             $eventos[] = [
                 'texto' => $item->tipoDeIncidencia->nombre . ' - ' . $item->empleado->apellido,
                 'fecha' => $item->fecha_hora_inicio,
+                'tipo'  => 'incidencia',
             ];
         }
         // dd($eventos, $diasNoLaborables, $incidencias);
