@@ -2,10 +2,12 @@
 
 namespace App\Http\Livewire\Empleados\Incidencias;
 
+use App\Models\User;
+use Livewire\Component;
 use App\Models\Empleado;
 use App\Models\Incidencia;
-use Livewire\Component;
 use Livewire\WithPagination;
+use App\Notifications\NotificacionIncidenciaAceptada;
 
 class IndexIncidencia extends Component
 {
@@ -72,6 +74,10 @@ class IndexIncidencia extends Component
         $incidencia = Incidencia::find($id);
         $incidencia->aprobado = true;
         $incidencia->save();
+
+        $empleado = User::find(2);
+        $empleado->notify(new NotificacionIncidenciaAceptada($empleado, $incidencia));
+
         $this->emit('success', '¡La incidencia fue aprobada correctamente!');
         $this->emit('render');
     }
