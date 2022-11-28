@@ -11,7 +11,7 @@
         <div class="w-1/2">
             <select wire:model="selectedMonth" class="input-control w-full">
                 @foreach ($months as $month => $name)
-                    <option value="{{ $month }}">{{ $month }}</option>
+                    <option value="{{ $month }}">{{ $name }}</option>
                 @endforeach
             </select>
         </div>
@@ -45,7 +45,7 @@
                     <p class="text-center font-bold mb-2">{{ $day['day'] }}</p>
 
                     @foreach ($day['events'] as $event)
-                        <div class="bg-slate-300 p-1 rounded-md">
+                        <div class="bg-slate-300 p-1 mb-1 rounded-md">
                             <span>
                                 {{ $event }}
                             </span>

@@ -51,11 +51,6 @@ class Calendar extends Component
         $firstDay = $this->selectedYear . '-' . $this->selectedMonth . '-01';
         $dayOfWeek = date('w', strtotime($firstDay));
 
-        $days[] = [
-            'day' => '',
-            'events' => [],
-        ];
-
         for ($i = 0; $i < $dayOfWeek; $i++) {
             $days[] = [
                 'day' => '',
