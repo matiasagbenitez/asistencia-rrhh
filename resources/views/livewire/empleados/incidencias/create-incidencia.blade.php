@@ -1,12 +1,20 @@
 <div>
     <x-jet-secondary-button wire:click="createIncidencia">
         <i class="fas fa-plus mr-2"></i>
-        Registrar nueva incidencia
+        @if (Auth::user()->can('empleados'))
+            Registrar nueva incidencia
+        @else
+            Solicitar nueva incidencia
+        @endif
     </x-jet-secondary-button>
 
     <x-jet-dialog-modal wire:model="isOpen">
         <x-slot name="title" class="font-semibold">
-            Registrar nueva incidencia
+            @if (Auth::user()->can('empleados'))
+                Registrar nueva incidencia
+            @else
+                Solicitar nueva incidencia
+            @endif
         </x-slot>
 
         <x-slot name="content">

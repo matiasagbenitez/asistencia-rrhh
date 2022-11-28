@@ -66,4 +66,13 @@ class IndexIncidencia extends Component
     public function resetFilters()
     {
     }
+
+    public function aprobar($id)
+    {
+        $incidencia = Incidencia::find($id);
+        $incidencia->aprobado = true;
+        $incidencia->save();
+        $this->emit('success', '¡La incidencia fue aprobada correctamente!');
+        $this->emit('render');
+    }
 }

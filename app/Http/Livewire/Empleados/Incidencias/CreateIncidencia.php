@@ -67,6 +67,11 @@ class CreateIncidencia extends Component
     public function save()
     {
         $this->form['empleado_id'] = $this->empleado->id;
+
+        if (!auth()->user()->can('empleados')) {
+            $this->form['aprobado'] = false;
+        }
+
         $this->validate();
         Incidencia::create($this->form);
         $this->resetInputFields();

@@ -17,6 +17,7 @@ class Incidencia extends Model
         'fecha_hora_inicio',
         'fecha_hora_fin',
         'descripcion',
+        'aprobado',
     ];
 
     public function empleado()

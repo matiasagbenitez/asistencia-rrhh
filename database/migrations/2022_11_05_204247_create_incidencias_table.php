@@ -19,6 +19,8 @@ return new class extends Migration
 
             $table->dateTime('fecha_hora_inicio');
             $table->dateTime('fecha_hora_fin')->nullable();
+            $table->boolean('aprobado')->default(1);
+
             $table->text('descripcion')->nullable();
 
             $table->timestamps();

@@ -31,6 +31,7 @@
                         <th class="w-1/3 px-6 py-3">Incidencia</th>
                         <th class="w-1/5 px-6 py-3">Fin incidencia</th>
                         <th class="w-1/5 px-6 py-3">Descuenta sueldo</th>
+                        <th class="w-1/5 px-6 py-3">Estado</th>
                         <th class="px-6 py-3">Acciones</th>
                     </tr>
                 </thead>
@@ -60,10 +61,22 @@
                                 </span>
                             @endif
                             </td>
+                            <td class="px-6 py-4 text-center">
+                                {{
+                                    $item->aprobado
+                                    ? "Aprobado"
+                                    : "Pendiente"
+                                }}
+                            </td>
                             <td class="px-3 py-3 normal-case">
                                 <div class="flex items-center justify-center gap-2">
                                     {{-- @livewire('items.show-item', ['itemShow' => $item], key($item->id.'show')) --}}
                                     @can('empleados')
+                                        @if (!$item->aprobado)
+                                            <x-jet-button wire:click="aprobar({{ $item->id }})">
+                                                Aprobar
+                                            </x-jet-danger-button>
+                                        @endif
                                         @livewire('empleados.incidencias.edit-incidencia', ['incidencia' => $item], key($item->id.'edit'))
                                     @endcan
                                     <x-jet-danger-button wire:click="$emit('deleteItem', '{{ $item->id }}')">
