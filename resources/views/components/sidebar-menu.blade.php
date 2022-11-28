@@ -30,6 +30,23 @@
 
             {{-- SUBTÍTULO PARAMETRIZACIÓN --}}
             @can('parametros.empresa')
+                <span class="font-bold">Notificaciones
+                    <hr>
+                </span>
+                <a href="{{ route('notificaciones.index') }}"
+                    class="block px-4 py-1 mt-2 text-sm font-semibold text-gray-900 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+                    <div class="flex items-center">
+                        <i class="fas fa-bell mr-2"></i>
+                        <div class="w-full flex justify-between items-center">
+                            <span class="w-full">Notificaciones</span>
+                            <span class="font-bold {{ auth()->user()->unreadNotifications->count() > 0 ? 'bg-sky-200' : 'bg-gray-200' }} px-3 py-1 rounded-full">
+                                {{ auth()->user()->unreadNotifications->count() }}
+                            </span>
+                        </div>
+                    </div>
+                </a>
+                <br>
+
                 <span class="font-bold">Parámetros empresa
                     <hr>
                 </span>
@@ -112,16 +129,16 @@
 
             {{-- SUBTÍTULO PARAMETRIZACIÓN --}}
             @can('calendario.empleados')
-            <br>
-            <span class="font-bold">Asistencia
-                <hr>
-            </span>
+                <br>
+                <span class="font-bold">Asistencia
+                    <hr>
+                </span>
 
-            <a href="{{ route('calendarios.empleados', auth()->user()) }}"
-                class="block px-4 py-1 mt-2 text-sm font-semibold text-gray-900 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
-                <i class="fas fa-list mr-2"></i>
-                Marcar asistencia
-            </a>
+                <a href="{{ route('calendarios.empleados', auth()->user()) }}"
+                    class="block px-4 py-1 mt-2 text-sm font-semibold text-gray-900 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+                    <i class="fas fa-list mr-2"></i>
+                    Marcar asistencia
+                </a>
             @endcan
 
             {{-- perfil.empleado --}}
@@ -131,7 +148,7 @@
                     <hr>
                 </span>
 
-                <a href="{{ route('empleados.detalle', Auth()->user() ) }}"
+                <a href="{{ route('empleados.detalle', Auth()->user()) }}"
                     class="block px-4 py-1 mt-2 text-sm font-semibold text-gray-900 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
                     <i class="fas fa-clock mr-2"></i>
                     Mi perfil

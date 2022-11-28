@@ -16,6 +16,7 @@ use App\Http\Livewire\DiasNoLaborables\IndexDias;
 use App\Http\Livewire\Empleados\Asistencias\IndexAsistencia;
 use App\Http\Livewire\Empleados\DetalleEmpleado;
 use App\Http\Livewire\Informe\IndexInforme;
+use App\Http\Livewire\Notificaciones\NotificacionesIndex;
 
 // PARÁMETROS DE EMPRESA
 Route::get('/areas', IndexAreas::class)->name('areas.index');
@@ -44,3 +45,6 @@ Route::get('/informes/{empleado?}', IndexInforme::class)->name('informes.index')
 
 // MARCAR ASISTENCIA
 Route::get('/calendarios/empleados/{empleado?}', Empleado::class)->name('calendarios.empleados');
+
+// NOTIFICACIONES
+Route::get('/notificaciones', NotificacionesIndex::class)->name('notificaciones.index');

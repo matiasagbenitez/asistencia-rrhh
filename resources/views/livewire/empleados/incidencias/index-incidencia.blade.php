@@ -73,7 +73,8 @@
                                     {{-- @livewire('items.show-item', ['itemShow' => $item], key($item->id.'show')) --}}
                                     @can('empleados')
                                         @if (!$item->aprobado)
-                                            <x-jet-button wire:click="aprobar({{ $item->id }})">
+                                            <x-jet-button class="bg-green-600" wire:click="aprobar({{ $item->id }})">
+                                                <i class="fas fa-check mr-2"></i>
                                                 Aprobar
                                             </x-jet-danger-button>
                                         @endif

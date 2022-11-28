@@ -2,9 +2,12 @@
 
 namespace App\Http\Livewire\Empleados\Incidencias;
 
+use App\Models\Empleado;
 use Livewire\Component;
 use App\Models\Incidencia;
 use App\Models\TipoDeIncidencia;
+use App\Models\User;
+use App\Notifications\NotificacionSolicitudIncidencia;
 
 class CreateIncidencia extends Component
 {
@@ -70,6 +73,9 @@ class CreateIncidencia extends Component
 
         if (!auth()->user()->can('empleados')) {
             $this->form['aprobado'] = false;
+
+            $admin = User::find(1);
+            $admin->notify(new NotificacionSolicitudIncidencia($admin, $this->form));
         }
 
         $this->validate();
