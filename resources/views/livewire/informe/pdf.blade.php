@@ -1,4 +1,28 @@
-<div class="container py-6">
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
+        <title>{{ config('app.name', 'Laravel') }}</title>
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
+
+        <!-- Scripts -->
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        <!-- Styles -->
+        @livewireStyles
+        <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
+
+        {{-- SweetAlert2 --}}
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        {{-- <script src="https://kit.fontawesome.com/d2f341af73.js" crossorigin="anonymous"></script> --}}
+    </head>
+    <body>
+        <div class="container py-6">
 
     <x-slot name="header">
         <div class="flex items-center justify-between">
@@ -6,43 +30,8 @@
         </div>
     </x-slot>
 
-    <div class="px-6 py-4 grid grid-cols-6 gap-2">
-        <div class="col-span-2">
-            <x-jet-label class="mb-2">Empleado</x-jet-label>
-            <select wire:model="filtros.empleado_id" class="input-control w-full">
-                <option value="">Seleccione un empleado</option>
-                @foreach ($collections['empleados'] as $empleado)
-                    <option value="{{ $empleado['id'] }}">{{ $empleado['nombre'] }} {{ $empleado['apellido'] }}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="col-span-2">
-            <x-jet-label class="mb-2">Fecha de inicio</x-jet-label>
-            <x-jet-input wire:model="filtros.fecha_inicio" type="date" class="w-full">
-            </x-jet-input>
-            <x-jet-input-error class="mt-2 text-xs font-semibold" for="filtros.fecha_inicio" />
-        </div>
-        <div class="col-span-2">
-            <x-jet-label class="mb-2">Fecha de fin</x-jet-label>
-            <x-jet-input wire:model="filtros.fecha_fin" type="date" class="w-full">
-            </x-jet-input>
-            <x-jet-input-error class="mt-2 text-xs font-semibold" for="filtros.fecha_fin" />
-        </div>
-    </div>
-
     <div class="px-8 py-6 mt-6 bg-white rounded-lg shadow">
-        @if ($stats)
-            {{-- PDF BUTTON --}}
-            <a href="{{route('pdf', [
-                    'empleado_id' => $stats['empleado']->id,
-                    'fecha_inicio' => $filtros['fecha_inicio'],
-                    'fecha_fin' => $filtros['fecha_fin'] ])
-                }}">
-                <x-jet-danger-button>
-                    <i class="fas fa-file-pdf mr-2"></i>
-                    Descargar PDF
-                </x-jet-danger-button>
-            </a>
+        @if (isset($stats))
             <h1 class="font-bold text-lg uppercase">Informe de asistencias</h1>
             <hr class="my-2">
 
@@ -63,15 +52,14 @@
                         class="font-normal">{{ $stats['empleado']->puesto->departamento->area->nombre }}</span></p>
             </div>
 
-
             <h1 class="font-bold text-lg uppercase">Detalle del informe</h1>
             <hr class="my-2">
 
             <span class="text-sm text-gray-500">
                 <i class="fas fa-info-circle mr-1"></i>
                 El presente reporte toma en consideración las asistencias registradas en el sistema entre las fechas
-                {{ Date::parse($filtros['fecha_inicio'])->format('d-m-Y') }} y
-                {{ Date::parse($filtros['fecha_fin'])->format('d-m-Y') }}.
+                {{ Date::parse($fecha_inicio)->format('d-m-Y') }} y
+                {{ Date::parse($fecha_fin)->format('d-m-Y') }}.
             </span>
 
             {{-- ------------------------------------------------ LISTADO DE ASISTENCIAS ----------------------------------------------------------- --}}
@@ -192,42 +180,6 @@
 
             <br>
 
-            {{-- ------------------------------------------ ESTADÍSTICAS ASISTENCIAS Y FALTAS ------------------------------------------------------ --}}
-            <div class="grid grid-cols-2 gap-4 mt-2 rounded-lg overflow-hidden">
-                <div class="border p-4 rounded-lg h-96">
-                    <h2 class="font-bold text-center">Faltas justificadas e injustificadas</h2>
-                    @if ($emptyData['faltas'])
-                        <div class="p-4 flex my-auto justify-center">
-                            <p class="text-sm text-gray-500">
-                                <i class="fas fa-info-circle mr-1"></i>
-                                No se encontraron faltas registradas en el sistema.
-                            </p>
-                        </div>
-                    @else
-                        {!! $faltasChart->container() !!}
-                        {!! $faltasChart->script() !!}
-                    @endif
-                </div>
-                <div class="border p-4 rounded-lg h-96">
-                    <h2 class="font-bold text-center">Asistencias y faltas</h2>
-                    @if ($emptyData['asistencias'])
-                        <div class="p-4 flex my-auto justify-center">
-                            <p class="text-sm text-gray-500">
-                                <i class="fas fa-info-circle mr-1"></i>
-                                No se encontraron asistencias ni faltas registradas en el sistema.
-                            </p>
-                        </div>
-                    @else
-                        {!! $asistenciasChart->container() !!}
-                        {!! $asistenciasChart->script() !!}
-                    @endif
-                </div>
-                <div class="col-span-2 border p-4 rounded-lg">
-                    <h2 class="font-bold text-center">Horas extras anualizadas</h2>
-                    {!! $horasExtrasChart->container() !!}
-                    {!! $horasExtrasChart->script() !!}
-                </div>
-            </div>
             {{-- ---------------------------------------- FIN ESTADÍSTICAS ASISTENCIAS Y FALTAS ---------------------------------------------------- --}}
             <div class="flex items-baseline space-x-2">
                 <h3 class="mt-3 text-md font-bold">Asistencias:</h3>
@@ -246,3 +198,5 @@
         @endif
     </div>
 </div>
+    </body>
+</html>

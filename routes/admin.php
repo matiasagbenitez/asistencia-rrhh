@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PDFController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Areas\IndexAreas;
 use App\Http\Livewire\Calendario\Empleado;
@@ -48,3 +49,6 @@ Route::get('/calendarios/empleados/{empleado?}', Empleado::class)->name('calenda
 
 // NOTIFICACIONES
 Route::get('/notificaciones', NotificacionesIndex::class)->name('notificaciones.index');
+
+// PDF
+Route::get('/pdf', [PDFController::class, 'pdf'])->name('pdf');
