@@ -85,6 +85,7 @@ class CreateJornada extends Component
         $this->form['tipo'] = 'Trabajo';
         $this->form['hora_entrada'] = date('H:i:s', strtotime($this->form['hora_entrada']));
         $this->form['hora_salida'] = date('H:i:s', strtotime($this->form['hora_salida']));
+        $this->validate();
         Jornada::create($this->form);
         $this->resetInputFields();
         $this->toggleModal();

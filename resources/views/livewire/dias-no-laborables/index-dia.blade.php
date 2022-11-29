@@ -50,7 +50,7 @@
                             </td>
                             <td class="px-6 py-2 text-center">
                                 <p class="text-sm uppercase">
-                                    {{ $dia->fecha }}
+                                    {{ Date::parse($dia->fecha)->format('d-m-Y') }}
                                 </p>
                             </td>
                             <td class="px-6 py-3 whitespace-nowrap text-sm font-medium">
