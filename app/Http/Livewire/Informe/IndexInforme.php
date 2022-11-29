@@ -11,6 +11,7 @@ use App\Charts\AsistenciasChart;
 use App\Charts\HorasExtrasChart;
 use Illuminate\Support\Facades\Date;
 use App\Http\Services\InformeService;
+use Illuminate\Http\Client\Request;
 
 class IndexInforme extends Component
 {
@@ -30,13 +31,22 @@ class IndexInforme extends Component
     public function mount()
     {
         $this->collections['empleados'] = Empleado::all();
-        if (request()->empleado) {
-            $this->empleado = Empleado::where('id', request()->empleado)->first();
+        if (request()->empleado_id) {
+            $this->empleado = Empleado::where('id', request()->empleado_id)->first();
             $this->filtros['empleado_id'] = $this->empleado->id;
         }
 
-        $this->filtros['fecha_inicio'] = Carbon::create(2022, 11, 01)->format('Y-m-d');
-        $this->filtros['fecha_fin'] = Carbon::now()->format('Y-m-d');
+        if (isset(request()->fecha_inicio)) {
+            $this->filtros['fecha_inicio'] = Carbon::create(request()->fecha_inicio)->format('Y-m-d');
+        } else {
+            $this->filtros['fecha_inicio'] = Carbon::create(2022, 11, 01)->format('Y-m-d');
+        }
+
+        if (isset(request()->fecha_fin)) {
+            $this->filtros['fecha_fin'] = Carbon::create(request()->fecha_fin)->format('Y-m-d');
+        } else {
+            $this->filtros['fecha_fin'] = Carbon::now()->format('Y-m-d');
+        }
 
     }
 
@@ -129,40 +139,44 @@ class IndexInforme extends Component
     public function getStats($empleado)
     {
         if (!is_null($empleado)) {
+
+            // Agregar un dia a $this->filtros['fecha_fin']
+            $fecha_fin = Carbon::parse($this->filtros['fecha_fin'])->addDay()->format('Y-m-d');
+
             $asistencias = InformeService::asistencias(
                 $empleado,
                 $this->filtros['fecha_inicio'],
-                $this->filtros['fecha_fin']
+                $fecha_fin
             );
             $listadoAsistencias = InformeService::listadoAsistencias(
                 $empleado,
                 $this->filtros['fecha_inicio'],
-                $this->filtros['fecha_fin']
+                $fecha_fin
             );
             $horasExtras = InformeService::horasExtras(
                 $empleado,
                 $this->filtros['fecha_inicio'],
-                $this->filtros['fecha_fin']
+                $fecha_fin
             );
             $listadoHorasExtra = InformeService::listadoHorasExtra(
                 $empleado,
                 $this->filtros['fecha_inicio'],
-                $this->filtros['fecha_fin']
+                $fecha_fin
             );
             $horasTrabajadas = InformeService::horasTrabajadas(
                 $empleado,
                 $this->filtros['fecha_inicio'],
-                $this->filtros['fecha_fin']
+                $fecha_fin
             );
             $faltasJustificadas = InformeService::faltasJustificadas(
                 $empleado,
                 $this->filtros['fecha_inicio'],
-                $this->filtros['fecha_fin']
+                $fecha_fin
             );
             $faltasInjustificadas = InformeService::faltasInjustificadas(
                 $empleado,
                 $this->filtros['fecha_inicio'],
-                $this->filtros['fecha_fin']
+                $fecha_fin
             );
 
             // Este es el array con los datos de exceso de horas
@@ -174,7 +188,7 @@ class IndexInforme extends Component
             $excesoHoras = InformeService::excesoHoras(
                 $empleado,
                 $this->filtros['fecha_inicio'],
-                $this->filtros['fecha_fin']
+                $fecha_fin
             );
 
             // Este es el array con los datos para los gráficos
@@ -187,7 +201,7 @@ class IndexInforme extends Component
             $graficos = InformeService::calcularGraficos(
                 $empleado,
                 $this->filtros['fecha_inicio'],
-                $this->filtros['fecha_fin']
+                $fecha_fin
             );
 
             return [

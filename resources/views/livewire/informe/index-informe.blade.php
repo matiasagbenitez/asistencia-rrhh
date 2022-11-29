@@ -28,8 +28,18 @@
             </x-jet-input>
             <x-jet-input-error class="mt-2 text-xs font-semibold" for="filtros.fecha_fin" />
         </div>
+
+            <a href="{{route('informes.index', [
+                    'empleado_id' => $filtros['empleado_id'],
+                    'fecha_inicio' => $filtros['fecha_inicio'],
+                    'fecha_fin' => $filtros['fecha_fin'] ])}}">
+                <x-jet-button>
+                    Filtrar
+                </x-jet-button>
+            </a>
     </div>
 
+<div wire:ignore>
     <div class="px-8 py-6 mt-6 bg-white rounded-lg shadow">
         @if ($stats)
             {{-- PDF BUTTON --}}
@@ -241,8 +251,21 @@
                 <h3 class="mt-3 text-md font-bold">Faltas justificadas:</h3>
                 <p class="text-md font-mono">{{ $stats['faltasJustificadas'] }}</p>
             </div>
+            <div class="flex items-baseline space-x-2">
+                <h3 class="mt-3 text-md font-bold">Horas trabajadas:</h3>
+                <p class="text-md font-mono">{{ $stats['excesoHoras']['horasTrabajadas'] }}</p>
+            </div>
+            <div class="flex items-baseline space-x-2">
+                <h3 class="mt-3 text-md font-bold">Horas de trabajo del horario:</h3>
+                <p class="text-md font-mono">{{ $stats['excesoHoras']['cantidadDeHoras'] }}</p>
+            </div>
+            <div class="flex items-baseline space-x-2">
+                <h3 class="mt-3 text-md font-bold">Diferencia de horas:</h3>
+                <p class="text-md font-mono">{{ $stats['excesoHoras']['exceso'] }}</p>
+            </div>
         @else
             Seleccione un empleado para ver sus estadísticas.
         @endif
     </div>
+</div>
 </div>

@@ -71,6 +71,10 @@ class CreateIncidencia extends Component
     {
         $this->form['empleado_id'] = $this->empleado->id;
 
+        if ($this->form['fecha_hora_fin'] == '') {
+            $this->form['fecha_hora_fin'] = null;
+        }
+
         if (!auth()->user()->can('empleados')) {
             $this->form['aprobado'] = false;
 
