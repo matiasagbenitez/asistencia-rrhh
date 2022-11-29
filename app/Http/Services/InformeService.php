@@ -257,8 +257,12 @@ class InformeService
      */
     public static function excesoHoras(Empleado $empleado, $fechaInicio, $fechaFin)
     {
-        $cantidadHorasHorario = self::cantidadHorasHorario($empleado, $fechaInicio, $fechaFin);
         $horasTrabajadas = self::horasTrabajadas($empleado, $fechaInicio, $fechaFin);
+
+        // Restar un dia a la fecha de fin
+        $fechaFin = Carbon::parse($fechaFin)->subDay()->toDateString();
+
+        $cantidadHorasHorario = self::cantidadHorasHorario($empleado, $fechaInicio, $fechaFin);
 
         return [
             'cantidadDeHoras' => $cantidadHorasHorario,

@@ -59,6 +59,10 @@ class EditIncidencia extends Component
 
     public function update()
     {
+        if ($this->form['fecha_hora_fin'] == '') {
+            $this->form['fecha_hora_fin'] = null;
+        }
+
         $this->validate([
             'form.empleado_id' => 'required',
             'form.tipo_de_incidencia_id' => 'required',
