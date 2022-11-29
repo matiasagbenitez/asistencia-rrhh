@@ -18,15 +18,17 @@ class HoraExtraFactory extends Factory
         // Si el empleado tiene horas extras, obtener la última
         if ($empleado->horas_extras) {
             $ultima_hora_extra = HoraExtra::where('empleado_id', $empleado_id)->latest()->first();
-            $fecha_hora_inicio = $this->faker->dateTimeBetween($ultima_hora_extra->fecha_hora_fin, 'now');
+            // Add two weeks to the last hour extra
+            $ultima_hora_extra->addWeeks(2);
+            $fecha_hora_inicio = $this->faker->dateTimeBetween($ultima_hora_extra->fecha_hora_fin, '+2 week');
             while ($fecha_hora_inicio->format('N') < 7) {
-                $fecha_hora_inicio = $this->faker->dateTimeBetween($ultima_hora_extra->fecha_hora_fin, 'now');
+                $fecha_hora_inicio = $this->faker->dateTimeBetween($ultima_hora_extra->fecha_hora_fin, '+2 week');
             }
         } else {
             // Si no tiene horas extras, crear una fecha aleatoria
-            $fecha_hora_inicio = $this->faker->dateTimeBetween('2022-11-01', 'now');
+            $fecha_hora_inicio = $this->faker->dateTimeBetween('-6 month', 'now');
             while ($fecha_hora_inicio->format('N') < 7) {
-                $fecha_hora_inicio = $this->faker->dateTimeBetween('2022-11-01', 'now');
+                $fecha_hora_inicio = $this->faker->dateTimeBetween('-6 month', 'now');
             }
         }
 

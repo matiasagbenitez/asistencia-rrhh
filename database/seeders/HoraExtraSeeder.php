@@ -9,6 +9,6 @@ class HoraExtraSeeder extends Seeder
 {
     public function run()
     {
-        \App\Models\HoraExtra::factory(30)->create();
+        \App\Models\HoraExtra::factory(300)->create();
     }
 }

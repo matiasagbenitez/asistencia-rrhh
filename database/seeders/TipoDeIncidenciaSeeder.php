@@ -53,10 +53,6 @@ class TipoDeIncidenciaSeeder extends Seeder
                 'descuenta_sueldo' => false,
             ],
             [
-                'nombre' => 'Incapacidad por maternidad',
-                'descuenta_sueldo' => false,
-            ],
-            [
                 'nombre' => 'Otro (no descuenta sueldo)',
                 'descuenta_sueldo' => false,
             ],

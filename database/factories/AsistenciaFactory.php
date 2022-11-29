@@ -20,7 +20,7 @@ class AsistenciaFactory extends Factory
         $empleado = Empleado::find(self::$empleado_id);
 
         self::$asistencias_count++;
-        if (self::$asistencias_count >= 30) {
+        if (self::$asistencias_count >= 350) {
             self::$empleado_id++;
             self::$asistencias_count = 0;
         }
@@ -41,6 +41,8 @@ class AsistenciaFactory extends Factory
 
                 // Si la última hora de salida es a las 20:00, la siguiente entrada será al día siguiente a las 8:00
                 if ($ultima_salida->format('H:i:s') == '20:00:00') {
+
+
                     $fecha_hora_entrada = Date::parse($ultima_salida)->addDays(1)->setTime(8, 0, 0);
 
                     // Si la fecha de entrada es domingo, la siguiente entrada será al día siguiente a las 8:00
@@ -53,8 +55,8 @@ class AsistenciaFactory extends Factory
             }
 
         } else {
-            $fecha_hora_entrada = Date::create(2022, 11, 1, 8, 0, 0);
-            $fecha_hora_salida = Date::create(2022, 11, 1, 12, 0, 0);
+            $fecha_hora_entrada = Date::create(2022, 06, 1, 8, 0, 0);
+            $fecha_hora_salida = Date::create(2022, 06, 1, 12, 0, 0);
         }
 
         $cantidad_horas = Date::parse($fecha_hora_salida)->diffInMinutes($fecha_hora_entrada) / 60;
